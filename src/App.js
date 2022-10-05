@@ -1,56 +1,37 @@
+//Libraries
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import {
+  BrowserRouter as Router, 
+  Route, 
+  Routes } from "react-router-dom";
+
+//Components
+import Login from './app/component/login/Login'
+import Profile from './app/component/profile/Profile';
+import UserProjects from './app/component/profile/UserProjects';
+import Projects from './app/component/projects/Projects';
+import ProjectCreator from './app/component/projects/ProjectCreator';
+import ProjectAdmin from './app/component/projects/ProjectAdmin';
+import ProjectApplication from './app/component/projects/ProjectApplication';
+
+//Styling
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/myprojects" element={<UserProjects />} />
+          {/* Kanskje endre denne til projects eller noe realtert til main page */}
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/create" element={<ProjectCreator/>} />
+          <Route path="/admin" element={<ProjectAdmin />} />
+          <Route path="/apply" element={<ProjectApplication/>} />
+        </Routes>
+      </Router>
     </div>
   );
 }

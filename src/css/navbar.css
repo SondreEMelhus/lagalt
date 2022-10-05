@@ -1,0 +1,66 @@
+.navBar{
+    height: 70px;
+    display: flex;
+    background: white;
+    justify-content: space-between;
+
+}
+.logo{
+    position: fixed;
+    left: 10px;
+    margin-top: 10px;
+    height: 50px;
+}
+.searchField{
+    height: 40px;
+    margin-top: 15px;
+    margin-left: 150px;
+    background: #E7E7E7;
+    border: none;
+    border-radius: 10px;
+    min-width: 225px;
+}
+
+input{
+    text-indent: 5px;
+}
+
+.loginButton{
+    border: 2px solid #117AA0;
+    color: #117AA0;
+    font-weight: bold;
+    background: white;
+    border-radius: 20px;
+    height: 40px;
+    width: 130px;
+    margin-top: 15px;
+    min-width: 63px;
+}
+.registerButton{
+    border: none;
+    color: white;
+    background:  #117AA0;
+    border-radius: 20px;
+    height: 40px;
+    width: 130px;
+    margin-top: 15px; 
+}
+.dropdown{
+    height: 50px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.inputtext{
+    border: none;
+    background: #E7E7E7;
+    outline: none;
+    margin-top: 8px;
+    border-left: 2px solid #656565;
+}
+.magnifyingGlass{
+    height: 24px;
+    margin-top: -5px;
+    margin-left: 5px;
+    margin-right: 8px;
+}

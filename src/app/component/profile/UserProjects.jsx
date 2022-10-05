@@ -1,6 +1,6 @@
 //Libraries
 import React from "react";
-
+import Navbar from "../navbar/Navbar";
 //Components
 
 //Styling
@@ -8,8 +8,9 @@ import React from "react";
 export default function UserProjects () {
 
     return (
-        <>
+        <div>
+            <Navbar/>
             <h1>User projects page</h1>
-        </>
+        </div>
     )
 }

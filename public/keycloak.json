@@ -1,0 +1,8 @@
+{
+    "realm": "lagalt",
+    "auth-server-url": "https://lagaltkc.herokuapp.com/auth/",
+    "ssl-required": "external",
+    "resource": "lagalt-client",
+    "public-client": true,
+    "confidential-port": 0
+  }

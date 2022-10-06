@@ -28,6 +28,7 @@ input:focus{
     height: 30px;
     margin-top: 9px;
     margin-left: 7px;
+    cursor: pointer;
 }
 .imgBackground{
     background: white;
@@ -77,6 +78,7 @@ input:focus{
     height: 15px;
     margin-top: 6px;
     margin-left: 27px;
+    cursor: pointer;
 }
 .descriptiondiv{
     display: flex;

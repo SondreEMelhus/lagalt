@@ -10,6 +10,7 @@ import magglass from '../../../assets/MagnifyingGlass.png';
 
 //Styling
 import '../../../css/navbar.css'
+import Login from "../login/Login";
 
 export default function Navbar() {
   return (
@@ -19,8 +20,7 @@ export default function Navbar() {
         <img src={magglass} alt="" className="magnifyingGlass"/>
         <input type="text" name="" id="" placeholder="Søk..." className="inputtext"/>
         </div>
-        <button className="loginButton">Log in</button>
-        <button className="registerButton">Registrer</button>
+        <Login />
         <img src={dropdown} alt="Dropdown" className="dropdown"/>
     </div>
  

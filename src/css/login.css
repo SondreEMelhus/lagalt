@@ -1,0 +1,20 @@
+.loginButton{
+    border: 2px solid #117AA0;
+    color: #117AA0;
+    font-weight: bold;
+    background: white;
+    border-radius: 20px;
+    height: 40px;
+    width: 130px;
+    margin-top: 15px;
+    min-width: 63px;
+}
+.registerButton{
+    border: none;
+    color: white;
+    background:  #117AA0;
+    border-radius: 20px;
+    height: 40px;
+    width: 130px;
+    margin-top: 15px; 
+}

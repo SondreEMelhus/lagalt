@@ -6,7 +6,7 @@ import {
   Routes } from "react-router-dom";
 
 //Components
-import Login from './app/component/login/Login'
+import HomePage from './app/component/home/HomePage'
 import Profile from './app/component/profile/Profile';
 import UserProjects from './app/component/profile/UserProjects';
 import Projects from './app/component/projects/Projects';
@@ -16,6 +16,7 @@ import ProjectApplication from './app/component/projects/ProjectApplication';
 
 //Styling
 import './App.css';
+import ProjectBanner from './app/component/projects/ProjectBanner';
 
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/myprojects" element={<UserProjects />} />
           {/* Kanskje endre denne til projects eller noe realtert til main page */}
@@ -31,6 +32,8 @@ function App() {
           <Route path="/create" element={<ProjectCreator/>} />
           <Route path="/admin" element={<ProjectAdmin />} />
           <Route path="/apply" element={<ProjectApplication/>} />
+          {/* TODO: Kun for utvikling, fjern før innlevering!!!!*/}
+          <Route path="/banner" element={<ProjectBanner/>} />
         </Routes>
       </Router>
     </div>

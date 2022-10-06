@@ -2,3 +2,107 @@
     margin-left: 40px;
     margin-top: 30px;
 }
+.titlediv{
+    display: flex;
+    margin-top: 40px;
+}
+.title{
+    margin-left: 80px;
+    margin-right: 10px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+input:focus{
+    outline: none;
+    text-indent: 10px;
+}
+.titleInput{
+    height: 40px;
+    width: 350px;
+    border: none;
+    border-radius: 15px;
+    
+    
+}
+.musicNote{
+    height: 30px;
+    margin-top: 9px;
+    margin-left: 7px;
+}
+.imgBackground{
+    background: white;
+    margin-top: -2px;
+    margin-left: 10px;
+    border-radius: 10px;
+    min-width: 50px;
+    height: 50px;
+}
+.skillsdiv{
+    margin-left: 7%;
+    border-radius: 20px;
+    height: 200px;
+    width: 400px;
+    background: white;
+}
+.headSkill{
+    margin-left: 20px;
+    margin-top: 20px;
+    border: none;
+
+}
+.skillIcon{
+    margin-left: 10px;
+    height: 40px;
+    margin-top: 10px;
+}
+.topPartSkill{
+    display: flex;
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+}
+.skillElement{
+    display: flex;
+    margin-left: 20px;
+    margin-top: 10px;
+    border: 1px solid black;
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    text-align: center;
+}
+.eachSkillElement{
+    margin-left: 5px;
+}
+.xletter{
+    height: 15px;
+    margin-top: 6px;
+    margin-left: 27px;
+}
+.descriptiondiv{
+    display: flex;
+}
+.description{
+    font-weight: bold;
+
+}
+.descriptionFieldDiv{
+    margin-left: 80px;
+    margin-top: -90px;
+}
+textarea:focus{
+    outline: none;
+}
+.textAreaField{
+    border: none;
+    border-radius: 20px;
+    resize: none;
+    padding: 20px 5px;
+}
+.keyWordsdiv{
+    margin-left: 7%;
+    border-radius: 20px;
+    margin-top: 30px;
+    height: 200px;
+    width: 400px;
+    background: white;
+}

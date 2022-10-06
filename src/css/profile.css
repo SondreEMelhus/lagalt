@@ -1,0 +1,51 @@
+.yourProfile{
+    text-align: center;
+}
+.skillElementProfile{
+    margin-left: 20px;
+    border: 2px solid #117AA0;
+    min-width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    margin-top: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+}
+.skillsFieldProfile{
+    background: white;
+    display: flex;
+    width: 70%;
+    min-height: 80px;
+    margin-left: 100px;
+    border-radius: 11px;
+}
+.skillsHeadProfile{
+    margin-left: 115px;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+.portfolioFieldProfile{
+    margin-top: 40px;
+    margin-left: 100px;
+}
+.portfolioHeadProfile{
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+.profileStatusText{
+    margin-left: 100px;
+    margin-top: 30px;
+    font-weight: bold;
+}
+.statusDiv{
+    display: flex;
+}
+.statusButtonProfile{
+    height: 40px;
+    margin-top: 23px;
+    border: 1px solid #117AA0;
+    border-radius: 10px;
+    margin-left: 30px;
+    color: #117AA0;
+}

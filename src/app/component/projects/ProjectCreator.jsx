@@ -7,6 +7,8 @@ import musicNote from '../../../assets/musicalNote.png'
 import SkillIcon from '../../../assets/Skillicon.png'
 import XLetter from '../../../assets/xLetter.png'
 import KeyWord from '../../../assets/KeyWord.png'
+import ProjectSkills from "./ProjectSkills";
+import ProjectKeyWords from "./ProjectKeyWords";
 
 //Styling
 import '../../../css/projectCreator.css'
@@ -24,16 +26,8 @@ export default function ProjectCreator () {
             <div className="imgBackground">
                 <img src={musicNote} alt="" className="musicNote"/>
             </div>
-            <div className="skillsdiv">
-                <div className="topPartSkill">
-                    <img src={SkillIcon} alt=""  className="skillIcon"/>
-                    <input type="text" class="headSkill" placeholder="Ferdigheter..."/>
-                </div>
-                <div class="skillElement">
-                    <p className="eachSkillElement">Guitar</p>
-                    <img src={XLetter} alt="" className="xletter"/>
-                </div>
-
+            <div className="createCards">
+            <ProjectSkills/>
             </div>
         </div>
         <div className="descriptiondiv">
@@ -42,16 +36,8 @@ export default function ProjectCreator () {
             <p className="description">Prosjekt beskrivelse:</p>
             <textarea name="descriptionField" id="" cols="60" rows="10" className="textAreaField"></textarea>
             </div>
-            <div className="keyWordsdiv">
-                <div className="topPartSkill">
-                    <img src={KeyWord} alt=""  className="skillIcon"/>
-                    <input type="text" class="headSkill" placeholder="Nøkkelord..."/>
-                </div>
-                <div class="skillElement">
-                    <p className="eachSkillElement">Guitar</p>
-                    <img src={XLetter} alt="" className="xletter"/>
-                </div>
-
+            <div className="createCards">
+            <ProjectKeyWords/>
             </div>
         </div>
         </>

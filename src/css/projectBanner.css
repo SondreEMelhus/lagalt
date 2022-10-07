@@ -1,12 +1,12 @@
 .project-clickable {
-    border: 2px solid black;
+    border: 2px solid white;
     border-radius: 10px;
     align-items: center;
     background-color: white;
 }
 
 .project-clickable:hover {
-    border-color:  rgb(0, 132, 255);
+    border: 2px solid rgb(0, 132, 255);
   }
 
 .project-header {
@@ -36,6 +36,7 @@
 
 .project-skill-intro {
     font-size: 1vw;
+    margin-right: 65%;
 }
 
 .project-skills {
@@ -67,6 +68,8 @@
 
 .project-keyword-intro {
     font-size: 1vw;
+    margin-right: 60%;
+    margin-top: 10px;
 }
 
 .project-keywords {

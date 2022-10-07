@@ -1,9 +1,13 @@
-.project-banner {
+.project-clickable {
     border: 2px solid black;
     border-radius: 10px;
     align-items: center;
     background-color: white;
 }
+
+.project-clickable:hover {
+    border-color:  rgb(0, 132, 255);
+  }
 
 .project-header {
     margin-top: 10px;
@@ -14,18 +18,16 @@
 }
 
 .project-title {
-    margin-left: 2%;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-size: 3vw;
 }
 
 .project-industry {
-    margin-left: 20%;
+   margin-right: 50%;
 }
 
 .project-industry-image {
-    width: 30px;
-    height: 28px;
+  
 }
 
 .project-body {
@@ -33,7 +35,6 @@
 }
 
 .project-skill-intro {
-    margin-left: 2%;
     font-size: 1vw;
 }
 
@@ -44,38 +45,43 @@
     gap: 15px;
 }
 
-.project-skill {
+.project-skill-filled {
     text-align:center;
-    justify-content: center;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-size: 0.8vw;
-
-    padding-left: 2%;
-    padding-right: 2%;
-
-    margin-right: 1%;
-
-    border: 2px solid black;
+    border: 2px solid rgb(3, 156, 3);
     border-radius: 20px;
     background-color: white;
-    color: black;
+    color: rgb(3, 156, 3);
 }
 
-.project-show-more {
-    border: 2px solid rgb(0, 132, 255);
+.project-skill-not-filled {
+    text-align:center;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 0.8vw;
+    border: 2px solid rgb(206, 27, 27);
     border-radius: 20px;
     background-color: white;
-    color: rgb(0, 132, 255);
-    cursor: pointer;
+    color: rgb(206, 27, 27);
+}
+
+.project-keyword-intro {
     font-size: 1vw;
-
-    height: 30%;
-    width: 20%;
-    margin-left: 2%;
-    margin-bottom: 2%;
 }
 
-.project-show-more:hover {
-    background-color: rgb(0, 132, 255);
-    color: white;
-  }
+.project-keywords {
+    margin-left: 2%;
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    gap: 15px;
+}
+
+.project-keyword {
+    text-align:center;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 0.8vw;
+    border: 2px solid slategrey;
+    border-radius: 20px;
+    background-color: white;
+    color: slategrey;
+}

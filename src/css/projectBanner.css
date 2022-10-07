@@ -7,8 +7,10 @@
 
 .project-header {
     margin-top: 10px;
-    display: flex;
-    width: 100%;
+    margin-left: 2%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 175px;
 }
 
 .project-title {
@@ -22,8 +24,8 @@
 }
 
 .project-industry-image {
-    width: 80%;
-    height: 65%;
+    width: 30px;
+    height: 28px;
 }
 
 .project-body {
@@ -36,10 +38,10 @@
 }
 
 .project-skills {
-    margin-top: 10px;
-    display: flex;
     margin-left: 2%;
-    width: 80%;
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    gap: 15px;
 }
 
 .project-skill {
@@ -47,9 +49,6 @@
     justify-content: center;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-size: 0.8vw;
-
-    height: 30%;
-    width: 20%;
 
     padding-left: 2%;
     padding-right: 2%;

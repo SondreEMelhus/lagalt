@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import { reset, selectFilter } from './FilteredSlice'
+import { reset, selectFilter } from '../redux/slices/FilteredSlice'
 
 export default function Option ({ setText, item, setInputText, setFound}) {
 

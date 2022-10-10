@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { selectFilter } from './FilteredSlice'
+import { selectFilter } from '../redux/slices/FilteredSlice'
 import Option from "./Option";
 
 import magglass from '../../../assets/MagnifyingGlass.png';

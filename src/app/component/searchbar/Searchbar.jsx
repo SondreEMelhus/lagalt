@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { filter as filterFunction } from "./Filters";
-import { reset, search, selectFilter } from './FilteredSlice'
+import { reset, search, selectFilter } from '../redux/slices/FilteredSlice'
 import InputField from "./InputField";
 
 import '../../../css/searchbar.css'

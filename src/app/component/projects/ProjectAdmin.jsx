@@ -8,6 +8,7 @@ import Navbar from "../navbar/Navbar";
 import ProjectSkills from "./ProjectSkills";
 import ProjectKeyWords from "./ProjectKeyWords";
 import ProjectApplicants from "./ProjectApplicants";
+import IndusrtyChanger from "../dropdown/industyChanger";
 
 
 
@@ -40,8 +41,8 @@ export default function ProjectAdmin () {
             <div className="titleDivAdmin">
                 <p className="titleTextAdmin">Tittel:</p>
                 <input type="text" className="titleInputAdmin"/>
-                <div class="musicNoteBox">
-                    <img src={musicNote} alt="" className="musicNoteAdmin"/>
+                <div className="industryChanger">
+                <IndusrtyChanger/>
                 </div>
             </div>
             <div className="titleDivAdmin">

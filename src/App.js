@@ -13,6 +13,7 @@ import Projects from './app/component/projects/Projects';
 import ProjectCreator from './app/component/projects/ProjectCreator';
 import ProjectAdmin from './app/component/projects/ProjectAdmin';
 import ProjectApplication from './app/component/projects/ProjectApplication';
+import MyProjects from './app/component/myProjects/myProjects';
 
 //Styling
 import './App.css';
@@ -27,7 +28,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/myprojects" element={<UserProjects />} />
+          <Route path="/myProjects" element={<MyProjects/>} />
           {/* Kanskje endre denne til projects eller noe realtert til main page */}
           <Route path="/projects" element={<Projects />} />
           <Route path="/create" element={<ProjectCreator/>} />

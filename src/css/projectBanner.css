@@ -19,7 +19,7 @@
 
 .project-title {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 3vw;
+    font-size: 2vw;
 }
 
 .project-industry {
@@ -42,7 +42,7 @@
 .project-skills {
     margin-left: 2%;
     display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-columns: 20% 20% 20% 20%;
     gap: 15px;
 }
 
@@ -75,7 +75,7 @@
 .project-keywords {
     margin-left: 2%;
     display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-columns: 20% 20% 20% 20%;
     gap: 15px;
 }
 

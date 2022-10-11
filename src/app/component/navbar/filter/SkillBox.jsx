@@ -28,8 +28,7 @@ export default function SkillBox () {
                 title={skill}>
             {skills.map((_skill, index ) => {
                 return (
-                
-                    <DropdownItem onClick={handleClick} id={_skill} eventKey={index}>
+                    <DropdownItem onClick={handleClick} id={_skill} eventKey={index + '-' + _skill} key={index + '-' + _skill}>
                         {_skill}
                     </DropdownItem>
                 )

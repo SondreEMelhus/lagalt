@@ -21,6 +21,7 @@ export default function IndustryBox () {
 
     return (
         <div>
+            <p>Industri</p>
             <DropdownButton as={ButtonGroup}
                       variant="success"
                       id='IndustriKnapp'

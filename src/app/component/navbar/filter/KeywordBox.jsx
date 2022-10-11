@@ -22,6 +22,7 @@ export default function KeywordBox () {
 
     return (
         <div>
+            <p>Nøkkelord</p>
             <DropdownButton as={ButtonGroup}
                 variant="success"
                 id='KeywordBtn'

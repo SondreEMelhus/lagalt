@@ -21,6 +21,7 @@ export default function SkillBox () {
 
     return (
         <div>
+            <p>Ferdigheter</p>
             <DropdownButton as={ButtonGroup}
                 variant="success"
                 id='SkillsBtn'

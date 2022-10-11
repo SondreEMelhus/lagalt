@@ -21,7 +21,7 @@ export const userSlice = createSlice({
 export const { update, remove } = userSlice.actions;
 
 
-export const selectFilter = (state) => state.filter.value;
+export const selectUser = (state) => state.user.value;
 
 
 export default userSlice.reducer;

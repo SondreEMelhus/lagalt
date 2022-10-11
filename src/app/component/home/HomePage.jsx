@@ -10,6 +10,8 @@ import '../../../css/home.css'
 
 export default function HomePage () {
 
+    //TODO: Comment
+
     return (
         <div>
             <Navbar />

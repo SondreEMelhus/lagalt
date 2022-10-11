@@ -9,16 +9,16 @@ export const industrySlice = createSlice({
   name: 'industry',
   initialState,
   reducers: {
-    update: (state, action) => {
+    updateIndustry: (state, action) => {
       state.value = action.payload;
     },
-    reset: (state) => {
+    resetIndustry: (state) => {
       state.value = 'Industri';
     }
   },
 });
 
-export const { update, remove } = industrySlice.actions;
+export const { updateIndustry, resetIndustry } = industrySlice.actions;
 
 
 export const selectIndustry = (state) => state.industry.value;

@@ -7,28 +7,13 @@ const initialState = {
     name: 'Bygge spillmotor',
     industry: 'Spillutvikling',
     skills: [
-      {
-        id: 1,
-        skill: 'C++'
-      },
-      {
-        id: 2,
-        skill: 'Unity'
-      },
-      {
-        id: 3,
-        skill: 'Shader programmering'
-      }
+      'C++',
+      'Unity',
+      'Shader programmering'
     ],
     keywords: [
-      {
-        id: 1,
-        keyword: 'Erfaren'
-      },
-      {
-        id: 2,
-        keyword: 'Full-stack'
-      }
+      'Erfaren',
+      'Full-stack'
     ]
   },
   {
@@ -36,28 +21,13 @@ const initialState = {
     name: 'The Room 2',
     industry: 'Film',
     skills: [
-      {
-        id: 1,
-        skill: 'Kamera'
-      },
-      {
-        id: 2,
-        skill: 'Klipping'
-      },
-      {
-        id: 3,
-        skill: 'Skuespiller'
-      }
+      'Kamera',
+      'Klipping',
+      'Skuespiller'
     ],
     keywords: [
-      {
-        id: 1,
-        keyword: 'Lidenskapelig'
-      },
-      {
-        id: 2,
-        keyword: 'Erfaren'
-      }
+      'Lidenskapelig',
+      'Erfaren'
     ]
   },
   {
@@ -65,48 +35,18 @@ const initialState = {
     name: 'Bygge Lagalt klone',
     industry: 'Webutvikling',
     skills: [
-      {
-        id: 1,
-        skill: 'Java'
-      },
-      {
-        id: 2,
-        skill: 'React'
-      },
-      {
-        id: 3,
-        skill: 'Heroku'
-      },
-      {
-        id: 4,
-        skill: 'Spring boot'
-      },
-      {
-        id: 5,
-        skill: 'Hibernate'
-      },
-      {
-        id: 6,
-        skill: 'Redux'
-      }
+      'Java',
+      'React',
+      'Heroku',
+      'Spring boot',
+      'Hibernate',
+      'Redux',
     ],
     keywords: [
-      {
-        id: 1,
-        keyword: 'Erfaren'
-      },
-      {
-        id: 2,
-        keyword: 'Full-stack'
-      },
-      {
-        id: 3,
-        keyword: 'Front-end'
-      },
-      {
-        id: 4,
-        keyword: 'Back-end'
-      }
+      'Erfaren',
+      'Full-stack',
+      'Front-end',
+      'Back-end'
     ]
   },
   {
@@ -114,28 +54,13 @@ const initialState = {
     name: 'Mixtape',
     industry: 'Musikk',
     skills: [
-      {
-        id: 1,
-        skill: 'Soundtrap'
-      },
-      {
-        id: 2,
-        skill: 'Mixer'
-      },
-      {
-        id: 3,
-        skill: 'Beat maker'
-      }
+      'Soundtrap',
+      'Mixer',
+      'Beat maker'
     ],
     keywords: [
-      {
-        id: 1,
-        keyword: 'Musikalsk'
-      },
-      {
-        id: 2,
-        keyword: 'Drop-the-beat'
-      }
+      'Musikalsk',
+      'Drop-the-beat'
     ]
   },
 ],

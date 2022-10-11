@@ -7,7 +7,7 @@ import DropdownItem from "react-bootstrap/esm/DropdownItem";
 //Components
 import { useSelector, useDispatch } from "react-redux";
 import { selectSkills } from '../../redux/slices/filters/lists/SkillsSlice'
-import { selectSkill, update } from "../../redux/slices/filters/SkillSlice";
+import { selectSkill, updateSkill } from "../../redux/slices/filters/SkillSlice";
 
 export default function SkillBox () {
 
@@ -16,7 +16,7 @@ export default function SkillBox () {
     const dispatch = useDispatch();
 
     const handleClick = (event) => {
-        dispatch( update ( event.target.id ))
+        dispatch( updateSkill ( event.target.id ))
     }
 
     return (

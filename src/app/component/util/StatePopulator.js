@@ -1,25 +1,44 @@
 export const generateKeywordState = (listOfProjects) => {
 
-    let keywords = [];
+    let keywords = new Set();
+    keywords.add('Nøkkelord');
 
     for (let project of listOfProjects) {
         for (let keyword of project.keywords) {
-            keywords.push(keyword.keyword);
+            keywords.add(keyword);
         }
     }
 
-    return keywords;
+    const array = [...keywords];
+
+    return array;
 }
 
 export const generateSkillsState = (listOfProjects) => {
 
-    let skills = [];
+    let skills = new Set();
+    skills.add('Ferdighet');
 
     for (let project of listOfProjects) {
         for (let skill of project.skills) {
-            skills.push(skill.skill);
+            skills.add(skill);
         }
     }
 
-    return skills;
+    const array = [...skills];
+
+    return array;
+}
+
+export const generateProjectNameState = (listOfProjects) => {
+
+    let names = new Set();
+
+    for (let project of listOfProjects) {
+        names.add(project.name);
+    }
+
+    const array = [...names];
+
+    return array;
 }

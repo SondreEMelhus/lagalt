@@ -9,16 +9,16 @@ export const skillSlice = createSlice({
   name: 'skill',
   initialState,
   reducers: {
-    update: (state, action) => {
+    updateSkill: (state, action) => {
       state.value = action.payload;
     },
-    reset: (state) => {
+    resetSkill: (state) => {
       state.value = 'Ferdighet';
     }
   },
 });
 
-export const { update, remove } = skillSlice.actions;
+export const { updateSkill, resetSkill } = skillSlice.actions;
 
 
 export const selectSkill = (state) => state.skill.value;

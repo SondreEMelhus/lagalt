@@ -25,7 +25,7 @@ export const projectsSlice = createSlice({
 export const { search, reset } = projectsSlice.actions;
 
 
-export const selectFilter = (state) => state.filter.value;
+export const selectProject = (state) => state.project.value;
 
 
 export default projectsSlice.reducer;

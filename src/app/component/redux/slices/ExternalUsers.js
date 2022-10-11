@@ -25,7 +25,7 @@ export const externalUsersSlice = createSlice({
 export const { search, reset } = externalUsersSlice.actions;
 
 
-export const selectFilter = (state) => state.filter.value;
+export const selectExternalUsers = (state) => state.externalUsers.value;
 
 
 export default externalUsersSlice.reducer;

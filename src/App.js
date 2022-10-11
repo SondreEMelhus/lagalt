@@ -17,6 +17,7 @@ import ProjectApplication from './app/component/projects/ProjectApplication';
 //Styling
 import './App.css';
 import ProjectBanner from './app/component/projects/ProjectBanner';
+import FilterBox from './app/component/navbar/filter/IndustryBox';
 
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
           <Route path="/admin" element={<ProjectAdmin />} />
           <Route path="/apply" element={<ProjectApplication/>} />
           {/* TODO: Kun for utvikling, fjern før innlevering!!!!*/}
-          <Route path="/banner" element={<ProjectBanner/>} />
+          <Route path="/filter" element={<FilterBox/>} />
         </Routes>
       </Router>
     </div>

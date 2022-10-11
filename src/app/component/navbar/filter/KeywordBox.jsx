@@ -30,7 +30,7 @@ export default function KeywordBox () {
             {keywords.map((_keyword, index ) => {
                 return (
                 
-                    <DropdownItem onClick={handleClick} id={_keyword} eventKey={index}>
+                    <DropdownItem onClick={handleClick} id={_keyword} eventKey={index + '-' + _keyword} key={index + '-' + _keyword}>
                         {_keyword}
                     </DropdownItem>
                 )

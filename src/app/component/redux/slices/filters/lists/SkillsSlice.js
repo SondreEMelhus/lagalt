@@ -1,12 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  value: [
-    'Guitar',
-    'Drums',
-    'Piano',
-    'Singing'
-],
+  value: [],
   status: 'idle',
 };
 
@@ -14,16 +9,16 @@ export const skillsSlice = createSlice({
   name: 'skills',
   initialState,
   reducers: {
-    update: (state, action) => {
+    updateSkills: (state, action) => {
       state.value = action.payload;
     },
-    reset: (state) => {
+    resetSkills: (state) => {
       state.value = [];
     }
   },
 });
 
-export const { update, remove } = skillsSlice.actions;
+export const { updateSkills, resetSkills } = skillsSlice.actions;
 
 
 export const selectSkills = (state) => state.skills.value;

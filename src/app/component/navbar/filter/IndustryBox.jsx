@@ -28,7 +28,7 @@ export default function IndustryBox () {
                       title={industry}>
             {industries.map((_industry, index) => {
                 return (
-                    <DropdownItem onClick={handleClick} id={_industry} eventKey={index} key={index + '-' + _industry}>
+                    <DropdownItem onClick={handleClick} id={_industry} eventKey={index + '-' + _industry} key={index + '-' + _industry}>
                     {_industry}
                     </DropdownItem>
                 )

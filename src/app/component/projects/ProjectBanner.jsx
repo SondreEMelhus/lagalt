@@ -47,7 +47,7 @@ export default function ProjectBanner ({ project }) {
                     <div className="project-skills">
                         {project.skills.map((skill, index) => {
                             return (
-                                <p className="project-skill-filled" key={index + '-' + skill.id}>{skill.skill}</p>
+                                <p className="project-skill-filled" key={index + '-' + skill}>{skill}</p>
                             )
                         })}
                     </div>
@@ -55,7 +55,7 @@ export default function ProjectBanner ({ project }) {
                     <div className="project-keywords">
                         {project.keywords.map((keyword, index) => {
                             return (
-                                <p className="project-keyword" key={index + '-' + keyword.id}>{keyword.keyword}</p>
+                                <p className="project-keyword" key={index + '-' + keyword}>{keyword}</p>
                             )
                         })}
                     </div>

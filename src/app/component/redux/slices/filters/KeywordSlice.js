@@ -9,16 +9,16 @@ export const keywordSlice = createSlice({
   name: 'keyword',
   initialState,
   reducers: {
-    update: (state, action) => {
+    updateKeyword: (state, action) => {
       state.value = action.payload;
     },
-    reset: (state) => {
+    resetKeyword: (state) => {
       state.value = 'Nøkkelord';
     }
   },
 });
 
-export const { update, remove } = keywordSlice.actions;
+export const { updateKeyword, resetKeyword } = keywordSlice.actions;
 
 
 export const selectKeyword = (state) => state.keyword.value;

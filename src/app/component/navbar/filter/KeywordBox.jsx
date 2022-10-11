@@ -7,7 +7,7 @@ import DropdownItem from "react-bootstrap/esm/DropdownItem";
 //Components
 import { useSelector, useDispatch } from "react-redux";
 import { selectKeywords } from '../../redux/slices/filters/lists/KeywordsSlice'
-import { selectKeyword, update } from "../../redux/slices/filters/KeywordSlice";
+import { selectKeyword, updateKeyword } from "../../redux/slices/filters/KeywordSlice";
 
 
 export default function KeywordBox () {
@@ -17,7 +17,7 @@ export default function KeywordBox () {
     const dispatch = useDispatch();
 
     const handleClick = (event) => {
-        dispatch( update ( event.target.id ));
+        dispatch( updateKeyword ( event.target.id ));
     }
 
     return (

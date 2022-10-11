@@ -2,28 +2,22 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { filter as filterFunction } from "./Filters";
-import { reset, search, selectFilter } from '../redux/slices/FilteredSlice'
+import { reset, search } from '../redux/slices/FilteredSlice'
 import InputField from "./InputField";
 
 import '../../../css/searchbar.css'
+import { selectProjectNames } from "../redux/slices/filters/lists/ProjectNamesSlice";
+
 
 //TODO: Endre dette så det bruker provider pattern (Unngå propdrilling)
 
 export default function Searchbar () {
 
-    const [filterList,] = useState([
-        'Guitar',
-        'Trommer',
-        'Java',
-        'Jopple',
-        'Jump',
-        'C++',
-        'Noir',
-        'Dokumentar'
-    ]);
+    const filterList = useSelector(selectProjectNames);
+
     const [text, setText] = useState('');
     const [found, setFound] = useState(false);
-    const filteredList = useSelector(selectFilter);
+
     const dispatch = useDispatch();
 
     useEffect((prevText) => {
@@ -42,5 +36,3 @@ export default function Searchbar () {
         </div>
     )
 }
-
-//<button className="option" onClick={handleClick} key={item} value={item}>{item}</button>

@@ -1,18 +1,17 @@
 import React from "react";
 
-import { useSelector, useDispatch } from "react-redux";
-import { reset, selectFilter } from '../redux/slices/FilteredSlice'
+import { useDispatch } from "react-redux";
+import { reset } from '../redux/slices/FilteredSlice'
 
 export default function Option ({ setText, item, setInputText, setFound}) {
 
-    const filteredList = useSelector(selectFilter);
     const dispatch = useDispatch();
 
     const handleClick =  (event) => {
         setText(event.target.value);
         setInputText(event.target.value);
         setFound(true);
-        dispatch( reset () );
+        dispatch( reset ( ) );
     }
 
     return (

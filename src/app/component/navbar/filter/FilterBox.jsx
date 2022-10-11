@@ -7,12 +7,38 @@ import '../../../../css/filterBox.css'
 
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { useDispatch, useSelector } from "react-redux";
+import { selectIndustry, resetIndustry } from "../../redux/slices/filters/IndustrySlice";
+import { resetKeyword, selectKeyword } from "../../redux/slices/filters/KeywordSlice";
+import { resetSkill, selectSkill } from "../../redux/slices/filters/SkillSlice";
+import { selectProjects } from "../../redux/slices/ProjectsSlice";
+import { updateFilteredProjects } from "../../redux/slices/filters/FilteredProjects";
+import { applyFilters } from "./ApplyFilter";
 
 export default function FilterBox () {
 
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
+    const projects = useSelector(selectProjects);
+    const industryFilter = useSelector(selectIndustry);
+    const keywordFilter = useSelector(selectKeyword);
+    const skillFilter = useSelector(selectSkill);
+
+    const dispatch = useDispatch();
+
+    const handleClose = () => {
+        dispatch( updateFilteredProjects(applyFilters(projects, industryFilter, keywordFilter, skillFilter) ));    
+        setShow(false);
+    }
+
+    const handleReset = () => {
+        dispatch( updateFilteredProjects( projects ));
+        dispatch( resetIndustry() )
+        dispatch( resetSkill () );
+        dispatch( resetKeyword () );
+        setShow(false);
+    }
+
     const handleShow = () => setShow(true);
 
     return (
@@ -31,6 +57,9 @@ export default function FilterBox () {
                     <SkillBox className='filter-option' />
                 </Modal.Body>
                 <Modal.Footer>
+                    <Button variant="error" onClick={handleReset}>
+                    Nullstill
+                    </Button>
                     <Button variant="primary" onClick={handleClose}>
                     Lukk
                     </Button>

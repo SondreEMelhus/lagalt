@@ -7,7 +7,7 @@ import DropdownItem from "react-bootstrap/esm/DropdownItem";
 //Components
 import { useSelector, useDispatch } from "react-redux";
 import { selectIndustries } from "../../redux/slices/filters/lists/IndustriesSlice";
-import { selectIndustry, update } from "../../redux/slices/filters/IndustrySlice";
+import { selectIndustry, updateIndustry } from "../../redux/slices/filters/IndustrySlice";
 
 export default function IndustryBox () {
 
@@ -16,7 +16,7 @@ export default function IndustryBox () {
     const dispatch = useDispatch();
 
     const handleClick = (event) => {
-        dispatch( update (event.target.id) )
+        dispatch( updateIndustry (event.target.id) )
     }
 
     return (

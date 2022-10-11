@@ -2,11 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   value: [
+    'Industri',
     'Musikk',
     'Film',
     'Spillutvikling',
-    'Webutvikling',
-    'Alle'
+    'Webutvikling'
 ],
   status: 'idle',
 };

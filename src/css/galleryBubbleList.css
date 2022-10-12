@@ -1,0 +1,25 @@
+.gallery-bubble-listings {
+    padding-top: 40px;
+    margin-right: 50px;
+    height: 200px;
+    overflow: scroll;
+}
+
+.gallery-bubble-items {
+    justify-content: space-around;
+    display: flex;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-left: 2%;
+}
+
+.gallery-bubble-item {
+    text-align:center;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 0.8vw;
+    border: 2px solid #117AA0;
+    border-radius: 20px;
+    background-color: white;
+    color: #117AA0;
+}

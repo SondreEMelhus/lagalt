@@ -14,6 +14,7 @@ import music from '../../../../assets/musicalNote.png';
 import film from '../../../../assets/videoIcon.png';
 import game from '../../../../assets/playIcon.png';
 import coding from '../../../../assets/codingIcon.png';
+import Chat from "./Chat";
 
 
 export default function ProjectPage () {
@@ -70,6 +71,7 @@ export default function ProjectPage () {
                 <p>Ferdigheter vi trenger:</p>
                 <BubbleList list={ project.skills } />
             </div>
+            <Chat />
         </div>
     )
 }

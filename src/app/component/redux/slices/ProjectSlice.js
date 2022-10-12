@@ -12,11 +12,14 @@ export const projectSlice = createSlice({
   reducers: {
     set: (state, action) => {
       state.value = action.payload;
+    },
+    updateChatLog: (state, action) => {
+      state.value.chat = action.payload;
     }
   },
 });
 
-export const { set } = projectSlice.actions;
+export const { set, updateChatLog } = projectSlice.actions;
 
 
 export const selectProject = (state) => state.project.value;

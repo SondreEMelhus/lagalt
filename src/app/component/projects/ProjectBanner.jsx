@@ -10,6 +10,7 @@ import game from '../../../assets/playIcon.png';
 import coding from '../../../assets/codingIcon.png';
 
 import '../../../css/projectBanner.css'
+import BubbleList from "../bubbleList/BubbleList";
 
 /*TODO: 
     - Fiks på CSS så den er mer responsiv og fin
@@ -44,21 +45,9 @@ export default function ProjectBanner ({ project }) {
                 </div>
                 <div className="project-body">
                     <p className="project-skill-intro">Ferdigheter som trengs:</p>
-                    <div className="project-skills">
-                        {project.skills.map((skill, index) => {
-                            return (
-                                <p className="project-skill-filled" key={index + '-' + skill}>{skill}</p>
-                            )
-                        })}
-                    </div>
+                    <BubbleList list = { project.skills } />
                     <p className="project-keyword-intro">Prosjekt relaterte nøkkelord:</p>
-                    <div className="project-keywords">
-                        {project.keywords.map((keyword, index) => {
-                            return (
-                                <p className="project-keyword" key={index + '-' + keyword}>{keyword}</p>
-                            )
-                        })}
-                    </div>
+                    <BubbleList list = { project.keywords } />
                 </div>
             </div>
         </button>

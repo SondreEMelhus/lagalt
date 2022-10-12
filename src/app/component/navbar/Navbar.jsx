@@ -13,6 +13,7 @@ import '../../../css/navbar.css'
 import Login from "../login/Login";
 import Searchbar from "../searchbar/Searchbar";
 import FilterBox from "./filter/FilterBox";
+import NavigateMyProjects from "./NavigateMyProjects";
 
 export default function Navbar() {
   return (
@@ -21,6 +22,7 @@ export default function Navbar() {
         <Searchbar />
         <FilterBox />
         <Login />
+        <NavigateMyProjects/>
         <img src={dropdown} alt="Dropdown" className="dropdown"/>
     </div>
  

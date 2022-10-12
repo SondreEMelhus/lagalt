@@ -1,38 +1,29 @@
-//Libraries
-import React from "react";
+import React, { useState } from "react";
 
 //Components
-import musicNote from '../../../assets/musicalNote.png'
-import Visibility from '../../../assets/visibility.png'
-import Navbar from "../navbar/Navbar";
-import ProjectSkills from "./ProjectSkills";
-import ProjectKeyWords from "./ProjectKeyWords";
-import ProjectApplicants from "./ProjectApplicants";
-import IndusrtyChanger from "../dropdown/industyChanger";
+import ProjectSkills from "../ProjectSkills";
+import ProjectKeyWords from "../ProjectKeyWords";
+import ProjectApplicants from "../ProjectApplicants";
+import IndusrtyChanger from "../../dropdown/industyChanger";
+import Visibility from '../../../../assets/visibility.png'
+import { useDispatch, useSelector } from "react-redux";
+import { selectAdmin } from "../../redux/slices/AdminSlice";
 
 
 
+export default function AdminForm( {StatusClicked, setTitle} ){    
 
-//Styling
-import '../../../css/projectAdmin.css'
+    const project = useSelector(selectAdmin);
+    const[titleInput, setTitleInput] = useState(project.name);
 
-export default function ProjectAdmin () {
-    
-    //Changing status, for now it only changes the css
-    //TODO: Add so that it actually changes the status of the given project
-    const StatusClicked = event =>{
-        document.getElementById("planing").className = "statusButtonWhite"
-        document.getElementById("started").className = "statusButtonWhite"
-        document.getElementById("finished").className = "statusButtonWhite"
-
-        event.currentTarget.className = "statusButtonBlue"
-    
+    const onChangeTitle = (event) =>{
+        setTitleInput(event.target.value)
+        setTitle(event.target.value)
     }
-    
+
     return (
         <div>
-            <Navbar/>
-        <div className="pageAdmin">
+            <div className="pageAdmin">
             <div>
             <div className="headProjectAdmin">
                 <h2>Administrer prosjekt</h2>
@@ -40,7 +31,7 @@ export default function ProjectAdmin () {
             </div>
             <div className="titleDivAdmin">
                 <p className="titleTextAdmin">Tittel:</p>
-                <input type="text" className="titleInputAdmin"/>
+                <input type="text" className="titleInputAdmin" value={titleInput} onChange={onChangeTitle}/>
                 <div className="industryChanger">
                 <IndusrtyChanger/>
                 </div>
@@ -73,7 +64,6 @@ export default function ProjectAdmin () {
             </div>
         </div>
         </div>
-        
     )
 
 }

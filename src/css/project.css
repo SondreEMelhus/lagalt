@@ -1,0 +1,63 @@
+.topDivProject{
+    display: flex;
+    margin-top: 30px;
+    margin-left: 20px;
+}
+.icon{
+    height: 30px;
+    margin-top: 6px;
+    margin-right: 10px;
+}
+.statusField{
+    border: 2px solid #117AA0;
+    margin-left: 20px;
+    height: 40px;
+    min-width: 100px;
+    text-align: center;
+    border-radius: 15px;
+}
+.statusText{
+    margin-top: 6px;
+    font-weight: bold;
+    color: #117AA0;
+}
+.joinButton{
+    border-radius: 15px;
+    border: none;
+    margin-left: 10px;
+    min-width: 90px;
+    height: 40px;
+    color: white;
+    background: #227C9D;
+}
+.adminButton{
+    border-radius: 15px;
+    border: none;
+    margin-left: 10px;
+    min-width: 110px;
+    height: 40px;
+    color: white;
+    background: #FB4C34;
+}
+.projectInfoField{
+    margin-top: 50px;
+    min-height: 600px;
+    margin-left: 5%;
+    min-width: 700px;
+    width: 80%;
+    border-radius: 15px;
+    background: white;
+}
+.descriptionProject{
+    border: 2px solid #227C9D;
+    width: 500px;
+    margin-top: 30px;
+    margin-left: 30px;
+    border-radius: 15px;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.projecSubTitle{
+    margin-left: 30px;
+}

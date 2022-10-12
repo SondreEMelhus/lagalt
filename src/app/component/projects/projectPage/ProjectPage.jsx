@@ -1,14 +1,45 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 //Components
 import Navbar from "../../navbar/Navbar";
-import codeSymbol from '../../../../assets/codingIcon.png'
 
 //Style
 import '../../../../css/project.css'
+import { useSelector } from "react-redux";
+import { selectProject } from "../../redux/slices/ProjectSlice";
+import BubbleList from "../../bubbleList/BubbleList";
+
+import music from '../../../../assets/musicalNote.png';
+import film from '../../../../assets/videoIcon.png';
+import game from '../../../../assets/playIcon.png';
+import coding from '../../../../assets/codingIcon.png';
 
 
-export default function ProjectPage (){
+export default function ProjectPage () {
+
+    const project = useSelector(selectProject);
+    const navigate = useNavigate();
+
+    const chooseIcon = (industry) => {
+        if (industry === 'Musikk') {
+            return music;
+        }
+        if (industry === 'Film') {
+            return film;
+        }
+        if (industry === 'Spillutvikling') {
+            return game;
+        }
+        if (industry === 'Webutvikling') {
+            return coding;
+        }
+    }
+
+    //TODO: Legg inn sjekk for å se om du er admin
+    const navigateToAdmin = () => {
+        navigate('/admin');
+    }
 
     //Industry image - Tittel - Status - Bli med button - Administrate button
     //div
@@ -23,17 +54,21 @@ export default function ProjectPage (){
         <div>
             <Navbar/>
             <div className="topDivProject">
-                <img src={codeSymbol} alt="" className="icon"/>
-                <h2>Prosjekt tittel</h2>
+                <img src={ chooseIcon(project.industry) } alt="" className="icon"/>
+                <h2>{project.title}</h2>
                 <div className="statusField">
-                    <p className="statusText">Startet</p>
+                    <p className="statusText">{project.status}</p>
                 </div>
                 <button className="joinButton">Bli med</button>
-                <button className="adminButton">Administrer</button>
+                <button className="adminButton" onClick={navigateToAdmin}>Administrer</button>
             </div>
             <div className="projectInfoField">
-                <h3 className="projecSubTitle">Prosjekt tittel</h3>
-                <p className="descriptionProject">Jeg ønsker å utvikle en web app Jeg ønsker å utvikle en web app Jeg ønsker å utvikle en web app Jeg ønsker å utvikle en web app Jeg ønsker å utvikle en web app Jeg ønsker å utvikle en web app Jeg ønsker å utvikle en web</p>
+                <h3 className="projecSubTitle">Sub-header</h3>
+                <p className="descriptionProject">{project.description}</p>
+                <p>Nøkkelord:</p>
+                <BubbleList list={ project.keywords } />
+                <p>Ferdigheter vi trenger:</p>
+                <BubbleList list={ project.skills } />
             </div>
         </div>
     )

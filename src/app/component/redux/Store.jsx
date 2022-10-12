@@ -7,6 +7,7 @@ import projectsReducer from './slices/ProjectsSlice';
 import externalUsersReducer from './slices/ExternalUsers';
 import myProjectsReducer from './slices/MyProjectsSlice';
 import adminReducer from './slices/AdminSlice';
+import projectReducer from './slices/ProjectSlice';
 
 //Filter lists
 import industriesReducer from './slices/filters/lists/IndustriesSlice';
@@ -29,6 +30,7 @@ export const store = configureStore({
     externalUsers: externalUsersReducer,
     myProjects: myProjectsReducer,
     admin: adminReducer,
+    project: projectReducer,
     //Filter lists
     industries: industriesReducer,
     keywords: keywordsReducer,

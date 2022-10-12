@@ -6,6 +6,8 @@ const initialState = {
     id: 1,
     title: 'Bygge spillmotor',
     industry: 'Spillutvikling',
+    status: 'Startet',
+    description: 'Vi har lyst til å lage en Unity konkurrent',
     skills: [
       'C++',
       'Unity',
@@ -20,6 +22,8 @@ const initialState = {
     id: 2,
     title: 'The Room 2',
     industry: 'Film',
+    status: 'Ferdig',
+    description: 'Vi vil lage en sprituell oppfølger til The Room',
     skills: [
       'Kamera',
       'Klipping',
@@ -34,6 +38,8 @@ const initialState = {
     id: 3,
     title: 'Bygge Lagalt klone',
     industry: 'Webutvikling',
+    status: 'Stoppet',
+    description: 'Vi vil lage en Lagalt klone',
     skills: [
       'Java',
       'React',
@@ -53,6 +59,8 @@ const initialState = {
     id: 4,
     title: 'Mixtape',
     industry: 'Musikk',
+    status: 'Startet',
+    description: 'Vi har lyst til å lage den feteste mix-tapen ever',
     skills: [
       'Soundtrap',
       'Mixer',

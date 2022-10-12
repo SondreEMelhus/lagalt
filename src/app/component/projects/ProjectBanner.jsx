@@ -1,7 +1,11 @@
 //Libraries
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 //Components
+import BubbleList from "../bubbleList/BubbleList";
+import { set } from '../redux/slices/ProjectSlice';
 
 //Styling
 import music from '../../../assets/musicalNote.png';
@@ -10,13 +14,23 @@ import game from '../../../assets/playIcon.png';
 import coding from '../../../assets/codingIcon.png';
 
 import '../../../css/projectBanner.css'
-import BubbleList from "../bubbleList/BubbleList";
+
+
 
 /*TODO: 
     - Fiks på CSS så den er mer responsiv og fin
     - Legg til redux store for å hente diverse variabler
 */
 export default function ProjectBanner ({ project }) {
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const navigateToProject = async () => {
+        await dispatch( set(project) );
+        navigate('/project');
+
+    }
 
     const chooseIcon = (industry) => {
         if (industry === 'Musikk') {
@@ -35,7 +49,7 @@ export default function ProjectBanner ({ project }) {
 
 
     return (
-        <button className="project-clickable">
+        <button className="project-clickable" onClick={navigateToProject}>
             <div className="project-banner">
                 <div className="project-header">
                     <h1 className="project-title">{ project.title }</h1>

@@ -15,6 +15,9 @@ import { selectFilteredProjects, updateFilteredProjects } from "../redux/slices/
 
 //Styling
 import '../../../css/home.css'
+import { checkIfUserExists, registerUser } from "../../../api/login";
+import { update } from "../redux/slices/MyProjectsSlice";
+import keycloak from "../keycloak/keycloak";
 
 export default function HomePage () {
 
@@ -29,6 +32,33 @@ export default function HomePage () {
         dispatch( updateProjectNames ( generateProjectNameState( projects )));
         dispatch( updateFilteredProjects ( projects ));
     }, [])
+
+    // autenticate account
+
+
+    useEffect(()=>{
+        authenticate()
+    },[])
+
+    const authenticate = async () => {
+        if( keycloak.authenticated) {   // viss bruker er logget inn
+
+            // a) sende en get request for å se om username finnes i DB
+            const account = await checkIfUserExists()
+            if (account) { 
+                console.log("welcome back" + JSON.stringify(account)) 
+            }
+            if (!account) {
+                // viss ikke username finnes i db -> registrer metode
+                console.log("sending account to api so it can be stored in the database")
+                const account = await registerUser(keycloak.tokenParsed)
+                if (account) {
+                    dispatch( update(account))
+                }
+            }
+        }   
+    }
+  
 
     return (
         <div>

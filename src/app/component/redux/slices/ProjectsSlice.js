@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   value: [{
     id: 1,
-    name: 'Bygge spillmotor',
+    title: 'Bygge spillmotor',
     industry: 'Spillutvikling',
     skills: [
       'C++',
@@ -18,7 +18,7 @@ const initialState = {
   },
   {
     id: 2,
-    name: 'The Room 2',
+    title: 'The Room 2',
     industry: 'Film',
     skills: [
       'Kamera',
@@ -32,7 +32,7 @@ const initialState = {
   },
   {
     id: 3,
-    name: 'Bygge Lagalt klone',
+    title: 'Bygge Lagalt klone',
     industry: 'Webutvikling',
     skills: [
       'Java',
@@ -51,7 +51,7 @@ const initialState = {
   },
   {
     id: 4,
-    name: 'Mixtape',
+    title: 'Mixtape',
     industry: 'Musikk',
     skills: [
       'Soundtrap',

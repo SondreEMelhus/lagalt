@@ -37,7 +37,7 @@ export default function ProjectBanner ({ project }) {
         <button className="project-clickable">
             <div className="project-banner">
                 <div className="project-header">
-                    <h1 className="project-title">{ project.name }</h1>
+                    <h1 className="project-title">{ project.title }</h1>
                     <div className="project-industry">
                         <img src={ chooseIcon(project.industry) } alt={project.industry} className="project-industry-image"/>
                     </div>

@@ -1,9 +1,12 @@
+
 import { configureStore } from '@reduxjs/toolkit';
 
 import filterReducer from './slices/FilteredSlice';
 import userReducer from './slices/UserSlice';
 import projectsReducer from './slices/ProjectsSlice';
 import externalUsersReducer from './slices/ExternalUsers';
+import myProjectsReducer from './slices/MyProjectsSlice';
+import adminReducer from './slices/AdminSlice';
 
 //Filter lists
 import industriesReducer from './slices/filters/lists/IndustriesSlice';
@@ -24,6 +27,8 @@ export const store = configureStore({
     user: userReducer,
     projects: projectsReducer,
     externalUsers: externalUsersReducer,
+    myProjects: myProjectsReducer,
+    admin: adminReducer,
     //Filter lists
     industries: industriesReducer,
     keywords: keywordsReducer,
@@ -35,4 +40,4 @@ export const store = configureStore({
     keyword: keywordReducer,
     skill: skillReducer
   },
-});
+})

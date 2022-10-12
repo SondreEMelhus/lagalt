@@ -1,41 +1,38 @@
 //Libraries
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 
 //Components
+import {update} from '../redux/slices/MyProjectsSlice';
+import { updateAdminProject } from "../redux/slices/AdminSlice";
+import { getProjects } from "../../../api/project";
+
 import Navbar from "../navbar/Navbar";
 import ProjectBanner from "../projects/ProjectBanner";
-import { selectProjects } from "../redux/slices/ProjectsSlice";
-import { updateSkills } from "../redux/slices/filters/lists/SkillsSlice";
-import { updateKeywords } from "../redux/slices/filters/lists/KeywordsSlice";
-import { generateKeywordState, generateSkillsState } from "../util/StatePopulator";
+
 
 //Styling
 import '../../../css/profile.css'
+import { selectMyProjects } from "../redux/slices/MyProjectsSlice";
 
 export default function MyProjects () {
 
-    const projects = useSelector(selectProjects)
+    const myProjects = useSelector(selectMyProjects)
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     //Populate skills and keywords in filter
-    useEffect(() => {
-        dispatch( updateSkills( generateSkillsState(projects) ));
-        dispatch( updateKeywords( generateKeywordState(projects)));
-    }, [])
-
-    function sendToAdmin(){
-        
-    }
 
     return (
         <>
             <Navbar/>
             <p>Mine prosjekter</p>
             <div className="home-body">
-                    {projects.map((project, index) => {
+                    {myProjects.map((project, index) => {
                         return (
-                            <ProjectBanner key={index + '-' + project.id} project={project}  onClick={sendToAdmin}/>
+                            <ProjectBanner key={index + '-' + project.id} project={project}/>
                         )
                     })
 

@@ -20,6 +20,7 @@ import ProjectPage from './app/component/projects/projectPage/ProjectPage';
 import './App.css';
 import ProjectBanner from './app/component/projects/ProjectBanner';
 import FilterBox from './app/component/navbar/filter/IndustryBox';
+import Chat from './app/component/projects/projectPage/Chat';
 
 
 function App() {
@@ -37,7 +38,7 @@ function App() {
           <Route path="/admin" element={<ProjectAdmin />} />
           <Route path="/apply" element={<ProjectApplication/>} />
           {/* TODO: Kun for utvikling, fjern før innlevering!!!!*/}
-          <Route path="/filter" element={<FilterBox/>} />
+          <Route path="/chat" element={<Chat/>} />
         </Routes>
       </Router>
     </div>

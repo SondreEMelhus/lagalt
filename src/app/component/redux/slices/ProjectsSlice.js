@@ -8,6 +8,12 @@ const initialState = {
     industry: 'Spillutvikling',
     status: 'Startet',
     description: 'Vi har lyst til å lage en Unity konkurrent',
+    chat: [
+      {
+        timestamp: '19:45',
+        message: 'Halle dette er testing!'
+      }
+    ],
     skills: [
       'C++',
       'Unity',
@@ -24,6 +30,12 @@ const initialState = {
     industry: 'Film',
     status: 'Ferdig',
     description: 'Vi vil lage en sprituell oppfølger til The Room',
+    chat: [
+      {
+        timestamp: '19:45',
+        message: 'Halle dette er testing!'
+      }
+    ],
     skills: [
       'Kamera',
       'Klipping',
@@ -40,6 +52,12 @@ const initialState = {
     industry: 'Webutvikling',
     status: 'Stoppet',
     description: 'Vi vil lage en Lagalt klone',
+    chat: [
+      {
+        timestamp: '19:45',
+        message: 'Halle dette er testing!'
+      }
+    ],
     skills: [
       'Java',
       'React',
@@ -61,6 +79,12 @@ const initialState = {
     industry: 'Musikk',
     status: 'Startet',
     description: 'Vi har lyst til å lage den feteste mix-tapen ever',
+    chat: [
+      {
+        timestamp: '19:45',
+        message: 'Halle dette er testing!'
+      }
+    ],
     skills: [
       'Soundtrap',
       'Mixer',

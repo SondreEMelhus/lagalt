@@ -43,18 +43,19 @@ export default function HomePage () {
     const authenticate = async () => {
         if( keycloak.authenticated) {   // viss bruker er logget inn
 
-            // a) sende en get request for å se om username finnes i DB
+            // 1) sende en get request for å hente account dra db
             const account = await checkIfUserExists()
             if (account) { 
                 console.log("welcome back" + JSON.stringify(account)) 
             }
-            if (!account) {
-                // viss ikke username finnes i db -> registrer metode
+            // 2) viss ikke username finnes i db -> registrer ny account
+            else {
                 console.log("sending account to api so it can be stored in the database")
                 const account = await registerUser(keycloak.tokenParsed)
-                if (account) {
-                    dispatch( update(account))
-                }
+            }
+            // 3) lagre account fra db i en redux state
+            if (account) {
+                dispatch( update(account))
             }
         }   
     }

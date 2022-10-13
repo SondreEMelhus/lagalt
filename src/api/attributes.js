@@ -9,7 +9,21 @@ export const getKeyWordsOfIndustry = async () => {
             throw new Error("No keywords found");
         }
         const data = await response.json();
-        console.log(data)
+        return data
+
+    }catch(error){
+        return[error.message, []];
+    }
+}
+
+//Add id, same as the function above
+export const getSkillsOfIndustry = async () => {
+    try{
+        const response = await fetch(`${apiUrl}/industries/1/skill`);
+        if(!response.ok){
+            throw new Error("No skills found");
+        }
+        const data = await response.json();
         return data
 
     }catch(error){

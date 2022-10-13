@@ -1,5 +1,5 @@
 //Libraries
-import React from "react";
+import React, { useState } from "react";
 
 //Components
 import SkillIcon from '../../../assets/Skillicon.png'
@@ -14,6 +14,9 @@ export default function ProjectSkills () {
     const project = useSelector(selectProject);
     const projectSkills = project.skills;
     const dispatch = useDispatch();
+    const [show, setShow] = useState(false);
+    const [fetchedSkills, setFetchedSkills] = useState([]);
+
 
     function removeSkill(selected){
         const newSkillList = [];
@@ -24,6 +27,17 @@ export default function ProjectSkills () {
         }
         dispatch(updateSkill(newSkillList));
     }
+
+    async function showKeywordSelection(){
+        setShow(true);
+        //const allKeywords = await getKeyWordsOfIndustry()
+        let skills = []
+        //allKeywords.forEach(word => keywords.push(word.title));
+        setFetchedSkills(skills);
+     }
+     function hide(){
+         setShow(false);
+     }
     return (
         <div className="skillsdivAdmin">
         <div className="topPartSkillAdmin">

@@ -18,7 +18,7 @@ export default function ProjectKeyWords () {
     const keywords = (project.keywords)
     const dispatch = useDispatch();
     const [show, setShow] = useState(false);
-    const[fetchedKeywords, setFetchedKeywords] = useState(["Hello"])
+    const[fetchedKeywords, setFetchedKeywords] = useState([])
 
 
     function removeKeyword (event){

@@ -1,0 +1,39 @@
+.popupBox{
+    position: absolute;
+    left: 40%;
+    top: 20%;
+    width: 300px;
+    height: 400px;
+    background: white;
+    border-radius: 15px;
+    visibility: hidden;
+    text-align: center;
+}
+.visiblePopup{
+    position: absolute;
+    text-align: center;
+    border: 1px solid black;
+    left: 40%;
+    top: 20%;
+    width: 300px;
+    height: 400px;
+    background: white;
+    border-radius: 15px;
+}
+.keywordsDiv{
+    text-align: center;
+    height: 290px;
+    overflow: auto; 
+   
+}
+.wordToSelect{
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid black;
+    width: fit-content;
+}
+.closeButton{
+    position:relative;
+    bottom: 0;
+}

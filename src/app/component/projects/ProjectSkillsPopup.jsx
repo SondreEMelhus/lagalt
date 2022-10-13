@@ -2,15 +2,14 @@ import React, { useEffect, useState } from "react";
 
 //components
 import XLetter from '../../../assets/xLetter.png'
-import { getKeyWordsOfIndustry } from "../../../api/attributes";
-import { selectProject, updateKeywords } from "../redux/slices/ProjectSlice";
+import { selectProject, updateSkill } from "../redux/slices/ProjectSlice";
 
 
 //Styling
 import '../../../css/projectKeywordPopup.css'
 import { useDispatch, useSelector } from "react-redux";
 
-export default function ProjectSkillsPopup({show, onHide, fetchedKeywords}){
+export default function ProjectSkillsPopup({show, onHide, fetchedSkills}){
 
     const project = useSelector(selectProject);
     const dispatch = useDispatch();
@@ -18,37 +17,37 @@ export default function ProjectSkillsPopup({show, onHide, fetchedKeywords}){
     useEffect(() => {
 
         if(show){
-            document.getElementById("popup").className = "visiblePopup";
+            document.getElementById("popupSkill").className = "visiblePopup";
         }else if(!show){
-            document.getElementById("popup").className = "popupBox";
+            document.getElementById("popupSkill").className = "popupBox";
         }
 
     }, [show])
 
-    function addKeyword(keyword){
-        const newKeywords = [];
+    function addSkill(skillGiven){
+        const newSkills = [];
         const alreadyIn = false;
-        for(let word of project.keywords){
-            newKeywords.push(word);
-            if(word === keyword){
+        for(let skill of project.skills){
+            newSkills.push(skill);
+            if(skill === skillGiven){
                 alreadyIn = true;
             }
         }
         if(!alreadyIn){
-            newKeywords.push(keyword);
-            dispatch(updateKeywords(newKeywords));
-        }else{
-            console.log("Keyword already in project keywords");
+            newSkills.push(skillGiven);
+            dispatch(updateSkill(newSkills));
+        }else{ //Not sure why not working
+            prompt("Ferdigheten " + skillGiven + " er allerede koblet opp til prosjektet")
         }
     }
 
     return(
-        <div className="popupBox" id="popup">
+        <div className="popupBox" id="popupSkill">
             <p>Trykk på nøkkelordet du vil ha</p>
-            {fetchedKeywords.map((word) => {
+            {fetchedSkills.map((skill) => {
                 return(
                     <div className="keywordsDiv">
-                        <button className="wordToSelect" onClick={() => addKeyword(word)}>{word}</button>
+                        <button className="wordToSelect" onClick={() => addSkill(skill)}>{skill}</button>
                     </div>
                 )
             })}

@@ -20,10 +20,12 @@
     background: white;
     border-radius: 15px;
 }
+.popupContent{
+    height: 290px;
+    overflow: auto;
+}
 .keywordsDiv{
     text-align: center;
-    height: 290px;
-    overflow: auto; 
    
 }
 .wordToSelect{

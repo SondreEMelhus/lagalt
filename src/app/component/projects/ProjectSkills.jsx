@@ -6,6 +6,8 @@ import SkillIcon from '../../../assets/Skillicon.png'
 import XLetter from '../../../assets/xLetter.png'
 import { useDispatch, useSelector } from "react-redux";
 import { selectProject, updateSkill } from "../redux/slices/ProjectSlice";
+import { getSkillsOfIndustry } from "../../../api/attributes";
+import ProjectSkillsPopup from "./ProjectSkillsPopup";
 //Styling
 import '../../../css/projectSkills.css'
 
@@ -28,11 +30,11 @@ export default function ProjectSkills () {
         dispatch(updateSkill(newSkillList));
     }
 
-    async function showKeywordSelection(){
+    async function showSkillsSelection(){
         setShow(true);
-        //const allKeywords = await getKeyWordsOfIndustry()
+        const allSkills = await getSkillsOfIndustry()
         let skills = []
-        //allKeywords.forEach(word => keywords.push(word.title));
+        allSkills.forEach(word => skills.push(word.title));
         setFetchedSkills(skills);
      }
      function hide(){
@@ -42,9 +44,10 @@ export default function ProjectSkills () {
         <div className="skillsdivAdmin">
         <div className="topPartSkillAdmin">
                 <img src={SkillIcon} alt=""  className="skillIconAdmin"/>
-            <input type="text" class="headSkillAdmin" placeholder="Ferdigheter..."/>
+                <button onClick={() => showSkillsSelection()} className="addKeyWordButton">Legg til</button>
         </div>
         <div className="skillElementsContainer">
+            <div className="keywordElementsContainer">
         {projectSkills.map((skill) => {
             return(
                 
@@ -54,7 +57,9 @@ export default function ProjectSkills () {
                 </div>
                     )
                 })}
+                </div>
         </div>
+        <ProjectSkillsPopup show={show} onHide={hide} fetchedSkills={fetchedSkills}/>
     </div>
     )
 }

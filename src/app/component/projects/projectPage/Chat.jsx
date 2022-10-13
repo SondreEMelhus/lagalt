@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectProject, updateChatLog } from "../../redux/slices/ProjectSlice";
+import { selectProject, set, updateChatLog } from "../../redux/slices/ProjectSlice";
+import { patchProject } from "../../../../api/project";
 
 import { santize } from "../../util/InputSantizer";
 
@@ -25,7 +26,8 @@ export default function Chat () {
         }
         const updatedLog = [...project.chat, newMessage];
         dispatch( updateChatLog (updatedLog));
-        console.log(project.chat);
+        const updatedProject = patchProject(project.id, project);
+        console.log(updatedProject);
     }
 
     return (

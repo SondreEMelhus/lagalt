@@ -71,7 +71,7 @@ export default function ProjectPage () {
                 <p>Ferdigheter vi trenger:</p>
                 <BubbleList list={ project.skills } />
             </div>
-            <Chat />
+            {project.chat !== null && <Chat /> }
         </div>
     )
 }

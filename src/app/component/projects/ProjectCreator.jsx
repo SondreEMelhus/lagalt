@@ -1,12 +1,9 @@
 //Libraries
-import React from "react";
+import React, {useState} from "react";
 
 //Components
 import Navbar from "../navbar/Navbar";
 import musicNote from '../../../assets/musicalNote.png'
-import SkillIcon from '../../../assets/Skillicon.png'
-import XLetter from '../../../assets/xLetter.png'
-import KeyWord from '../../../assets/KeyWord.png'
 import ProjectSkills from "./ProjectSkills";
 import ProjectKeyWords from "./ProjectKeyWords";
 import { addProject } from "../../../api/projectCreate";
@@ -17,27 +14,68 @@ import '../../../css/projectCreator.css'
 
 
 export default function ProjectCreator () {
-    let titleInput = "";
-    let descriptionInput = "";
+    const [title, setTitle] = useState('');
+    const [industry, setIndustry] = useState('Musikk');
+    const [skills, setSkills] = useState([]);
+    const [keywords, setKeywords] = useState([]);
+    const [description, setDescription] = ('');
 
     const handleTitleInput = (event) => {
-        titleInput = event.target.value;
+        setTitle(event.target.value);
     }
 
     const handleDescriptionInput = (event) => {
-        descriptionInput = event.target.value;
+        setDescription(event.target.value);
+    }
+
+    const handleIndustry = (event) => {
+        setIndustry(event.target.value);
+    }
+
+    const handleKeywords = (newKeyword) => {
+        const newKeywords = [...keywords, newKeyword]
+        setKeywords(newKeywords);
+    }
+
+    const handleSkills = (newSkill) => {
+        const newSkills = [...skills, newSkill]
+        setSkills(newSkills);
     }
 
 
 
     function submitProject(){
-        console.log(descriptionInput);
-        console.log(titleInput);
+        const newProject = {
+            title: "Testing 1",
+            description: "Testing desc",
+            contributors: [
+                "karo",
+                "tj",
+                "sondre",
+                "ulrik"
+            ],
+            applications: [],
+            skills: [
+                "Design",
+                "Java",
+                "Springboot"
+            ],
+            industry: "Webutvikling",
+            keywords: [
+                "Koding",
+                "Front-end",
+                "Back-end"
+            ],
+            accounts: []
+          }
+        console.log('Logging ProjectCreator: ' + newProject);
+        /*
         if(keycloak.authenticated){
            let user = keycloak.tokenParsed.preferred_username;
-           console.log("user: " + user)
         }
-        addProject(titleInput, descriptionInput);
+        */
+        const response = addProject(newProject);
+        console.log(response);
     }
 
     return (

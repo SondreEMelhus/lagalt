@@ -45,6 +45,7 @@ export default function ProjectKeyWordsPopup({show, onHide, fetchedKeywords}){
     return(
         <div className="popupBox" id="popup">
             <p>Trykk på nøkkelordet du vil ha</p>
+            <div className="popupContent">
             {fetchedKeywords.map((word) => {
                 return(
                     <div className="keywordsDiv">
@@ -52,6 +53,7 @@ export default function ProjectKeyWordsPopup({show, onHide, fetchedKeywords}){
                     </div>
                 )
             })}
+            </div>
             <button onClick={onHide} className="closeButton">Lukk vindu</button>
         </div>
     )

@@ -7,7 +7,7 @@ import ProjectApplicants from "../ProjectApplicants";
 import IndusrtyChanger from "../../dropdown/industyChanger";
 import Visibility from '../../../../assets/visibility.png'
 import { useDispatch, useSelector } from "react-redux";
-import { selectProject } from "../../redux/slices/ProjectSlice";
+import { selectProject, updateTitle, updateDescription, updateStatus } from "../../redux/slices/ProjectSlice";
 
 
 
@@ -17,6 +17,7 @@ export default function AdminForm( {setTitle} ){
     const[titleInput, setTitleInput] = useState(project.title);
     const[descriptionInput, setDescriptionInput] = useState(project.description);
     const[status, setStatus] = useState(project.status);
+    const dispatch = useDispatch();
     
     useEffect(() => {
         if(status === 'Ferdig'){
@@ -37,10 +38,13 @@ export default function AdminForm( {setTitle} ){
         setDescriptionInput(event.target.value);
     }
     function sendUpdatedForm(){
-        console.log(descriptionInput)
-        console.log(titleInput)
-        console.log(status)
+        dispatch(updateTitle(titleInput));
+        dispatch(updateDescription(descriptionInput));
+        dispatch(updateStatus(status));
+        //const newProject = useSelector(selectProject)
     }
+    console.log(project.indusrty)
+    
     const changeStatus = (event) =>{
         setStatus(event.target.value)
         StatusClicked(event)

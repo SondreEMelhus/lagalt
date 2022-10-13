@@ -4,53 +4,64 @@ import React, { useState } from "react";
 //Components
 import KeyWord from '../../../assets/KeyWord.png'
 import XLetter from '../../../assets/xLetter.png'
-import { useSelector } from "react-redux";
-import { selectProject } from "../redux/slices/ProjectSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectProject, updateKeywords } from "../redux/slices/ProjectSlice";
+import ProjectKeyWordsPopup from "./ProjectKeywordsPopup";
+import { getKeyWordsOfIndustry } from "../../../api/attributes";
+
 //Styling
 import '../../../css/projectKeyWords.css'
 
 export default function ProjectKeyWords () {
 
     const project = useSelector(selectProject);
-    const [keywords, setKeywords] = useState(project.keywords)
+    const keywords = (project.keywords)
+    const dispatch = useDispatch();
+    const [show, setShow] = useState(false);
+    const[fetchedKeywords, setFetchedKeywords] = useState(["Hello"])
 
-    const removeKeyword = (event) => {
-        console.log("hello")
-        const word2 = document.getElementById("image").value;
 
-        console.log(word2)
+    function removeKeyword (event){
         const newKeywords = [];
         for(let word of keywords){
-            console.log("-------")
-            console.log(event.target.value)
-            console.log("-------")
-
-            if(word === event){
+            if(word != event){
                 newKeywords.push(word);
             }
         }
-        console.log(newKeywords);
+        dispatch(updateKeywords(newKeywords));
     }
+
+    async function showKeywordSelection(){
+       setShow(true);
+       const allKeywords = await getKeyWordsOfIndustry()
+       let keywords = []
+       allKeywords.forEach(word => keywords.push(word.title));
+       setFetchedKeywords(keywords);
+    }
+    function hide(){
+        setShow(false);
+    }
+
 
     return (
         <div className="keyWorddivAdmin">
         <div className="topPartKeyWordAdmin">
             <img src={KeyWord} alt=""  className="keyWordIconAdmin"/>
-            <input type="text" class="headKeyWordAdmin" placeholder="Nøkkelord..."/>
+            <button onClick={() => showKeywordSelection()} className="addKeyWordButton">Legg til</button>
         </div>
         <div className="keywordElementsContainer">
         {keywords.map((keyword, index) => {
-            
             return(
-                <div class="keyWordElementAdmin" key={index + '-' + keyword}>
+                <div class="keyWordElementAdmin" key={index}>
             <p className="eachKeyWordElementAdmin">{keyword}</p>
-            <div >
-            <img src={XLetter} alt="ffs" className="xletterAdmin" id="image" value={index} onClick={removeKeyword}/>
+            <div onClick={() => removeKeyword(keyword)} id="give" value={keyword}>
+            <img src={XLetter} alt="" className="xletterAdmin" id="image" value={keyword}/>
             </div>
         </div>
             )
         })}
         </div>
+        <ProjectKeyWordsPopup show={show} onHide={hide} fetchedKeywords={fetchedKeywords}/>
     </div>
     )
 }

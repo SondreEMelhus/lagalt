@@ -1,37 +1,36 @@
 //Libraries
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser, updateUser } from "../redux/slices/UserSlice";
 
 //Components
 
 //Styling
 import '../../../css/profile.css'
+import Navbar from "../navbar/Navbar";
+import ProfileForm from "./ProfileForm";
+import { updateAccountInDB } from "../../../api/profile";
+
 
 export default function Profile () {
+    const dispatch = useDispatch();
+    const user = useSelector(selectUser);//#33
+
+    //test
+    console.log("hrrrr" + JSON.stringify(user) )
+
+    const handleUpdateAccountClick = async (input) => {
+        // 1) lagre bruker i db (og få tilbake endret bruker?)
+        await updateAccountInDB(user.id, user.username, input.portfolio, input.description)
+
+        // 2) lagre bruker fra db i redux
+        //dispatch( updateUser(account))
+    }
 
     return (
         <>
-            <h2 className="yourProfile">Din profil</h2>
-
-            <div>
-                <p className="skillsHeadProfile">Mine ferdigheter</p>
-                <div className="skillsFieldProfile">
-                    <div className="skillElementProfile">
-                        <p>Java</p>
-                    </div>
-                </div>
-            </div>
-            <div className="portfolioFieldProfile">
-                <p className="portfolioHeadProfile">Portfolio</p>
-                <textarea name="" id="" cols="80" rows="10" className="textAreaField"></textarea>
-            </div>
-            <div className="portfolioFieldProfile">
-                <p className="portfolioHeadProfile">Min beskrivelse</p>
-                <textarea name="" id="" cols="80" rows="10" className="textAreaField"></textarea>
-            </div>
-            <div className="statusDiv">
-                <p className="profileStatusText">Profil status:</p>
-                <button className="statusButtonProfile">Offentlig</button>
-            </div>
+            <Navbar/>
+            <ProfileForm handleUpdateAccountClick={ handleUpdateAccountClick }/>
         </>
     )
 }

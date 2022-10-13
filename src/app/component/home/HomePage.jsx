@@ -17,7 +17,7 @@ import { scoreProjects } from "../util/SuggestionAlgorithm";
 //Styling
 import '../../../css/home.css'
 
-import { selectUser } from "../redux/slices/UserSlice";
+import { selectUser, updateUser } from "../redux/slices/UserSlice";
 import { checkIfUserExists, registerUser } from "../../../api/login";
 import { update } from "../redux/slices/MyProjectsSlice";
 import keycloak from "../keycloak/keycloak";
@@ -53,29 +53,27 @@ export default function HomePage () {
         return scoreProjects(user, projects, industries, keywords, skills);
     }
 
-    // autenticate account
-
+    // autenticate account (bør flyttes ut i en egen funksjon)
     const authenticate = async () => {
         if( keycloak.authenticated) {   // viss bruker er logget inn
 
-            // 1) sende en get request for å hente account dra db
+            // 1) sende en get request for å hente account dra db -> lagre den i redux store
             const account = await checkIfUserExists()
             if (account) { 
-                console.log("welcome back" + JSON.stringify(account)) 
-            }
-            // 2) viss ikke username finnes i db -> registrer ny account
-            else {
-                console.log("sending account to api so it can be stored in the database")
-                const account = await registerUser(keycloak.tokenParsed)
-            }
-            // 3) lagre account fra db i en redux state
-            if (account) {
+                //console.log("welcome back" + JSON.stringify(account)) 
                 dispatch( update(account))
             }
+            // 2) viss ikke username finnes i db -> registrer ny account -> lagre den i redux store
+            else {
+                //console.log("sending account to api so it can be stored in the database")
+                const account = await registerUser(keycloak.tokenParsed)
+                dispatch( updateUser(account))
+            }   
         }   
     }
+    //test
+    console.log(user)
   
-
     return (
         <div>
             <Navbar />

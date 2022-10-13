@@ -14,6 +14,7 @@ import '../../../css/navbar.css'
 import Login from "../login/Login";
 import Searchbar from "../searchbar/Searchbar";
 import FilterBox from "./filter/FilterBox";
+import NavigateMyProfile from "./NavigateMyProfile";
 import NavigateMyProjects from "./NavigateMyProjects";
 
 export default function Navbar() {
@@ -31,6 +32,7 @@ export default function Navbar() {
         <FilterBox />
         <Login />
         <NavigateMyProjects/>
+        <NavigateMyProfile/>
         <img src={dropdown} alt="Dropdown" className="dropdown"/>
     </div>
  

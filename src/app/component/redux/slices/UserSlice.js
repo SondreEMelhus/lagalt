@@ -81,7 +81,7 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    update: (state, action) => {
+    updateUser: (state, action) => {
       state.value = action.payload;
     },
     remove: (state) => {
@@ -90,7 +90,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { update, remove } = userSlice.actions;
+export const { updateUser, remove } = userSlice.actions;
 
 
 export const selectUser = (state) => state.user.value;

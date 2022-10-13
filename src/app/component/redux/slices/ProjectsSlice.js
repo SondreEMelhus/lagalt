@@ -42,8 +42,7 @@ const initialState = {
       'Skuespiller'
     ],
     keywords: [
-      'Lidenskapelig',
-      'Erfaren'
+      'Lidenskapelig'
     ]
   },
   {
@@ -95,6 +94,71 @@ const initialState = {
       'Drop-the-beat'
     ]
   },
+  {
+    id: 70,
+    title: 'Skrive kode',
+    industry: 'Webutvikling',
+    status: 'Ferdig',
+    description: 'Vi vil lage en sprituell oppfølger til The Room',
+    chat: [
+      {
+        timestamp: '19:45',
+        message: 'Halle dette er testing!'
+      }
+    ],
+    skills: [
+      'C++',
+      'React',
+      'Bootstrap'
+    ],
+    keywords: [
+      'Lidenskapelig',
+      'Erfaren'
+    ]
+  },
+  {
+    id: 71,
+    title: 'Lage film',
+    industry: 'Film',
+    status: 'Ferdig',
+    description: 'Vi vil lage en sprituell oppfølger til The Room',
+    chat: [
+      {
+        timestamp: '19:45',
+        message: 'Halle dette er testing!'
+      }
+    ],
+    skills: [
+      'Kamera',
+      'Klipping',
+      'Skuespiller',
+    ],
+    keywords: [
+      'Lidenskapelig',
+      'Erfaren'
+    ]
+  },
+  {
+    id: 72,
+    title: 'Svett gaming',
+    industry: 'Spillutvikling',
+    status: 'Ferdig',
+    description: 'Vi vil lage en sprituell oppfølger til The Room',
+    chat: [
+      {
+        timestamp: '19:45',
+        message: 'Halle dette er testing!'
+      }
+    ],
+    skills: [
+      'C++',
+      'Unity',
+      'Unreal'
+    ],
+    keywords: [
+      'Nybegynner'
+    ]
+  }
 ],
   status: 'idle',
 };
@@ -106,17 +170,18 @@ export const projectsSlice = createSlice({
     add: (state, action) => {
         state.value = [...state.value, action.payload];
     },
-    update: (state, action) => {
+    updateProjects: (state, action) => {
+      state.value = []
       state.value = action.payload;
     },
-    remove: (state, action) => {
+    removeProjects: (state, action) => {
       let newState = state.value.forEach(state.value !== action.payload).newState.push();
       state.value = newState;
     }
   },
 });
 
-export const { search, reset } = projectsSlice.actions;
+export const { add, updateProjects, removeProjects } = projectsSlice.actions;
 
 
 export const selectProjects = (state) => state.projects.value;

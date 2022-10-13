@@ -27,7 +27,6 @@ export const applyFilters = (listOfProjects, filterIndustry, filterKeyword, filt
     filterIndustry !== 'Industri' ? filterSelection += 1 : filterSelection += 0;
     filterKeyword !== 'Nøkkelord' ? filterSelection += 2 : filterSelection += 0;
     filterSkill !== 'Ferdighet' ? filterSelection += 4 : filterSelection += 0;
-    console.log(filterSelection);
 
     for (let project of listOfProjects) {
         switch(filterSelection) {

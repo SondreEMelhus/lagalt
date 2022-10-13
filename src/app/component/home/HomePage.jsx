@@ -16,7 +16,12 @@ import { scoreProjects } from "../util/SuggestionAlgorithm";
 
 //Styling
 import '../../../css/home.css'
+
 import { selectUser } from "../redux/slices/UserSlice";
+import { checkIfUserExists, registerUser } from "../../../api/login";
+import { update } from "../redux/slices/MyProjectsSlice";
+import keycloak from "../keycloak/keycloak";
+
 
 export default function HomePage () {
 
@@ -29,6 +34,7 @@ export default function HomePage () {
 
     useEffect(() => {
         dispatch( updateProjects (generateProjectSuggestions()));
+        authenticate();
     }, [])
 
     useEffect(() => {
@@ -46,6 +52,29 @@ export default function HomePage () {
         'Drop-the-beat'];
         return scoreProjects(user, projects, industries, keywords, skills);
     }
+
+    // autenticate account
+
+    const authenticate = async () => {
+        if( keycloak.authenticated) {   // viss bruker er logget inn
+
+            // 1) sende en get request for å hente account dra db
+            const account = await checkIfUserExists()
+            if (account) { 
+                console.log("welcome back" + JSON.stringify(account)) 
+            }
+            // 2) viss ikke username finnes i db -> registrer ny account
+            else {
+                console.log("sending account to api so it can be stored in the database")
+                const account = await registerUser(keycloak.tokenParsed)
+            }
+            // 3) lagre account fra db i en redux state
+            if (account) {
+                dispatch( update(account))
+            }
+        }   
+    }
+  
 
     return (
         <div>

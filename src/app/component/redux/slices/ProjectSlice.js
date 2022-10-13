@@ -15,11 +15,26 @@ export const projectSlice = createSlice({
     },
     updateChatLog: (state, action) => {
       state.value.chat = action.payload;
+    },
+    updateTitle: (state, action) => {
+      state.value.title = action.payload;
+    },
+    updateDescription: (state, action) => {
+      state.value.description = action.payload;
+    },
+    updateStatus: (state, action) => {
+      state.value.status = action.payload;
+    },
+    updateKeywords: (state, action) => {
+      state.value.keywords = action.payload;
+    },
+    updateSkill: (state, action) => {
+      state.value.skills = action.payload;
     }
   },
 });
 
-export const { set, updateChatLog } = projectSlice.actions;
+export const { set, updateChatLog, updateTitle, updateDescription, updateStatus, updateKeywords, updateSkill } = projectSlice.actions;
 
 
 export const selectProject = (state) => state.project.value;

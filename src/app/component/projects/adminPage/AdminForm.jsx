@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 //Components
 import ProjectSkills from "../ProjectSkills";
@@ -7,18 +7,53 @@ import ProjectApplicants from "../ProjectApplicants";
 import IndusrtyChanger from "../../dropdown/industyChanger";
 import Visibility from '../../../../assets/visibility.png'
 import { useDispatch, useSelector } from "react-redux";
-import { selectAdmin } from "../../redux/slices/AdminSlice";
+import { selectProject, updateTitle, updateDescription, updateStatus } from "../../redux/slices/ProjectSlice";
 
 
 
-export default function AdminForm( {StatusClicked, setTitle} ){    
+export default function AdminForm( {setTitle} ){    
 
-    const project = useSelector(selectAdmin);
-    const[titleInput, setTitleInput] = useState(project.name);
+    const project = useSelector(selectProject);
+    const[titleInput, setTitleInput] = useState(project.title);
+    const[descriptionInput, setDescriptionInput] = useState(project.description);
+    const[status, setStatus] = useState(project.status);
+    const dispatch = useDispatch();
+    
+    useEffect(() => {
+        if(status === 'Ferdig'){
+            document.getElementById("finished").className = "statusButtonBlue"
+        } else if(status === 'Planlegges'){
+            document.getElementById("planing").className = "statusButtonBlue"
+        } else if(status === 'Startet'){
+            document.getElementById("started").className = "statusButtonBlue"
+        }
+    }, [])
 
     const onChangeTitle = (event) =>{
         setTitleInput(event.target.value)
         setTitle(event.target.value)
+    }
+
+    const onChangeDescription = (event) => {
+        setDescriptionInput(event.target.value);
+    }
+    function sendUpdatedForm(){
+        dispatch(updateTitle(titleInput));
+        dispatch(updateDescription(descriptionInput));
+        dispatch(updateStatus(status));
+        //const newProject = useSelector(selectProject)
+    }
+    console.log(project.indusrty)
+    
+    const changeStatus = (event) =>{
+        setStatus(event.target.value)
+        StatusClicked(event)
+    }
+    const StatusClicked = (event) =>{
+        document.getElementById("planing").className = "statusButtonWhite"
+        document.getElementById("started").className = "statusButtonWhite"
+        document.getElementById("finished").className = "statusButtonWhite"
+        event.currentTarget.className = "statusButtonBlue"
     }
 
     return (
@@ -27,7 +62,7 @@ export default function AdminForm( {StatusClicked, setTitle} ){
             <div>
             <div className="headProjectAdmin">
                 <h2>Administrer prosjekt</h2>
-                <button className="buttonUpdateAdmin">Oppdater</button>
+                <button className="buttonUpdateAdmin" onClick={sendUpdatedForm}>Oppdater</button>
             </div>
             <div className="titleDivAdmin">
                 <p className="titleTextAdmin">Tittel:</p>
@@ -38,16 +73,16 @@ export default function AdminForm( {StatusClicked, setTitle} ){
             </div>
             <div className="titleDivAdmin">
                 <p className="titleTextAdmin">Status:</p>
-                <button className="statusButtonWhite" onClick={StatusClicked} id="planing">Planlegges</button>
-                <button className="statusButtonWhite" onClick={StatusClicked} id="started">Startet</button>
-                <button className="statusButtonWhite" onClick={StatusClicked} id="finished">Ferdig</button>
+                <button className="statusButtonWhite" onClick={changeStatus} id="planing" value="Planlegges">Planlegges</button>
+                <button className="statusButtonWhite" onClick={changeStatus} id="started" value="Startet">Startet</button>
+                <button className="statusButtonWhite" onClick={changeStatus} id="finished" value="Ferdig">Ferdig</button>
                 <div class="musicNoteBoxAdmin">
                     <img src={Visibility} alt="" className="visibilityIconAdmin"/>
                 </div>
             </div>
             <div className="descriptionDivAdmin">
                 <p>Prosjekt beskrivelse</p>
-                <textarea name="" id="" cols="53" rows="10" className="textAreaAdmin"></textarea>
+                <textarea name="" id="" cols="53" rows="10" className="textAreaAdmin" value={descriptionInput} onChange={onChangeDescription}></textarea>
             </div>
             </div>
 

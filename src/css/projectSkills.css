@@ -20,15 +20,19 @@
     margin-top: 20px;
     border: none;
 }
+.skillElementsContainer{
+    height: 120px;
+    overflow: auto;
+}
 .skillElementAdmin{
     display: flex;
-    margin-left: 20px;
+    justify-content: space-around;
+    margin-left: 10px;
     margin-top: 10px;
+    width: fit-content;
     border: 1px solid black;
-    width: 100px;
     height: 30px;
     border-radius: 10px;
-    text-align: center;
 }
 .eachSkillElementAdmin{
     margin-left: 5px;
@@ -36,6 +40,6 @@
 .xletterAdmin{
     height: 15px;
     margin-top: 6px;
-    margin-left: 27px;
+    margin-right: 10px;
     cursor: pointer;
 }

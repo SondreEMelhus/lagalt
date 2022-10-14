@@ -34,7 +34,7 @@ export default function ProjectKeyWords () {
     async function showKeywordSelection(){
         console.log("hello")
        setShow(true);
-       const allKeywords = await getKeyWordsOfIndustry()
+       const allKeywords = await getKeyWordsOfIndustry(project.industry);
        let keywords = []
        allKeywords.forEach(word => keywords.push(word.title));
        setFetchedKeywords(keywords);

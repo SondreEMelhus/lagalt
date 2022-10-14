@@ -32,7 +32,7 @@ export default function ProjectSkills () {
 
     async function showSkillsSelection(){
         setShow(true);
-        const allSkills = await getSkillsOfIndustry()
+        const allSkills = await getSkillsOfIndustry(project.industry)
         let skills = []
         allSkills.forEach(word => skills.push(word.title));
         setFetchedSkills(skills);

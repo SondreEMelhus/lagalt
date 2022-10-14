@@ -5,27 +5,39 @@ import { selectProject, set, updateChatLog } from "../../redux/slices/ProjectSli
 import { patchProject } from "../../../../api/project";
 
 import { santize } from "../../util/InputSantizer";
+import { generateTimestamp } from '../../util/Timestamp';
+import { selectUser } from "../../redux/slices/UserSlice";
+import { addChatMessage } from "../../../../api/chatAPI"
+
+import '../../../../css/chat.css'
 
 export default function Chat () {
 
     const [inputText, setInputText] = useState('');
     const project = useSelector(selectProject);
+    const user = useSelector(selectUser);
     const dispatch = useDispatch();
 
     const handleInputChange = (event) => {
         const sanetizedInput = santize(event.target.value);
         setInputText(sanetizedInput);
-        project.chat.forEach(message => console.log('Timestamp: ' + message.timestamp + ', Message: ' + message.message));
     }
 
     const updateChat = () => {
-        const time = Math.floor(Date.now() / 1000);
+
         const newMessage = {
-            timestamp: time,
-            message: inputText
+            text: inputText,
+            timestamp: generateTimestamp(),
+            username: user.username,
+            project: project
         }
-        const updatedLog = [...project.chat, newMessage];
+
+        let response = addChatMessage(newMessage);
+        console.log(response[1]);
+
+        const updatedLog = [...project.chat, response[1]];
         dispatch( updateChatLog (updatedLog));
+
         const updatedProject = patchProject(project.id, project);
         console.log(updatedProject);
     }
@@ -37,7 +49,8 @@ export default function Chat () {
                     return(
                         <div className="message">
                             <p>{message.timestamp}</p>
-                            <p>{message.message}</p>
+                            <p>{message.username + ' : '}</p>
+                            <p>{message.text}</p>
                         </div>
                     )
                 })}

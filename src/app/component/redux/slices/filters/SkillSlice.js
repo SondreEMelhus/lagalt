@@ -13,7 +13,7 @@ export const skillSlice = createSlice({
       state.value = action.payload;
     },
     resetSkill: (state) => {
-      state.value = 'Ferdighet';
+      state.value = initialState.value;
     }
   },
 });

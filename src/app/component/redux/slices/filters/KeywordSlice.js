@@ -13,7 +13,7 @@ export const keywordSlice = createSlice({
       state.value = action.payload;
     },
     resetKeyword: (state) => {
-      state.value = 'Nøkkelord';
+      state.value = initialState.value;
     }
   },
 });

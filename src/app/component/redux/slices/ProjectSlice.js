@@ -30,11 +30,14 @@ export const projectSlice = createSlice({
     },
     updateSkill: (state, action) => {
       state.value.skills = action.payload;
+    },
+    updateIndustry: (state, action) => {
+      state.value.industry = action.payload;
     }
   },
 });
 
-export const { set, updateChatLog, updateTitle, updateDescription, updateStatus, updateKeywords, updateSkill } = projectSlice.actions;
+export const { set, updateChatLog, updateTitle, updateDescription, updateStatus, updateKeywords, updateSkill, updateIndustry } = projectSlice.actions;
 
 
 export const selectProject = (state) => state.project.value;

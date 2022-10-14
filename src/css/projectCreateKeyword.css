@@ -1,0 +1,47 @@
+.projectCreateKeywordBoxes{
+    display: flex;
+    justify-content: space-evenly;
+}
+.allKeywordBox{
+    width: 220px;
+    height: 100px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    border: 1px solid black;
+    border-radius: 15px;
+    text-indent: 5px;
+    overflow: auto;
+    text-align: center;
+}
+.keywordElementCreateKeyword{
+    border: 1px solid black;
+    border-radius: 8px;
+    width: fit-content;
+    padding-left: 2px;
+    padding-right: 4px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }

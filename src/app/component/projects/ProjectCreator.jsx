@@ -1,110 +1,95 @@
-//Libraries
-import React, {useState} from "react";
-
-//Components
-import Navbar from "../navbar/Navbar";
-import musicNote from '../../../assets/musicalNote.png'
-import ProjectSkills from "./ProjectSkills";
-import ProjectKeyWords from "./ProjectKeyWords";
-import { addProject } from "../../../api/projectCreate";
-import keycloak from "../keycloak/keycloak";
-
-//Styling
-import '../../../css/projectCreator.css'
+import React, { useEffect, useState } from "react";
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ToggleButton from 'react-bootstrap/ToggleButton';
+import ProjectCreateKeyword from "./ProjectCreateKeyword";
+import ProjectCreateSkill from "./ProjectCreateSkill";
 
 
-export default function ProjectCreator () {
-    const [title, setTitle] = useState('');
-    const [industry, setIndustry] = useState('Musikk');
-    const [skills, setSkills] = useState([]);
-    const [keywords, setKeywords] = useState([]);
-    const [description, setDescription] = ('');
-
-    const handleTitleInput = (event) => {
-        setTitle(event.target.value);
+export default function CreateProject () {
+    const [show, setShow] = useState(false);
+    const [radioValue, setRadioValue] = useState("");
+    const handleShow = () => setShow(true);
+    const [industry, setIndustry] = useState("")
+    
+    const handleClose = () => {
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+        console.log("Title: " + title);
+        console.log("Description: " + description);
+        console.log("Industri: " + radioValue);
+        setShow(false);
     }
 
-    const handleDescriptionInput = (event) => {
-        setDescription(event.target.value);
-    }
-
-    const handleIndustry = (event) => {
-        setIndustry(event.target.value);
-    }
-
-    const handleKeywords = (newKeyword) => {
-        const newKeywords = [...keywords, newKeyword]
-        setKeywords(newKeywords);
-    }
-
-    const handleSkills = (newSkill) => {
-        const newSkills = [...skills, newSkill]
-        setSkills(newSkills);
-    }
-
-
-
-    function submitProject(){
-        const newProject = {
-            title: "Testing 1",
-            description: "Testing desc",
-            contributors: [
-                "karo",
-                "tj",
-                "sondre",
-                "ulrik"
-            ],
-            applications: [],
-            skills: [
-                "Design",
-                "Java",
-                "Springboot"
-            ],
-            industry: "Webutvikling",
-            keywords: [
-                "Koding",
-                "Front-end",
-                "Back-end"
-            ],
-            accounts: []
-          }
-        console.log('Logging ProjectCreator: ' + newProject);
-        /*
-        if(keycloak.authenticated){
-           let user = keycloak.tokenParsed.preferred_username;
-        }
-        */
-        const response = addProject(newProject);
-        console.log(response);
-    }
-
+    useEffect(() => {
+        setIndustry(radioValue);
+    }, [radioValue])
+    
+    const radios = [
+        { name: 'Spillutvikling', value: "Spillutvikling" },
+        { name: 'Webutvikling', value: "Webutvikling" },
+        { name: 'Film', value: "Film" },
+        { name: 'Musikk', value: "Musikk"},
+      ];
     return (
-        <>
-        <Navbar/>
-        <div className="headDivCreate">
-            <h2 className="head">Opprett et nytt prosjekt</h2>
-            <button className="SubmitCreateProject" onClick={submitProject}>Opprett</button>
-        </div>
-        <div className="titlediv">
-            <p className="title">Tittel:</p>
-            <input type="text" className="titleInput" onChange={handleTitleInput}/>
-            <div className="imgBackground">
-                <img src={musicNote} alt="" className="musicNote"/>
-            </div>
-            <div className="createCards">
-            <ProjectSkills/>
-            </div>
-        </div>
-        <div className="descriptiondiv">
-            <div class="descriptionFieldDiv">
+        <div>
+            <button onClick={handleShow}>Opprett prosjekt</button>
+            <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Opprett nytt prosjekt</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Tittel</Form.Label>
+              <Form.Control
+                type="text"
+                autoFocus
+                id ="title"
+              />
+            </Form.Group>
+            <Form.Group
+              className="mb-3"
+            >
+              <Form.Label>Beskrivelse</Form.Label>
+              <Form.Control as="textarea" rows={3} id="description"/>
+            </Form.Group>
+                <Form.Label>Industri</Form.Label>
+                <br/>
+            <ButtonGroup className="mb-2">
+        {radios.map((radio, idx) => (
+          <ToggleButton
+            key={idx}
+            id={`radio-${idx}`}
+            type="radio"
+            variant="secondary"
+            name="radio"
+            value={radio.value}
+            checked={radioValue === radio.value}
+            onChange={(e) => setRadioValue(e.currentTarget.value)}
+          >
+            {radio.name}
+          </ToggleButton>
+        ))}
+      </ButtonGroup>
+      <Form.Label>Velg nøkkelord for ditt prosjekt fra listen til venstre</Form.Label>
+      <ProjectCreateKeyword industry={industry}/>
+      <Form.Label>Velg ferdigheter for ditt prosjekt fra listen til venstre</Form.Label>
 
-            <p className="description">Prosjekt beskrivelse:</p>
-            <textarea name="descriptionField" id="" cols="60" rows="10" className="textAreaField" onChange={handleDescriptionInput}></textarea>
-            </div>
-            <div className="createCards">
-            <ProjectKeyWords/>
-            </div>
+      <ProjectCreateSkill industry={industry}/>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={handleClose}>
+            Lukk
+          </Button>
+          <Button variant="secondary" onClick={handleClose}>
+            Lagre prosjekt
+          </Button>
+        </Modal.Footer>
+        </Modal>
         </div>
-        </>
-    )
+        )
 }

@@ -1,70 +1,26 @@
-.head{
-    margin-left: 40px;
-    margin-top: 30px;
-}
-.headDivCreate{
-    display: flex;
-}
-.SubmitCreateProject{
-    height: 50px;
-    margin-top: 20px;
-    margin-left: 20px;
-}
-.titlediv{
+.topDivCreate{
     display: flex;
     margin-top: 40px;
+    margin-left: 60px;
 }
-.title{
-    margin-left: 80px;
-    margin-right: 10px;
-    margin-top: 5px;
-    font-weight: bold;
+.titleInputCreate{
+    display: flex;
+    margin-top: 30px;
+    margin-left: 100px;
 }
+
 input:focus{
     outline: none;
-    text-indent: 10px;
 }
-.titleInput{
-    height: 40px;
-    width: 350px;
+.titleInputFieldCreate{
+    margin-left: 20px;
     border: none;
-    border-radius: 15px;
-}
-.musicNote{
-    height: 30px;
-    margin-top: 9px;
-    margin-left: 7px;
-    cursor: pointer;
-}
-.imgBackground{
-    background: white;
-    margin-top: -2px;
-    margin-left: 10px;
     border-radius: 10px;
-    min-width: 50px;
-    height: 50px;
+    width: 270px;
 }
-.descriptiondiv{
-    display: flex;
-}
-.description{
-    font-weight: bold;
-
-}
-.descriptionFieldDiv{
-    margin-left: 80px;
-    margin-top: -120px;
-}
-textarea:focus{
-    outline: none;
-}
-.textAreaField{
-    border: none;
-    border-radius: 20px;
-    resize: none;
-    padding: 20px 5px;
-}
-.createCards{
-    margin-left: 7%;
-    margin-bottom: 10px;
+.iconCreate{
+    margin-left: 10px;
+    margin-top: 4px;
+    height: 35px;
+    width: 40px;
 }

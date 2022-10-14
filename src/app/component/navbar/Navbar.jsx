@@ -7,7 +7,7 @@ import Logo from '../../../assets/Logo.png';
 import dropdown from '../../../assets/Profile.png';
 
 //Components
-
+import CreateProject from "../projects/ProjectCreator";
 
 //Styling
 import '../../../css/navbar.css'
@@ -32,6 +32,7 @@ export default function Navbar() {
         <FilterBox />
         <Login />
         <NavigateMyProjects/>
+        <CreateProject/>
         <NavigateMyProfile/>
         <img src={dropdown} alt="Dropdown" className="dropdown"/>
     </div>

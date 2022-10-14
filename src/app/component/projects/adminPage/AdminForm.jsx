@@ -43,7 +43,6 @@ export default function AdminForm( {setTitle} ){
         dispatch(updateStatus(status));
         //const newProject = useSelector(selectProject)
     }
-    console.log(project.indusrty)
     
     const changeStatus = (event) =>{
         setStatus(event.target.value)
@@ -68,7 +67,7 @@ export default function AdminForm( {setTitle} ){
                 <p className="titleTextAdmin">Tittel:</p>
                 <input type="text" className="titleInputAdmin" value={titleInput} onChange={onChangeTitle}/>
                 <div className="industryChanger">
-                <IndusrtyChanger/>
+                <IndusrtyChanger industry={project.industry}/>
                 </div>
             </div>
             <div className="titleDivAdmin">

@@ -10,8 +10,10 @@ const initialState = {
     description: 'Vi har lyst til å lage en Unity konkurrent',
     chat: [
       {
+        id: 1,
         timestamp: '19:45',
-        message: 'Halle dette er testing!'
+        text: 'Halle dette er testing!',
+        username: 'PerGynt'
       }
     ],
     skills: [
@@ -32,8 +34,10 @@ const initialState = {
     description: 'Vi vil lage en sprituell oppfølger til The Room',
     chat: [
       {
+        id: 1,
         timestamp: '19:45',
-        message: 'Halle dette er testing!'
+        text: 'Halle dette er testing!',
+        username: 'PerGynt'
       }
     ],
     skills: [
@@ -53,8 +57,10 @@ const initialState = {
     description: 'Vi vil lage en Lagalt klone',
     chat: [
       {
+        id: 1,
         timestamp: '19:45',
-        message: 'Halle dette er testing!'
+        text: 'Halle dette er testing!',
+        username: 'PerGynt'
       }
     ],
     skills: [
@@ -80,8 +86,10 @@ const initialState = {
     description: 'Vi har lyst til å lage den feteste mix-tapen ever',
     chat: [
       {
+        id: 1,
         timestamp: '19:45',
-        message: 'Halle dette er testing!'
+        text: 'Halle dette er testing!',
+        username: 'PerGynt'
       }
     ],
     skills: [
@@ -102,8 +110,10 @@ const initialState = {
     description: 'Vi vil lage en sprituell oppfølger til The Room',
     chat: [
       {
+        id: 1,
         timestamp: '19:45',
-        message: 'Halle dette er testing!'
+        text: 'Halle dette er testing!',
+        username: 'PerGynt'
       }
     ],
     skills: [
@@ -124,8 +134,10 @@ const initialState = {
     description: 'Vi vil lage en sprituell oppfølger til The Room',
     chat: [
       {
+        id: 1,
         timestamp: '19:45',
-        message: 'Halle dette er testing!'
+        text: 'Halle dette er testing!',
+        username: 'PerGynt'
       }
     ],
     skills: [
@@ -146,8 +158,10 @@ const initialState = {
     description: 'Vi vil lage en sprituell oppfølger til The Room',
     chat: [
       {
+        id: 1,
         timestamp: '19:45',
-        message: 'Halle dette er testing!'
+        text: 'Halle dette er testing!',
+        username: 'PerGynt'
       }
     ],
     skills: [

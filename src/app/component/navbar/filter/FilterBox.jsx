@@ -13,13 +13,14 @@ import { resetKeyword, selectKeyword } from "../../redux/slices/filters/KeywordS
 import { resetSkill, selectSkill } from "../../redux/slices/filters/SkillSlice";
 import { selectProjects } from "../../redux/slices/ProjectsSlice";
 import { updateFilteredProjects } from "../../redux/slices/filters/FilteredProjects";
-import { applyFilters } from "./ApplyFilter";
+import { selectIndustries } from "../../redux/slices/filters/lists/IndustriesSlice";
 
 export default function FilterBox () {
 
     const [show, setShow] = useState(false);
 
     const projects = useSelector(selectProjects);
+    const industries = useSelector(selectIndustries);
     const industryFilter = useSelector(selectIndustry);
     const keywordFilter = useSelector(selectKeyword);
     const skillFilter = useSelector(selectSkill);
@@ -27,7 +28,9 @@ export default function FilterBox () {
     const dispatch = useDispatch();
 
     const handleClose = () => {
-        dispatch( updateFilteredProjects(applyFilters(projects, industryFilter, keywordFilter, skillFilter) ));    
+
+        //TODO: Legg til en fetch av filteredProjects()
+        //dispatch( updateFilteredProjects());    
         setShow(false);
     }
 
@@ -52,7 +55,7 @@ export default function FilterBox () {
                     <Modal.Title>Filtre</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="filter-box">
-                    <IndustryBox className='filter-option' />
+                    <IndustryBox className='filter-option'/>
                     <KeywordBox className='filter-option' />
                     <SkillBox className='filter-option' />
                 </Modal.Body>

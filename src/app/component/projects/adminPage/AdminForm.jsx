@@ -7,7 +7,7 @@ import ProjectApplicants from "../ProjectApplicants";
 import IndusrtyChanger from "../../dropdown/industyChanger";
 import Visibility from '../../../../assets/visibility.png'
 import { useDispatch, useSelector } from "react-redux";
-import { patchProject } from "../../../../api/projectsAPI";
+import { patchProject } from "../../../../api/ProjectAPI/projectsAPI";
 import { selectProject, updateTitle, updateDescription, updateStatus } from "../../redux/slices/ProjectSlice";
 
 

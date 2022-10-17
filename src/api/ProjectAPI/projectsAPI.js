@@ -98,7 +98,7 @@ export const createProject = async (payload) => {
     const keywordsToAdd = [];
     aKeyword.forEach((s) => keywordsToAdd.push(s));
     aSkills.forEach((s) => skillsToAdd.push({id: s}));
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+    console.log("@@@@@@@¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤@@@@@@@@")
     console.log(keywordsToAdd);
     console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 
@@ -120,7 +120,7 @@ export const createProject = async (payload) => {
                 projectInteractionHistory: [],
                 skills: skillsToAdd,
                 industry: ind,
-                keywords: aKeyword
+                //keywords: aKeyword
             })
         })
         if (!response.ok) {

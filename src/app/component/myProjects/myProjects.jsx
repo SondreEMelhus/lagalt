@@ -32,7 +32,7 @@ export default function MyProjects () {
             <Navbar/>
             <p>Mine prosjekter</p>
             <div className="home-body">
-                    {user.protfolio.map((project, index) => {
+                    {user.contributors !== undefined && user.portfolio.map((project, index) => {
                         return (
                             <ProjectBanner key={index + '-' + project.id} project={project}/>
                         )

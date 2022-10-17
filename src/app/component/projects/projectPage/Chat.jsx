@@ -1,16 +1,17 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectProject, set, updateChatLog } from "../../redux/slices/ProjectSlice";
-import { patchProject } from "../../../../api/project";
+import { selectProject } from "../../redux/slices/ProjectSlice";
 
 import { santize } from "../../util/InputSantizer";
 import { generateTimestamp } from '../../util/Timestamp';
 import { selectUser } from "../../redux/slices/UserSlice";
-import { addChatMessage } from "../../../../api/chatAPI"
+import { selectChat } from "../../redux/slices/Chat";
+import { getChat, addChatMessage } from "../../../../api/ProjectAPI/chatAPI";
+
 
 import '../../../../css/chat.css'
-import { selectChat } from "../../redux/slices/Chat";
+
 
 export default function Chat () {
 
@@ -31,6 +32,7 @@ export default function Chat () {
             text: inputText,
             timestamp: generateTimestamp(),
             username: user.username,
+            project: project
         }
 
         let response = addChatMessage(newMessage, project.id);
@@ -43,7 +45,7 @@ export default function Chat () {
             <div className='message-box'>
                 {chat !== undefined && chat.map((message, index) => {
                     return(
-                        <div className="message">
+                        <div className="message" key={index}>
                             <p>{message.timestamp}</p>
                             <p>{message.username + ' : '}</p>
                             <p>{message.text}</p>

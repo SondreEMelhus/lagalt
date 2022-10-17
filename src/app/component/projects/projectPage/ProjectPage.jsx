@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 //Components
@@ -6,7 +6,7 @@ import Navbar from "../../navbar/Navbar";
 
 //Style
 import '../../../../css/project.css'
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectProject } from "../../redux/slices/ProjectSlice";
 import BubbleList from "../../bubbleList/BubbleList";
 
@@ -15,13 +15,40 @@ import film from '../../../../assets/videoIcon.png';
 import game from '../../../../assets/playIcon.png';
 import coding from '../../../../assets/codingIcon.png';
 import Chat from "./Chat";
-import ContentBoard from "./ContentBoard";
+import MessageBoard from "./MessageBoard";
+import StatusBoard from './StatusBoard';
+import { updateMessageBoard } from "../../redux/slices/ContentBoards/MessageBoard/MessageBoardSlice";
+import { getMessageBoard } from "../../../../api/ProjectAPI/messageBoardAPI";
+import { getStatusBoard } from "../../../../api/ProjectAPI/statusBoardAPI";
+import { updateStatusBoard } from "../../redux/slices/ContentBoards/StatusBoard/StatusBoardSlice";
+import { getChat } from "../../../../api/ProjectAPI/chatAPI";
+import { updateChat } from "../../redux/slices/Chat";
 
 
 export default function ProjectPage () {
 
     const project = useSelector(selectProject);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    useEffect( () => {
+        fetchData();
+    })
+
+    const fetchData = async () => {
+        const messageBoard = await getMessageBoard(project.id);
+        if (messageBoard) {
+            dispatch ( updateMessageBoard ( messageBoard ) );
+        }
+        const statusBoard = await getStatusBoard(project.id);
+        if (statusBoard) {
+            dispatch ( updateStatusBoard ( statusBoard ));
+        }
+        const chat = await getChat(project.id);
+        if (chat) {
+            dispatch ( updateChat ( chat ))
+        }
+    }
 
     const chooseIcon = (industry) => {
         if (industry === 'Musikk') {
@@ -65,8 +92,9 @@ export default function ProjectPage () {
                 {/* TODO: Legg til fetchMethod for statusBoard <ContentBoard id='UpdateBoard' list={} />*/}
                 {/* TODO: Legg til fetchMethod for messageBoard <ContentBoard id='MessageBoard' list={} />*/}
                 <Chat />
+                <MessageBoard />
+                <StatusBoard />
             </div>
-            {/* TODO: Prosjekt objekene mangler chat project.chat !== null && <Chat /> */}
         </div>
     )
 }

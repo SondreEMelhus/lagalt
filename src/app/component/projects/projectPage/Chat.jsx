@@ -11,6 +11,7 @@ import { getChat, addChatMessage } from "../../../../api/ProjectAPI/chatAPI";
 
 
 import '../../../../css/chat.css'
+import { trimTimestamp } from "../../util/TrimTimestamp";
 
 
 export default function Chat () {
@@ -42,11 +43,13 @@ export default function Chat () {
 
     return (
         <div className='chat-box'>
+            <h1>Chat</h1>
             <div className='message-box'>
+                {chat.length === 0 && <h3 className="no-message">Ingen meldinger er sendt enda</h3>}
                 {chat !== undefined && chat.map((message, index) => {
                     return(
                         <div className="message" key={index}>
-                            <p>{message.timestamp}</p>
+                            <p>{trimTimestamp (message.timestamp)}</p>
                             <p>{message.username + ' : '}</p>
                             <p>{message.text}</p>
                         </div>
@@ -55,7 +58,7 @@ export default function Chat () {
             </div>
             <div className='input-box'>
                 <input className='input-field' onChange={ handleInputChange } value={ inputText }/>
-                <button onClick= {updateChat}>Send</button>
+                <button onClick= {updateChat} className="input-btn">Send</button>
             </div>
         </div>
     )

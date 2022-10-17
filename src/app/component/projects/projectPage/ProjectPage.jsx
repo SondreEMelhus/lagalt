@@ -17,10 +17,10 @@ import coding from '../../../../assets/codingIcon.png';
 import Chat from "./Chat";
 import MessageBoard from "./MessageBoard";
 import StatusBoard from './StatusBoard';
-import { updateMessageBoard } from "../../redux/slices/ContentBoards/MessageBoard/MessageBoardSlice";
+import { resetMessageBoard, updateMessageBoard } from "../../redux/slices/ContentBoards/MessageBoard/MessageBoardSlice";
 import { getMessageBoard } from "../../../../api/ProjectAPI/messageBoardAPI";
 import { getStatusBoard } from "../../../../api/ProjectAPI/statusBoardAPI";
-import { updateStatusBoard } from "../../redux/slices/ContentBoards/StatusBoard/StatusBoardSlice";
+import { resetStatusBoard, updateStatusBoard } from "../../redux/slices/ContentBoards/StatusBoard/StatusBoardSlice";
 import { getChat } from "../../../../api/ProjectAPI/chatAPI";
 import { updateChat } from "../../redux/slices/Chat";
 
@@ -39,14 +39,20 @@ export default function ProjectPage () {
         const messageBoard = await getMessageBoard(project.id);
         if (messageBoard) {
             dispatch ( updateMessageBoard ( messageBoard ) );
+        } else {
+            dispatch ( resetMessageBoard () );
         }
         const statusBoard = await getStatusBoard(project.id);
         if (statusBoard) {
             dispatch ( updateStatusBoard ( statusBoard ));
+        } else {
+            dispatch ( resetStatusBoard () );
         }
         const chat = await getChat(project.id);
         if (chat) {
             dispatch ( updateChat ( chat ))
+        } else {
+            dispatch ( updateChat ( [] ))
         }
     }
 
@@ -94,6 +100,7 @@ export default function ProjectPage () {
                 <Chat />
                 <MessageBoard />
                 <StatusBoard />
+                <div className="footer"></div>
             </div>
         </div>
     )

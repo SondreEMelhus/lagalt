@@ -27,6 +27,7 @@ const ProfileForm = ({handleUpdateAccountClick}) => {
     const updateProfile = () => {
         updatePortfolio(portfolio);
         updateDescription(description);
+        updateUserInDB
     }
 
 	return (

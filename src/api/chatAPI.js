@@ -2,17 +2,16 @@ import { createHeaders } from "."
 
 const apiUrl = "https://lagalt-java-backend.herokuapp.com/api/v1"
 
-export const addChatMessage = async ( payload ) => {
+export const addChatMessage = async ( payload, projectID ) => {
 
     try{
-        const response = await fetch(`${apiUrl}/chats` ,{
+        const response = await fetch(`${apiUrl}/chats/${projectID}/addChat` ,{
             method: 'POST',
             headers: createHeaders(),
             body: JSON.stringify({
                 text: payload.text,
                 timestamp: payload.timestamp,
                 username: payload.username,
-                project: payload.project
             })
         });
 

@@ -10,12 +10,14 @@ import { selectUser } from "../../redux/slices/UserSlice";
 import { addChatMessage } from "../../../../api/chatAPI"
 
 import '../../../../css/chat.css'
+import { selectChat } from "../../redux/slices/Chat";
 
 export default function Chat () {
 
     const [inputText, setInputText] = useState('');
     const project = useSelector(selectProject);
     const user = useSelector(selectUser);
+    const chat = useSelector(selectChat);
     const dispatch = useDispatch();
 
     const handleInputChange = (event) => {
@@ -29,23 +31,17 @@ export default function Chat () {
             text: inputText,
             timestamp: generateTimestamp(),
             username: user.username,
-            project: project
         }
 
-        let response = addChatMessage(newMessage);
+        let response = addChatMessage(newMessage, project.id);
         console.log(response[1]);
-
-        const updatedLog = [...project.chat, response[1]];
-        dispatch( updateChatLog (updatedLog));
-
-        const updatedProject = patchProject(project.id, project);
-        console.log(updatedProject);
+        dispatch( addChatMessage(newMessage));
     }
 
     return (
         <div className='chat-box'>
             <div className='message-box'>
-                {project.chat.map((message, index) => {
+                {chat !== undefined && chat.map((message, index) => {
                     return(
                         <div className="message">
                             <p>{message.timestamp}</p>

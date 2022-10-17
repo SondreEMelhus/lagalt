@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { selectUser } from "../redux/slices/UserSlice";
+import BubbleList from "../bubbleList/BubbleList";
 
 const ProfileForm = ({handleUpdateAccountClick}) => {
 
     const { register, handleSubmit } = useForm()
-
     const user = useSelector(selectUser);
 
     const submit = (input) => {
@@ -18,9 +18,7 @@ const ProfileForm = ({handleUpdateAccountClick}) => {
             <div>
                 <p className="skillsHeadProfile">Mine ferdigheter</p>
                 <div className="skillsFieldProfile">
-                    <div className="skillElementProfile">
-                        <p>Java</p>
-                    </div>
+                    <BubbleList list={user.skills} />
                 </div>
             </div>
             <div className="portfolioFieldProfile">

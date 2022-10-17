@@ -17,7 +17,7 @@ export default function NavigateMyProjects(){
         console.log(array)
         dispatch(update(array[1]))
         console.log(myProjects)
-        navigate('/myprojects')
+        navigate('/projects')
     }
 
     return(

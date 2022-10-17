@@ -8,6 +8,12 @@ import externalUsersReducer from './slices/ExternalUsers';
 import myProjectsReducer from './slices/MyProjectsSlice';
 import adminReducer from './slices/AdminSlice';
 import projectReducer from './slices/ProjectSlice';
+import chatReducer from './slices/Chat';
+
+//Create project
+import projectIndustryReducer from './slices/createProjectSlices/ProjectIndustrySlice';
+import projectKeywordsReducer from './slices/createProjectSlices/ProjectKeywordsSlice';
+import projectSkillsReducer from './slices/createProjectSlices/ProjectSkillsSlice';
 
 //Filter lists
 import industriesReducer from './slices/filters/lists/IndustriesSlice';
@@ -31,12 +37,20 @@ export const store = configureStore({
     myProjects: myProjectsReducer,
     admin: adminReducer,
     project: projectReducer,
+    chat: chatReducer,
+
+    //Create project
+    projectIndustry: projectIndustryReducer,
+    projectKeywords: projectKeywordsReducer,
+    projectSkills: projectSkillsReducer,
+
     //Filter lists
     industries: industriesReducer,
     keywords: keywordsReducer,
     skills: skillsReducer,
     projectNames: projectNamesReducer,
     filteredProjects: filteredProjectsReducer,
+    
     //Filter singles
     industry: industryReducer,
     keyword: keywordReducer,

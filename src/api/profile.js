@@ -14,7 +14,8 @@ const getLoggedInUser = () => {
 export const getUser = async () => {
     try {
         const token = getLoggedInUser()
-        const username = token.preferred_username;
+        //const username = token.preferred_username;
+        const username = 'Synnøve';
         const response = await fetch(`${apiUrl}/accounts/search?username=${username}`)
         const account = await response.json()
         if (account.JSON) {

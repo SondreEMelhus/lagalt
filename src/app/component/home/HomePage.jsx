@@ -3,24 +3,19 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 //Components
-import Navbar from "../navbar/Navbar";
 import ProjectBanner from "../projects/ProjectBanner";
 import { selectProjects, updateProjects } from "../redux/slices/ProjectsSlice";
-import { updateSkills } from "../redux/slices/filters/lists/SkillsSlice";
-import { updateKeywords } from "../redux/slices/filters/lists/KeywordsSlice";
-import { generateKeywordState, generateSkillsState } from "../util/StatePopulator";
-import { updateProjectNames } from "../redux/slices/filters/lists/ProjectNamesSlice";
-import { generateProjectNameState } from "../util/StatePopulator";
 import { selectFilteredProjects, updateFilteredProjects } from "../redux/slices/filters/FilteredProjects";
-import { scoreProjects } from "../util/SuggestionAlgorithm";
 
 //Styling
 import '../../../css/home.css'
 
 import { selectUser, updateUser } from "../redux/slices/UserSlice";
-import { checkIfUserExists, registerUser } from "../../../api/login";
-import { update } from "../redux/slices/MyProjectsSlice";
+import { getUser} from "../../../api/fetchUserAPI";
 import keycloak from "../keycloak/keycloak";
+import { getProjects } from "../../../api/project";
+import { getIndustries } from "../../../api/industryAPI";
+import { selectIndustries, updateIndustries } from "../redux/slices/filters/lists/IndustriesSlice";
 
 
 export default function HomePage () {
@@ -30,62 +25,57 @@ export default function HomePage () {
     const filteredProjects = useSelector(selectFilteredProjects);
     const dispatch = useDispatch();
 
+    const industries = useSelector(selectIndustries);
+
     //Populate skills and keywords in filter
 
     useEffect(() => {
-        dispatch( updateProjects (generateProjectSuggestions()));
-        authenticate();
+        fetchUser();
+        fetchProjects();
+        fetchIndustries();
     }, [])
 
+    /*
     useEffect(() => {
         dispatch( updateSkills( generateSkillsState(projects) ));
         dispatch( updateKeywords( generateKeywordState(projects) ));
         dispatch( updateProjectNames ( generateProjectNameState( projects )));
         dispatch( updateFilteredProjects ( projects ));
     }, [projects])
+    */
 
-    const generateProjectSuggestions = () => {
-        const industries = ['Musikk', 'Film', 'Spillutvikling', 'Webutvikling'];
-        const skills = ['C++','React','Bootstrap','Kamera','Klipping','Skuespiller','Unity','Unreal','Soundtrap','Mixer',
-        'Beat maker','Java','Heroku','Spring boot','Hibernate','Redux','Shader programmering'];
-        const keywords = ['Lidenskapelig','Erfaren', 'Nybegynner','Full-stack','Front-end','Back-end','Musikalsk',
-        'Drop-the-beat'];
-        return scoreProjects(user, projects, industries, keywords, skills);
+    //TODO: Fjern log, heller setError
+    const fetchUser = async () => {
+        if(keycloak.authenticated) { 
+            const userResponse = await getUser();
+            userResponse ? dispatch( updateUser(userResponse)): console.log('Could not fetch user');
+        }
     }
 
-    // autenticate account (bør flyttes ut i en egen funksjon)
-    const authenticate = async () => {
-        if( keycloak.authenticated) {   // viss bruker er logget inn
-
-            // 1) sende en get request for å hente account dra db -> lagre den i redux store
-            const account = await checkIfUserExists()
-            if (account) { 
-                //console.log("welcome back" + JSON.stringify(account)) 
-                dispatch( update(account))
-            }
-            // 2) viss ikke username finnes i db -> registrer ny account -> lagre den i redux store
-            else {
-                //console.log("sending account to api so it can be stored in the database")
-                const account = await registerUser(keycloak.tokenParsed)
-                dispatch( updateUser(account))
-            }   
-        }   
+    //TODO: Fjern log, heller setError
+    const fetchProjects = async () => {
+        const data = await getProjects();
+        data ? dispatch ( updateProjects(data[1])) : console.log('Could not fetch projects');
     }
-    //test
-    console.log(user)
+
+    //TODO: Fjern log, heller setError
+    const fetchIndustries = async () => {
+        const data = await getIndustries();
+        data ? dispatch ( updateIndustries(data)) : console.log('Could not fetch industries');
+    }
+
   
     return (
         <div>
-            <Navbar />
             <div className="home-outer-body">
                 <div className="home-body">
-                    {filteredProjects.map((project, index) => {
+                    { projects.map((project, index) => {
                         return (
                             <ProjectBanner key={index + '-' + project.id} project={project} />
                         )
                     })
 
-                    }
+                }
                 </div>
             </div>
         </div>

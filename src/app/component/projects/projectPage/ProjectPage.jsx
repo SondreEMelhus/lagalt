@@ -15,6 +15,7 @@ import film from '../../../../assets/videoIcon.png';
 import game from '../../../../assets/playIcon.png';
 import coding from '../../../../assets/codingIcon.png';
 import Chat from "./Chat";
+import ContentBoard from "./ContentBoard";
 
 
 export default function ProjectPage () {
@@ -42,15 +43,6 @@ export default function ProjectPage () {
         navigate('/admin');
     }
 
-    //Industry image - Tittel - Status - Bli med button - Administrate button
-    //div
-    //Sub Heading
-    //Description - KeyWords(comp) - Skills(comp)
-    //Chatt(comp)
-    //Git history(comp)
-    //MessageBoard(comp)
-    //UpdateBoard(MessageBoard comp)
-    //div/
     return(
         <div>
             <Navbar/>
@@ -70,8 +62,11 @@ export default function ProjectPage () {
                 <BubbleList list={ project.keywords } />
                 <p>Ferdigheter vi trenger:</p>
                 <BubbleList list={ project.skills } />
+                {/* TODO: Legg til fetchMethod for statusBoard <ContentBoard id='UpdateBoard' list={} />*/}
+                {/* TODO: Legg til fetchMethod for messageBoard <ContentBoard id='MessageBoard' list={} />*/}
+                <Chat />
             </div>
-            {project.chat !== null && <Chat /> }
+            {/* TODO: Prosjekt objekene mangler chat project.chat !== null && <Chat /> */}
         </div>
     )
 }

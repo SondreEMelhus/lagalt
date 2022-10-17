@@ -47,7 +47,7 @@ export default function ProjectCreatorRework () {
         statusUpdateBoards: [],
         projectInteractionHistory: [],
         skills: skills,
-        industry: industry.title,
+        industry: industry.id,
         keywords: keywords 
       }
       const response = await createProject(project);

@@ -7,6 +7,7 @@ import ProjectApplicants from "../ProjectApplicants";
 import IndusrtyChanger from "../../dropdown/industyChanger";
 import Visibility from '../../../../assets/visibility.png'
 import { useDispatch, useSelector } from "react-redux";
+import { patchProject } from "../../../../api/projectsAPI";
 import { selectProject, updateTitle, updateDescription, updateStatus } from "../../redux/slices/ProjectSlice";
 
 
@@ -39,8 +40,11 @@ export default function AdminForm( {setTitle} ){
     }
     function sendUpdatedForm(){
         dispatch(updateTitle(titleInput));
+        console.log(titleInput + " Logging inp") ;
+        console.log(project.title);
         dispatch(updateDescription(descriptionInput));
         dispatch(updateStatus(status));
+        patchProject(project)
         //const newProject = useSelector(selectProject)
     }
     

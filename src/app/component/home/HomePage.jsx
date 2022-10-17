@@ -11,7 +11,7 @@ import { selectFilteredProjects, updateFilteredProjects } from "../redux/slices/
 import '../../../css/home.css'
 
 import { selectUser, updateUser } from "../redux/slices/UserSlice";
-import { getUser} from "../../../api/fetchUserAPI";
+import { getUser, registerUser} from "../../../api/fetchUserAPI";
 import keycloak from "../keycloak/keycloak";
 import { getProjects } from "../../../api/project";
 import { getIndustries } from "../../../api/industryAPI";
@@ -48,7 +48,8 @@ export default function HomePage () {
     const fetchUser = async () => {
         if(keycloak.authenticated) { 
             const userResponse = await getUser();
-            userResponse ? dispatch( updateUser(userResponse)): console.log('Could not fetch user');
+            console.log(userResponse)
+            userResponse ? dispatch( updateUser(userResponse)): await registerUser();
         }
     }
 

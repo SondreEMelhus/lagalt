@@ -17,10 +17,32 @@ export default function CreateProject () {
     const handleClose = () => {
         const title = document.getElementById("title").value;
         const description = document.getElementById("description").value;
-        console.log("Title: " + title);
-        console.log("Description: " + description);
-        console.log("Industri: " + radioValue);
         setShow(false);
+        const newProject =  {
+            title: title,
+            industry: radioValue,
+            status: 'Planlegges',
+            description: description,
+            chat: [
+              {
+                
+              }
+            ],
+            skills: [
+              'Java',
+              'React',
+              'Heroku',
+              'Spring boot',
+              'Hibernate',
+              'Redux',
+            ],
+            keywords: [
+              'Erfaren',
+              'Full-stack',
+              'Front-end',
+              'Back-end'
+            ]
+          }
     }
 
     useEffect(() => {
@@ -33,6 +55,7 @@ export default function CreateProject () {
         { name: 'Film', value: "Film" },
         { name: 'Musikk', value: "Musikk"},
       ];
+
     return (
         <div>
             <button onClick={handleShow}>Opprett prosjekt</button>

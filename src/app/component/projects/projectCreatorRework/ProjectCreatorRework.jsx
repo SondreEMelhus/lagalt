@@ -12,7 +12,8 @@ import { selectProjectIndustry, setIndustry } from "../../redux/slices/createPro
 import { removeAllKeywords, selectProjectKeywords } from "../../redux/slices/createProjectSlices/ProjectKeywordsSlice";
 import { removeAllSkills, selectProjectSkills } from "../../redux/slices/createProjectSlices/ProjectSkillsSlice";
 import { selectUser } from "../../redux/slices/UserSlice";
-import { createProject } from "../../../../api/projectsAPI";
+import { createProject } from "../../../../api/ProjectAPI/projectsAPI";
+
 
 
 export default function ProjectCreatorRework () {

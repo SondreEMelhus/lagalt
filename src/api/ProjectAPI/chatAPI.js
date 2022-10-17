@@ -1,6 +1,22 @@
-import { createHeaders } from "."
+import { createHeaders } from "../index"
 
 const apiUrl = "https://lagalt-java-backend.herokuapp.com/api/v1"
+
+export const getChat = async (projectId) => {
+    try {
+        const response = await fetch(`${apiUrl}/chats/project/${projectId}`)
+        if (!response.ok) {
+            throw new Error ('Could not get chat of project with id ' + projectId);
+        } else {
+            const data = await response.json();
+            return data;
+        }
+    }
+    catch (error) {
+        console.log(error);
+		return null
+	}
+}
 
 export const addChatMessage = async ( payload, projectID ) => {
 

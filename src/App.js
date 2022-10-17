@@ -12,6 +12,8 @@ import UserProjectsView from './app/component/views/UserProjectsView'
 import ProjectCreatorView from './app/component/views/ProjectCreatorView'
 import ProjectView from './app/component/views/ProjectView'
 import ProjectAdminView from './app/component/views/ProjectAdminView';
+import Message from './app/component/projects/projectPage/Message'
+import Status from './app/component/projects/projectPage/Status'
 
 
 
@@ -41,6 +43,8 @@ function App() {
           <Route path="/create" element={<ProjectCreatorView/>} />
           <Route path="/admin" element={<ProjectAdminView />} />
           <Route path="/apply" element={<ProjectApplication/>} />
+          <Route path="/message" element={<Message />} />
+          <Route path="/status" element={<Status />} />
           {/* TODO: Kun for utvikling, fjern før innlevering!!!!*/}
         </Routes>
       </Router>

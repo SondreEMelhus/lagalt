@@ -9,6 +9,9 @@ import myProjectsReducer from './slices/MyProjectsSlice';
 import adminReducer from './slices/AdminSlice';
 import projectReducer from './slices/ProjectSlice';
 import chatReducer from './slices/Chat';
+import messageBoardReducer from './slices/ContentBoards/MessageBoard/MessageBoardSlice'
+import statusBoardReducer from './slices/ContentBoards/StatusBoard/StatusBoardSlice'
+import messageReducer from './slices/ContentBoards/MessageBoard/MessageSlice';
 
 //Create project
 import projectIndustryReducer from './slices/createProjectSlices/ProjectIndustrySlice';
@@ -38,6 +41,9 @@ export const store = configureStore({
     admin: adminReducer,
     project: projectReducer,
     chat: chatReducer,
+    messageBoard: messageBoardReducer,
+    statusBoard: statusBoardReducer,
+    message: messageReducer,
 
     //Create project
     projectIndustry: projectIndustryReducer,

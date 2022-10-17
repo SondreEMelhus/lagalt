@@ -1,4 +1,4 @@
-import { createHeaders } from "."
+import { createHeaders } from ".."
 
 const apiUrl = "https://lagalt-java-backend.herokuapp.com/api/v1"
 

@@ -32,13 +32,13 @@ export default function MyProjects () {
             <Navbar/>
             <p>Mine prosjekter</p>
             <div className="home-body">
-                    {user.protfolio.map((project, index) => {
+                    {user.portfolio.length > 0 && user.portfolio.map((project, index) => {
                         return (
                             <ProjectBanner key={index + '-' + project.id} project={project}/>
                         )
                     })
 
-                    }
+                }
                 </div>
 
         </>

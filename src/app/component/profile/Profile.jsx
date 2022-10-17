@@ -13,11 +13,9 @@ import { updateAccountInDB } from "../../../api/profile";
 
 
 export default function Profile () {
-    const dispatch = useDispatch();
-    const user = useSelector(selectUser);//#33
 
-    //test
-    console.log("hrrrr" + JSON.stringify(user) )
+    const user = useSelector(selectUser);
+    const dispatch = useDispatch();
 
     const handleUpdateAccountClick = async (input) => {
         // 1) lagre bruker i db (og få tilbake endret bruker?)

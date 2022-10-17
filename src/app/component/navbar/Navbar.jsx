@@ -8,6 +8,7 @@ import dropdown from '../../../assets/Profile.png';
 
 //Components
 import CreateProject from "../projects/ProjectCreator";
+import ProjectCreatorRework from "../projects/projectCreatorRework/ProjectCreatorRework";
 
 //Styling
 import '../../../css/navbar.css'
@@ -28,12 +29,14 @@ export default function Navbar() {
   return (
     <div className="navBar">
         <img src={Logo} alt="Logo" className="logo" onClick={handleNavigate}/>
-        <Searchbar />
+        {/* TODO: Fiks serarchbar <Searchbar />*/}
         <FilterBox />
         <Login />
-        <NavigateMyProjects/>
-        <CreateProject/>
+        {/* TODO: Finn ut hvor vi kan hente ut en brukers prosjekter <NavigateMyProjects/>*/}
+        {/*<CreateProject/>*/}
+        <ProjectCreatorRework />
         <NavigateMyProfile/>
+        {/* TODO: Finn ut hvordan man henter en brukers prosjekte r<NavigateMyProfile/> */}
         <img src={dropdown} alt="Dropdown" className="dropdown"/>
     </div>
  

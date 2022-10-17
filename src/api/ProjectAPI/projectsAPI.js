@@ -18,9 +18,9 @@ export const getProjects = async () => {
 	}
 }
 
-export const patchProject = async (projectId, payload) => {
+export const patchProject = async (payload) => {
     try {
-        console.log(payload);
+        const projectId = payload.id
         const response = await fetch(`${apiUrl}/projects/${projectId}`, {
             method: 'PATCH',
             headers: createHeaders(),
@@ -40,23 +40,87 @@ export const patchProject = async (projectId, payload) => {
     }
 }
 
+export const getAllSkills = async () =>{
+    try{
+        const response = await fetch(`${apiUrl}/skills`)
+        if(!response.ok){
+            throw new Error('Could not get any skills');
+        }
+        const data = await response.json();
+        return data
+    }catch (error) {
+        return [error.message, []]
+    }
+}
+
+export const getAllKeywords = async () => {
+    try{
+        const response = await fetch(`${apiUrl}/keywords`);
+        if(!response.ok) {
+            throw new Error('Could not get any keywords')
+        }
+        const data = await response.json();
+        return data;
+    }catch ( error ) {
+        return[error.message, []];
+    }
+}
+
 export const createProject = async (payload) => {
+    const mm = await getAllSkills() ;
+    const keywordsForProject = await getAllKeywords();
+    const aKeyword = [];
+    const aSkills = [];
+
+    for(let kw of payload.keywords){
+        for(let i of keywordsForProject){
+            console.log("::::::::::::::::::::::::")
+            console.log(i.title);
+            console.log(kw);
+            console.log("::::::::::::::::::::::::")
+            if(kw === i.title){
+                console.log(i)
+                aKeyword.push(i.id);
+            }
+        }
+    }
+    console.log("????????????????")
+    console.log(aKeyword);
+
+    for(let sk of payload.skills){
+        for(let y of mm) {
+            if(sk === y.title){
+                aSkills.push(y.id)
+            }
+        }
+    }
+    const skillsToAdd = [];
+    const keywordsToAdd = [];
+    aKeyword.forEach((s) => keywordsToAdd.push(s));
+    aSkills.forEach((s) => skillsToAdd.push({id: s}));
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+    console.log(keywordsToAdd);
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+
     try {
+        let ind = {id: payload.industry}
         const response = await fetch(`${apiUrl}/projects`, {
             method: 'POST',
             headers: createHeaders(),
             body: JSON.stringify({ 
                 title: payload.title,
                 description: payload.description,
-                status: payload.status,
-                contributors: payload.contributors,
+                status: 'Planlegges',
+                //contributors: payload.contributors,
                 applications: [],
                 chats: [],
+                messageBoard: [],
+                statusBoard: [],
                 statusUpdateBoards: [],
                 projectInteractionHistory: [],
-                skills: payload.skills,
-                industry: payload.industry,
-                keywords: [] 
+                skills: skillsToAdd,
+                industry: ind,
+                keywords: aKeyword
             })
         })
         if (!response.ok) {

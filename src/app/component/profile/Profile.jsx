@@ -1,5 +1,5 @@
 //Libraries
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser, updateUser } from "../redux/slices/UserSlice";
 
@@ -10,10 +10,12 @@ import '../../../css/profile.css'
 import Navbar from "../navbar/Navbar";
 import ProfileForm from "./ProfileForm";
 import { updateAccountInDB } from "../../../api/profile";
+import { getUser } from "../../../api/fetchUserAPI";
+
 
 
 export default function Profile () {
-
+    
     const user = useSelector(selectUser);
     const dispatch = useDispatch();
 
@@ -24,6 +26,19 @@ export default function Profile () {
         // 2) lagre bruker fra db i redux
         //dispatch( updateUser(account))
     }
+
+    useEffect(() => {
+        getUserAcc();
+    }, [])
+
+    async function getUserAcc(){
+        const currUser = await getUser() 
+        console.log( currUser.username + " MMMMMMMMMMMMMMMMM")
+        dispatch(updateUser(currUser))
+
+    }
+
+    console.log(user.username);
 
     return (
         <>

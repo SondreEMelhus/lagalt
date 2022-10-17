@@ -1,15 +1,32 @@
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { selectUser } from "../redux/slices/UserSlice";
+import { selectUser, updatePortfolio } from "../redux/slices/UserSlice";
 import BubbleList from "../bubbleList/BubbleList";
+import { useState } from "react";
+import { updateDescription } from "../redux/slices/ProjectSlice";
 
 const ProfileForm = ({handleUpdateAccountClick}) => {
 
     const { register, handleSubmit } = useForm()
     const user = useSelector(selectUser);
+    const [portfolio, setPortfolio] = useState(user.portfolio)
+    const [description, setDescription] = useState(user.description);
+    console.log("VALUES??? " + user.username);
 
     const submit = (input) => {
         handleUpdateAccountClick(input)
+    }
+
+    const changePortfolio = (event) => {
+        setPortfolio(event.target.value);
+        console.log(portfolio)
+    }
+    const changeDescription = (event) => {
+        setDescription(event.target.value)
+    }
+    const updateProfile = () => {
+        updatePortfolio(portfolio);
+        updateDescription(description);
     }
 
 	return (
@@ -23,17 +40,17 @@ const ProfileForm = ({handleUpdateAccountClick}) => {
             </div>
             <div className="portfolioFieldProfile">
                 <p className="portfolioHeadProfile">Portfolio</p>
-                <textarea name="" id="" cols="80" rows="10" className="textAreaField" { ...register("portfolio")} />
+                <textarea name="" id="" cols="80" rows="10" className="textAreaField" value={portfolio} onChange={changePortfolio} />
             </div>
             <div className="portfolioFieldProfile">
                 <p className="portfolioHeadProfile">Min beskrivelse</p>
-                <textarea name="" id="" cols="80" rows="10" className="textAreaField" { ...register("description")} />
+                <textarea name="" id="" cols="80" rows="10" className="textAreaField" value={description} onChange={changeDescription} />
             </div>
             <div className="statusDiv">
                 <p className="profileStatusText">Profil status:</p>
                 <button className="statusButtonProfile">Offentlig</button>
             </div>
-            <button className="btn btn-primary" type="submit">Lagre</button>
+            <button className="btn btn-primary" type="submit" onClick={updateProfile}>Lagre</button>
         </form>
     )
 };

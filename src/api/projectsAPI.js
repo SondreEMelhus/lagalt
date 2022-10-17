@@ -1,4 +1,4 @@
-import { createHeaders } from ".."
+import { createHeaders } from "."
 
 const apiUrl = "https://lagalt-java-backend.herokuapp.com/api/v1"
 
@@ -101,7 +101,7 @@ export const createProject = async (payload) => {
     console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
     console.log(keywordsToAdd);
     console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-
+//Yo
     try {
         let ind = {id: payload.industry}
         const response = await fetch(`${apiUrl}/projects`, {

@@ -1,0 +1,40 @@
+.item {
+
+}
+
+.item-btn {
+    margin-top: 20px;
+    margin-left: 20px;
+    border: solid 2px black;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.item-content {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.item-timestamp {
+
+}
+
+.item-username {
+
+}
+
+.item-title {
+
+}
+
+.item-text-box {
+    border: solid 2px black;
+    border-radius: 10px;
+    width: 80%;
+    background-color: white;
+}
+
+.item-text {
+    margin-left: 10px;
+}

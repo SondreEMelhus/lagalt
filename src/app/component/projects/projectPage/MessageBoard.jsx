@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { selectMessageBoard } from "../../redux/slices/ContentBoards/MessageBoard/MessageBoardSlice";
 import { updateMessage } from "../../redux/slices/ContentBoards/MessageBoard/MessageSlice";
 
+import '../../../../css/contentBoard.css'
+
 export default function ContentBoard () {
 
    const messageBoard = useSelector(selectMessageBoard);
@@ -12,16 +14,17 @@ export default function ContentBoard () {
    const navigate = useNavigate();
 
     return (
-        <div>
-            <h1>Meldinger</h1>
+        <div className="content-board">
+            <h1 className="content-title">Meldinger</h1>
+            {messageBoard.length === 0 && <h3 className="no-content">Ingen beskjeder er postet enda</h3>}
             {messageBoard !== undefined && messageBoard.map((message, index) => {
                 return (
                     //TODO: Bruk message-board controller
-                    <div key={index}>
+                    <div key={index} className="content-item">
                         <p onClick={(e) => {
                             dispatch( updateMessage ( message ))
                             navigate('/message')
-                        }} obj={message}>{message.text}</p>
+                        }} obj={message} className="content-text">{message.text}</p>
                     </div>
                 )
             })}

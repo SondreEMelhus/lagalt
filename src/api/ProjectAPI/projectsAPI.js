@@ -84,10 +84,6 @@ export const createProject = async (payload, user) => {
     const keywordsForProject = await getAllKeywords();
     const aKeyword = [];
     const aSkills = [];
-    console.log("__________________________");
-    console.log(user)
-    console.log("__________________________")
-
 
     for(let kw of payload.keywords){
         for(let i of keywordsForProject){
@@ -148,11 +144,6 @@ export const createProject = async (payload, user) => {
 }
 
 export const addOwnerContributor = async (user, project) => {
-    console.log("*****************************")
-    console.log(project.id)
-    console.log(user.id)
-    console.log("*****************************")
-
     try{
         const response = await fetch(`${apiUrl}/projects/addContributor`, {
             method: 'POST',
@@ -183,9 +174,6 @@ export const addKeywordToProject = async (title, keywordId) => {
 
     const idObj = await getProjectByName(title);
     const id = idObj[0].id;
-    console.log("DIDIDIIDIDIDIDIDIDIDDI")
-    console.log(id)
-    console.log("DIDIDIIDIDIDIDIDIDIDDI")
 
     try{
         const response = await fetch(`${apiUrl}/projects/${id}/addKeyword`, {

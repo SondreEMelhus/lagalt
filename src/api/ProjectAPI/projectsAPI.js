@@ -79,11 +79,15 @@ export const getAllContributers = async (projectId) => {
     }
 }
 
-export const createProject = async (payload) => {
+export const createProject = async (payload, user) => {
     const mm = await getAllSkills() ;
     const keywordsForProject = await getAllKeywords();
     const aKeyword = [];
     const aSkills = [];
+    console.log("__________________________");
+    console.log(user)
+    console.log("__________________________")
+
 
     for(let kw of payload.keywords){
         for(let i of keywordsForProject){
@@ -94,8 +98,6 @@ export const createProject = async (payload) => {
             }
         }
     }
-    console.log("????????????????")
-    console.log(aKeyword);
 
     for(let sk of payload.skills){
         for(let y of mm) {
@@ -111,10 +113,6 @@ export const createProject = async (payload) => {
 
     try {
         let ind = {id: payload.industry}
-        console.log("KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK")
-        console.log(keywordsToAdd)
-        console.log("KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK")
-
         const response = await fetch(`${apiUrl}/projects`, {
             method: 'POST',
             headers: createHeaders(),
@@ -138,16 +136,45 @@ export const createProject = async (payload) => {
 
             addKeywordToProject(payload.title, k)
         }
-        console.log("where u at???")
+            const projectObject = await getProjectByName(payload.title);
 
-        console.log("-------------------")
-        console.log(response)
-        console.log("-------------------")
+            addOwnerContributor(user, projectObject[0])
             const result = await response.json();
-
             return result;
         
     } catch (error) {
+        return error;
+    }
+}
+
+export const addOwnerContributor = async (user, project) => {
+    console.log("*****************************")
+    console.log(project.id)
+    console.log(user.id)
+    console.log("*****************************")
+
+    try{
+        const response = await fetch(`${apiUrl}/projects/addContributor`, {
+            method: 'POST',
+            headers: createHeaders(),
+            body: JSON.stringify({
+                role: "Owner",
+                account: {
+                    id: user.id
+                },
+                project: {
+                    id: project.id
+                }
+            })
+        })
+
+        if(!response.ok){
+            throw new Error("Owner was not added to project")
+        }else{
+            const data = await response.json();
+            return data;
+        }
+    }catch(error){
         return error;
     }
 }

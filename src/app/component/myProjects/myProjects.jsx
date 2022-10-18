@@ -21,6 +21,7 @@ import { selectMyProjects } from "../redux/slices/MyProjectsSlice";
 export default function MyProjects () {
 
     const user = useSelector(selectUser);
+    const userProjects = useSelector(selectMyProjects);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -32,6 +33,7 @@ export default function MyProjects () {
             <Navbar/>
             <p>Mine prosjekter</p>
             <div className="home-body">
+                    {user.contributors.length === 0 && <h3 className="no-message">Du har ingen prosjekter</h3>}
                     {user.contributors !== undefined && user.portfolio.map((project, index) => {
                         return (
                             <ProjectBanner key={index + '-' + project.id} project={project}/>

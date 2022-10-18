@@ -63,7 +63,7 @@ export default function ProjectApplication () {
                 </div>
                 <div>
                     <p>Jeg godtar at prosjekt eier og administrator får tilgang til all informasjon som ligger på min profil:</p>
-                    <input type="application-checkbox" onClick={handleChecked}></input>
+                    <input type="checkbox" onClick={handleChecked}></input>
                 </div>
                 <button onClick={handleClick}>Send inn søknad</button>
             </div>

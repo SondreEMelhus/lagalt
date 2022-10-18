@@ -7,37 +7,39 @@ export const getChat = async (projectId) => {
         const response = await fetch(`${apiUrl}/chats/project/${projectId}`)
         if (!response.ok) {
             throw new Error ('Could not get chat of project with id ' + projectId);
-        } else {
-            const data = await response.json();
-            return data;
         }
+        const data = await response.json();
+        return [null, data];
     }
     catch (error) {
-        console.log(error);
-		return null
+		return [error.message, null]
 	}
 }
 
-export const addChatMessage = async ( payload, projectID ) => {
+export const addChatMessage = async ( payload, projectId ) => {
 
     try{
-        const response = await fetch(`${apiUrl}/chats/${projectID}/addChat` ,{
+        const response = await fetch(`${apiUrl}/chats/${projectId}/addChat` ,{
             method: 'POST',
             headers: createHeaders(),
             body: JSON.stringify({
                 text: payload.text,
                 timestamp: payload.timestamp,
                 username: payload.username,
+                project: { 
+                    id: projectId
+                }
             })
         });
 
         if(!response.ok){
             throw new Error("Could not create a new message with content: " + payload.text);
         }
+        console.log(response);
         const data = await response.json();
         return [null, data];
 
     }catch(error){
-        return [error.message,[]];
+        return [error.message, null];
     }
 }

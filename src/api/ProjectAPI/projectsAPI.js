@@ -87,10 +87,7 @@ export const createProject = async (payload) => {
 
     for(let kw of payload.keywords){
         for(let i of keywordsForProject){
-            console.log("::::::::::::::::::::::::")
-            console.log(i.title);
-            console.log(kw);
-            console.log("::::::::::::::::::::::::")
+
             if(kw === i.title){
                 console.log(i)
                 aKeyword.push(i.id);
@@ -111,12 +108,13 @@ export const createProject = async (payload) => {
     const keywordsToAdd = [];
     aKeyword.forEach((s) => keywordsToAdd.push(s));
     aSkills.forEach((s) => skillsToAdd.push({id: s}));
-    console.log("@@@@@@@¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤@@@@@@@@")
-    console.log(keywordsToAdd);
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 
     try {
         let ind = {id: payload.industry}
+        console.log("KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK")
+        console.log(keywordsToAdd)
+        console.log("KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK")
+
         const response = await fetch(`${apiUrl}/projects`, {
             method: 'POST',
             headers: createHeaders(),
@@ -133,17 +131,60 @@ export const createProject = async (payload) => {
                 projectInteractionHistory: [],
                 skills: skillsToAdd,
                 industry: ind,
-                //keywords: aKeyword
             })
         })
-        if (!response.ok) {
-            throw new Error ('Could not create project');
-        } else {
-            const result = await response.json();
-            return result;
+
+        for(let k of keywordsToAdd){
+
+            addKeywordToProject(payload.title, k)
         }
+        console.log("where u at???")
+
+        console.log("-------------------")
+        console.log(response)
+        console.log("-------------------")
+            const result = await response.json();
+
+            return result;
+        
     } catch (error) {
         return error;
+    }
+}
+
+export const addKeywordToProject = async (title, keywordId) => {
+
+    const idObj = await getProjectByName(title);
+    const id = idObj[0].id;
+    console.log("DIDIDIIDIDIDIDIDIDIDDI")
+    console.log(id)
+    console.log("DIDIDIIDIDIDIDIDIDIDDI")
+
+    try{
+        const response = await fetch(`${apiUrl}/projects/${id}/addKeyword`, {
+            method: 'PUT',
+            headers: createHeaders(),
+            body: keywordId
+        })
+        const result = await response.json();
+        return result
+    }catch(error){
+        return error
+    }
+
+}
+
+export const getProjectByName = async (title) => {
+    try{
+        const response = await fetch(`${apiUrl}/projects/search?name=${title}`);
+        if(!response.ok)  {
+            throw new Error("No project found");
+        }else{
+            const data = response.json();
+            return data
+        }
+    }catch(error){
+        return error
     }
 }
 

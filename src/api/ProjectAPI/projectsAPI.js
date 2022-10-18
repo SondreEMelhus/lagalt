@@ -245,7 +245,7 @@ export const approveApplication = async ( projectId ) => {
         const result = await response.json();
         return [null, result]
     } catch (error) {
-        return [error.message, null];
+        return [error, null];
     }
 }
 
@@ -263,6 +263,6 @@ export const declineApplication = async ( projectId ) => {
         const result = await response.json();
         return [null, result]
     } catch (error) {
-        return [error.message, null];
+        return [error, null];
     }
 }

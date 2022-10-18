@@ -14,3 +14,13 @@
     background-color: white;
     color: #117AA0;
 }
+
+.bubble-item-userMatch {
+    text-align:center;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 0.8vw;
+    border: 2px solid #117AA0;
+    border-radius: 20px;
+    background-color: #117AA0;
+    color: #ffffff;
+}  

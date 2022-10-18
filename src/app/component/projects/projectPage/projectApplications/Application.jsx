@@ -17,7 +17,7 @@ export default function Application () {
 
     const handleApprove = async () => {
         const response = await approveApplication(application.id);
-        if (response[0]) {
+        if (!response[0]) {
             alert('Error: Could not approve application. Please contant an administrator.');
             navigate('/project');
         } else {
@@ -25,10 +25,10 @@ export default function Application () {
             navigate('/project');
         }
     }
-
+//
     const handleDecline = async () => {
         const response = await declineApplication(application.id);
-        if (response[0]) {
+        if (!response[0]) {
             alert('Error: Could not decline application. Please contant an administrator.');
             navigate('/project');
         } else {

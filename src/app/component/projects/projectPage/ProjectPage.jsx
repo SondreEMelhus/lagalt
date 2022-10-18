@@ -40,7 +40,7 @@ export default function ProjectPage () {
 
     useEffect( () => {
         fetchData();
-    })
+    },[])
 
     const fetchData = async () => {
         const role = await getAllContributers(project.id);
@@ -60,10 +60,14 @@ export default function ProjectPage () {
             dispatch ( resetStatusBoard () );
         }
         const chat = await getChat(project.id);
-        if (chat) {
-            dispatch ( updateChat ( chat ))
+        if (chat[0]) {
+            alert('Feil: klarte ikke å hente chat. Kontakt administrator for hjelp.')
         } else {
-            dispatch ( updateChat ( [] ))
+            if (chat[1].length !== 0) {
+                dispatch ( updateChat ( chat[1] ))
+            } else {
+                dispatch ( updateChat ( [] ))
+            }
         }
     }
 

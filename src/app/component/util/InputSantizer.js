@@ -1,7 +1,7 @@
 export function sanitize (contaminatedInput) {
-    return contaminatedInput.replace(/&/g, ' ')
-                            .replace(/</g, ' ')
-                            .replace(/>/g, ' ')
-                            .replace(/"/g, ' ')
-                            .replace(/'/g, ' ');
+    return contaminatedInput.replace(/&/g, '')
+                            .replace(/</g, '')
+                            .replace(/>/g, '')
+                            .replace(/"/g, '')
+                            .replace(/'/g, '');
 }

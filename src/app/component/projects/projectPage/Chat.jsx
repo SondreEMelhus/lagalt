@@ -1,14 +1,12 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProject } from "../../redux/slices/ProjectSlice";
 
 import { sanitize } from "../../util/InputSantizer";
 import { generateTimestamp } from '../../util/Timestamp';
 import { selectUser } from "../../redux/slices/UserSlice";
-import { selectChat } from "../../redux/slices/Chat";
+import { addMessage, selectChat } from "../../redux/slices/Chat";
 import { getChat, addChatMessage } from "../../../../api/ProjectAPI/chatAPI";
-
 
 import '../../../../css/chat.css'
 import { trimTimestamp } from "../../util/TrimTimestamp";
@@ -27,22 +25,36 @@ export default function Chat () {
     }
 
     const updateChat = () => {
-
-        const newMessage = {
+        const payload = {
             text: inputText,
             timestamp: generateTimestamp(),
             username: user.username,
             project: project
         }
+        
+        let response = addChatMessage(payload, project.id);
+        if (response[0]) {
+            alert('Feil: Klarte ikke å sende melding. Kontakt administrator for hjelp.')
+        } else {
+            dispatch ( addMessage ( payload ))
+        }
+    }
 
-        let response = addChatMessage(newMessage, project.id);
-        console.log(response[1]);
-        dispatch( addChatMessage(newMessage));
+    const handleChatRefresh = async () => {
+        const response = await getChat(project.id);
+        if (response[0]) {
+            alert('Feil: klarte ikke å hente chat. Kontakt administrator for hjelp.')
+        } else {
+            if (response[1].length !== 0) {
+                const data = response[1];
+            } 
+        }
     }
 
     return (
         <div className='chat-box'>
             <h1>Chat</h1>
+            {/*<button onClick={handleChatRefresh}>Refresh</button>*/}
             <div className='message-box'>
                 {chat.length === 0 && <h3 className="no-message">Ingen meldinger er sendt enda</h3>}
                 {chat !== undefined && chat.map((message, index) => {

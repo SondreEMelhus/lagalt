@@ -144,5 +144,34 @@ export const createProject = async (payload) => {
         }
     } catch (error) {
         return error;
-    }      
+    }
+}
+
+export const addApplication = async ( payload ) => {
+
+    try{
+        const response = await fetch(`${apiUrl}/applications` ,{
+            method: 'POST',
+            headers: createHeaders(),
+            body: JSON.stringify({
+                motivation: payload.motivation,
+                status: payload.status,
+                account: {
+                    id: payload.account.id
+                },
+                project: {
+                    id: payload.project.id
+                }
+            })
+        });
+
+        if(!response.ok){
+            throw new Error("Could not create a new application for project with id: " + payload.project.id);
+        }
+        const data = await response.json();
+        return data;
+
+    }catch(error){
+        return error.message;
+    }
 }

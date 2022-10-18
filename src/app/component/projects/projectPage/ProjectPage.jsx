@@ -26,12 +26,14 @@ import { getChat } from "../../../../api/ProjectAPI/chatAPI";
 import { updateChat } from "../../redux/slices/Chat";
 import { useState } from "react";
 import { checkUserRole } from "../../util/CheckUserRole";
+import { selectUser } from "../../redux/slices/UserSlice";
 
 
 export default function ProjectPage () {
 
     const [projectRole, setProjectRole] = useState('');
     const project = useSelector(selectProject);
+    const user = useSelector(selectUser);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -42,7 +44,7 @@ export default function ProjectPage () {
     const fetchData = async () => {
         const role = await getAllContributers(project.id);
         if (role) {
-            setProjectRole(checkUserRole(role));
+            setProjectRole(checkUserRole(user, role));
         }
         const messageBoard = await getMessageBoard(project.id);
         if (messageBoard) {

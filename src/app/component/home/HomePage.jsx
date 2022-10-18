@@ -48,7 +48,6 @@ export default function HomePage () {
     const fetchUser = async () => {
         if(keycloak.authenticated) { 
             const userResponse = await getUser();
-            console.log(userResponse)
             userResponse ? dispatch( updateUser(userResponse)): await registerUser();
         }
     }

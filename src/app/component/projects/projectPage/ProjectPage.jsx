@@ -27,6 +27,7 @@ import { updateChat } from "../../redux/slices/Chat";
 import { useState } from "react";
 import { checkUserRole } from "../../util/CheckUserRole";
 import { selectUser } from "../../redux/slices/UserSlice";
+import Applications from "./projectApplications/Applications";
 
 
 export default function ProjectPage () {
@@ -116,6 +117,7 @@ export default function ProjectPage () {
                 <Chat />
                 <MessageBoard />
                 <StatusBoard />
+                <Applications />
                 <div className="footer"></div>
             </div>
         </div>

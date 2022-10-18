@@ -27,6 +27,7 @@ import ProjectPage from './app/component/projects/projectPage/ProjectPage';
 
 //Styling
 import './App.css';
+import Application from './app/component/projects/projectPage/projectApplications/Application';
 
 
 
@@ -45,6 +46,7 @@ function App() {
           <Route path="/apply" element={<ProjectApplication/>} />
           <Route path="/message" element={<Message />} />
           <Route path="/status" element={<Status />} />
+          <Route path='/application' element={<Application />} />
           {/* TODO: Kun for utvikling, fjern før innlevering!!!!*/}
         </Routes>
       </Router>

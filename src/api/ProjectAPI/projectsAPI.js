@@ -147,6 +147,20 @@ export const createProject = async (payload) => {
     }
 }
 
+export const getApplications = async ( projectId ) => {
+
+    try {
+        const response = await fetch(`${apiUrl}/applications/project/${projectId}`)
+        if(!response.ok) {
+            throw new Error('Could not get applications for project with id: ' + projectId)
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        return error.message;
+    }
+}
+
 export const addApplication = async ( payload ) => {
 
     try{
@@ -173,5 +187,41 @@ export const addApplication = async ( payload ) => {
 
     }catch(error){
         return error.message;
+    }
+}
+
+export const approveApplication = async ( projectId ) => {
+    try {
+        const response = await fetch(`${apiUrl}/applications/${projectId}/accept`, {
+            method: 'PUT',
+            headers: createHeaders()
+        })
+
+        if (!response.ok) {
+            throw new Error ('Could not approve application')
+        }
+
+        const result = await response.json();
+        return [null, result]
+    } catch (error) {
+        return [error.message, null];
+    }
+}
+
+export const declineApplication = async ( projectId ) => {
+    try {
+        const response = await fetch(`${apiUrl}/applications/${projectId}/deny`, {
+            method: 'PUT',
+            headers: createHeaders()
+        })
+
+        if (!response.ok) {
+            throw new Error ('Could not deny application')
+        }
+
+        const result = await response.json();
+        return [null, result]
+    } catch (error) {
+        return [error.message, null];
     }
 }

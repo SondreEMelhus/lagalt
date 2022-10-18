@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProject } from "../../redux/slices/ProjectSlice";
 
-import { santize } from "../../util/InputSantizer";
+import { sanitize } from "../../util/InputSantizer";
 import { generateTimestamp } from '../../util/Timestamp';
 import { selectUser } from "../../redux/slices/UserSlice";
 import { selectChat } from "../../redux/slices/Chat";
@@ -23,8 +23,7 @@ export default function Chat () {
     const dispatch = useDispatch();
 
     const handleInputChange = (event) => {
-        const sanetizedInput = santize(event.target.value);
-        setInputText(sanetizedInput);
+        setInputText(sanitize(event.target.value));
     }
 
     const updateChat = () => {

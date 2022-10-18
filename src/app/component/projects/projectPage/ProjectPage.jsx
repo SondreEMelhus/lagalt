@@ -18,15 +18,19 @@ import Chat from "./Chat";
 import MessageBoard from "./MessageBoard";
 import StatusBoard from './StatusBoard';
 import { resetMessageBoard, updateMessageBoard } from "../../redux/slices/ContentBoards/MessageBoard/MessageBoardSlice";
+import { getAllContributers } from '../../../../api/ProjectAPI/projectsAPI'
 import { getMessageBoard } from "../../../../api/ProjectAPI/messageBoardAPI";
 import { getStatusBoard } from "../../../../api/ProjectAPI/statusBoardAPI";
 import { resetStatusBoard, updateStatusBoard } from "../../redux/slices/ContentBoards/StatusBoard/StatusBoardSlice";
 import { getChat } from "../../../../api/ProjectAPI/chatAPI";
 import { updateChat } from "../../redux/slices/Chat";
+import { useState } from "react";
+import { checkUserRole } from "../../util/CheckUserRole";
 
 
 export default function ProjectPage () {
 
+    const [projectRole, setProjectRole] = useState('');
     const project = useSelector(selectProject);
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -36,6 +40,10 @@ export default function ProjectPage () {
     })
 
     const fetchData = async () => {
+        const role = await getAllContributers(project.id);
+        if (role) {
+            setProjectRole(checkUserRole(role));
+        }
         const messageBoard = await getMessageBoard(project.id);
         if (messageBoard) {
             dispatch ( updateMessageBoard ( messageBoard ) );
@@ -76,6 +84,12 @@ export default function ProjectPage () {
         navigate('/admin');
     }
 
+    const navigateToApplication = () => {
+        navigate('/apply')
+    }
+
+
+
     return(
         <div>
             <Navbar/>
@@ -85,7 +99,7 @@ export default function ProjectPage () {
                 <div className="statusField">
                     <p className="statusText">{project.status}</p>
                 </div>
-                <button className="joinButton">Bli med</button>
+                <button className="joinButton" onClick={navigateToApplication}>Bli med</button>
                 <button className="adminButton" onClick={navigateToAdmin}>Administrer</button>
             </div>
             <div className="projectInfoField">

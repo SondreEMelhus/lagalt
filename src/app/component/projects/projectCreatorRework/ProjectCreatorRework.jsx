@@ -13,6 +13,7 @@ import { removeAllKeywords, selectProjectKeywords } from "../../redux/slices/cre
 import { removeAllSkills, selectProjectSkills } from "../../redux/slices/createProjectSlices/ProjectSkillsSlice";
 import { selectUser } from "../../redux/slices/UserSlice";
 import { createProject } from "../../../../api/ProjectAPI/projectsAPI";
+import { sanitize } from "../../util/InputSantizer";
 
 
 
@@ -39,8 +40,8 @@ export default function ProjectCreatorRework () {
 
     const handleSubmit = async () => {
       const project = {
-        title: document.getElementById("title").value,
-        description: document.getElementById("description").value,
+        title: sanitize(document.getElementById("title").value),
+        description: sanitize(document.getElementById("description").value),
         status: 'Started',
         contributors: [user],
         applications: [],

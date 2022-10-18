@@ -66,6 +66,19 @@ export const getAllKeywords = async () => {
     }
 }
 
+export const getAllContributers = async (projectId) => {
+    try{
+        const response = await fetch(`${apiUrl}/projects/${projectId}/contributors`);
+        if(!response.ok) {
+            throw new Error('Could not get contributers for project ' + projectId)
+        }
+        const data = await response.json();
+        return data;
+    }catch ( error ) {
+        return[error.message, []];
+    }
+}
+
 export const createProject = async (payload) => {
     const mm = await getAllSkills() ;
     const keywordsForProject = await getAllKeywords();

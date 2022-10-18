@@ -4,6 +4,7 @@ import { selectUser, updatePortfolio } from "../redux/slices/UserSlice";
 import BubbleList from "../bubbleList/BubbleList";
 import { useState } from "react";
 import { updateDescription } from "../redux/slices/ProjectSlice";
+import { sanitize } from "../util/InputSantizer";
 
 const ProfileForm = ({handleUpdateAccountClick}) => {
 
@@ -18,11 +19,11 @@ const ProfileForm = ({handleUpdateAccountClick}) => {
     }
 
     const changePortfolio = (event) => {
-        setPortfolio(event.target.value);
+        setPortfolio(sanitize(event.target.value));
         console.log(portfolio)
     }
     const changeDescription = (event) => {
-        setDescription(event.target.value)
+        setDescription(sanitize(event.target.value))
     }
     const updateProfile = () => {
         updatePortfolio(portfolio);

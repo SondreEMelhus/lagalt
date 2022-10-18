@@ -256,6 +256,7 @@ export const approveApplication = async ( projectId ) => {
         if (!response.ok) {
             throw new Error ('Could not approve application')
         }
+        console.log(response);
 
         const result = await response.json();
         return [null, result]

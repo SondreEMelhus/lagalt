@@ -52,7 +52,7 @@ export default function ProjectCreatorRework () {
         industry: industry.id,
         keywords: keywords 
       }
-      const response = await createProject(project);
+      const response = await createProject(project, user);
       console.log(response);
       console.log(project);
       dispatch ( removeAllSkills() )

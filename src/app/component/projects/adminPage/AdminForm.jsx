@@ -7,7 +7,7 @@ import ProjectApplicants from "../ProjectApplicants";
 import IndusrtyChanger from "../../dropdown/industyChanger";
 import Visibility from '../../../../assets/visibility.png'
 import { useDispatch, useSelector } from "react-redux";
-import { patchProject } from "../../../../api/ProjectAPI/projectsAPI";
+import { patchProject, updateProject } from "../../../../api/ProjectAPI/projectsAPI";
 import { selectProject, updateTitle, updateDescription, updateStatus } from "../../redux/slices/ProjectSlice";
 
 
@@ -28,29 +28,28 @@ export default function AdminForm( {setTitle} ){
         } else if(status === 'Startet'){
             document.getElementById("started").className = "statusButtonBlue"
         }
+        console.log(project);
     }, [])
-
-    const onChangeTitle = (event) =>{
-        setTitleInput(event.target.value)
-        setTitle(event.target.value)
+    const onChangeTitle = () =>{
+        const t = document.getElementById("title").value;
+        setTitleInput(t)
+        dispatch(updateTitle(t));
     }
 
-    const onChangeDescription = (event) => {
-        setDescriptionInput(event.target.value);
+    const onChangeDescription = () => {
+        setDescriptionInput(document.getElementById("description").value);
+        dispatch(updateDescription(document.getElementById("description").value));
     }
-    function sendUpdatedForm(){
-        dispatch(updateTitle(titleInput));
-        console.log(titleInput + " Logging inp") ;
-        console.log(project.title);
-        dispatch(updateDescription(descriptionInput));
-        dispatch(updateStatus(status));
-        patchProject(project)
+    async function sendUpdatedForm(){
+        // patchProject(project)
+        await updateProject(project);
         //const newProject = useSelector(selectProject)
     }
     
     const changeStatus = (event) =>{
         setStatus(event.target.value)
         StatusClicked(event)
+        dispatch(updateStatus(status));
     }
     const StatusClicked = (event) =>{
         document.getElementById("planing").className = "statusButtonWhite"
@@ -69,7 +68,7 @@ export default function AdminForm( {setTitle} ){
             </div>
             <div className="titleDivAdmin">
                 <p className="titleTextAdmin">Tittel:</p>
-                <input type="text" className="titleInputAdmin" value={titleInput} onChange={onChangeTitle}/>
+                <input type="text" className="titleInputAdmin" id="title" value={titleInput} onChange={onChangeTitle}/>
                 <div className="industryChanger">
                 <IndusrtyChanger industry={project.industry}/>
                 </div>
@@ -85,7 +84,7 @@ export default function AdminForm( {setTitle} ){
             </div>
             <div className="descriptionDivAdmin">
                 <p>Prosjekt beskrivelse</p>
-                <textarea name="" id="" cols="53" rows="10" className="textAreaAdmin" value={descriptionInput} onChange={onChangeDescription}></textarea>
+                <textarea name="" cols="53" rows="10" className="textAreaAdmin" id="description" value={descriptionInput} onChange={onChangeDescription}></textarea>
             </div>
             </div>
 

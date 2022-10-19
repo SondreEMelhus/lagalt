@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 
 import Navbar from "../../navbar/Navbar";
 import { useDispatch, useSelector } from "react-redux";
+import { selectProject } from "../../redux/slices/ProjectSlice";
 
 
 
@@ -17,11 +18,14 @@ import AdminForm from "./AdminForm";
 export default function ProjectAdmin () {
 
     const [title, setTitle] = useState('');
+    const project = useSelector(selectProject);
+
+
 
     useEffect(() =>{
         console.log("logging project")
     }, [])
-
+    console.log(project);
     useEffect((prevTitle) => {
         if (prevTitle !== title) {
            // console.log(title);

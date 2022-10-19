@@ -79,6 +79,81 @@ export const getAllContributers = async (projectId) => {
     }
 }
 
+export const updateProject = async (payload) => {
+    const mm = await getAllSkills();
+    const aSkills = [];
+    for(let sk of payload.skills){
+        for(let y of mm) {
+            if(sk === y.title){
+                aSkills.push(y.id)
+            }
+        }
+    }
+    const skillsToAdd = [];
+    aSkills.forEach((s) => skillsToAdd.push({id: s}));
+    let indus = {};
+    if(payload.industry === "Musikk"){
+        indus = {id: 1};
+    }else if(payload.industry === "Film"){
+        indus = {id: 2};
+    }else if (payload.industry === "Webutvikling"){
+        indus = {id: 4};
+    }else if (payload.industry === "Spillutvikling"){
+        indus = {id: 3};
+    }
+
+    const aKeyword = [];
+    const keywordsForProject = await getAllKeywords();
+    for(let kw of payload.keywords){
+        for(let i of keywordsForProject){
+
+            if(kw === i.title){
+                aKeyword.push(i.id);
+            }
+        }
+    }
+    const keywordsToAdd = [];
+    aKeyword.forEach((s) => keywordsToAdd.push(s));
+
+    try{
+        const response = await fetch(`${apiUrl}/projects/${payload.id}`,{
+            method: 'PUT',
+            headers: createHeaders(),
+            body: JSON.stringify({
+                id: payload.id,
+                title: payload.title,
+                description: payload.description,
+                status: payload.status,
+                applications: payload.applications,
+                chats: payload.chats,
+                messageBoard: payload.messageBoard,
+                statusboard: payload.statusBoard,
+                projectInteractionHistory: payload.projectInteractionHistory,
+                skills: skillsToAdd,
+                 industry: 
+                 {
+                    id: indus.id
+                 }
+               // keywords: payload.keywords
+            })
+        })
+
+        for(let k of keywordsToAdd){
+
+            addKeywordToProject(payload.title, k)
+        }
+        if(!response.ok){
+            throw new Error("Could not patch project");
+        }else{
+            const data = await response.json();
+            return data;
+        }
+    }catch(error){
+        return error;
+    }
+}
+
+
 export const createProject = async (payload, user) => {
     const mm = await getAllSkills() ;
     const keywordsForProject = await getAllKeywords();
@@ -89,7 +164,6 @@ export const createProject = async (payload, user) => {
         for(let i of keywordsForProject){
 
             if(kw === i.title){
-                console.log(i)
                 aKeyword.push(i.id);
             }
         }
@@ -116,7 +190,7 @@ export const createProject = async (payload, user) => {
                 title: payload.title,
                 description: payload.description,
                 status: 'Planlegges',
-                //contributors: payload.contributors,
+               // contributors: payload.contributors,
                 applications: [],
                 chats: [],
                 messageBoard: [],

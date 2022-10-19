@@ -19,6 +19,7 @@ import Searchbar from "../searchbar/Searchbar";
 import FilterBox from "./filter/FilterBox";
 import NavigateMyProfile from "./NavigateMyProfile";
 import NavigateMyProjects from "./NavigateMyProjects";
+import keycloak from "../keycloak/keycloak";
 
 export default function Navbar() {
 
@@ -35,17 +36,19 @@ export default function Navbar() {
         <Login />
         {/* TODO: Finn ut hvor vi kan hente ut en brukers prosjekter <NavigateMyProjects/>*/}
         {/* TODO: Finn ut hvordan man henter en brukers prosjekte r<NavigateMyProfile/> */}
+        {keycloak.authenticated && 
         <DropdownButton id="dropdown-basic-button" title="Alternativer">
-          <Dropdown.Item>
-            <ProjectCreatorRework className="projectCreatorButton" /> 
-          </Dropdown.Item>
-          <Dropdown.Item>
-            <NavigateMyProfile/>
-          </Dropdown.Item>
-          <Dropdown.Item>
-            <NavigateMyProjects/>
-          </Dropdown.Item>
-        </DropdownButton>
+        <Dropdown.Item>
+          <ProjectCreatorRework className="projectCreatorButton" /> 
+        </Dropdown.Item>
+        <Dropdown.Item>
+          <NavigateMyProfile/>
+        </Dropdown.Item>
+        <Dropdown.Item>
+          <NavigateMyProjects/>
+        </Dropdown.Item>
+      </DropdownButton>
+        }
     </div>
  
   );

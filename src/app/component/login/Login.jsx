@@ -20,8 +20,14 @@ export default function Login () {
         <>
             { !keycloak.authenticated &&
                 <>
-                    <button className="loginButton" onClick={ keycloak.login }>Logg in</button>
-                    <button className="registerButton" onClick={ keycloak.register }>Registrer</button>
+                    <button className="loginButton" onClick={event => {
+                        navigate('/')
+                        keycloak.login()
+                    }}>Logg in</button>
+                    <button className="registerButton" onClick={event => {
+                        navigate('/')
+                        keycloak.register() 
+                    }}>Registrer</button>
                 </>
             }
             { keycloak.authenticated && <button className="loginButton" onClick={event => {

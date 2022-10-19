@@ -28,11 +28,13 @@ import { useState } from "react";
 import { checkUserRole } from "../../util/CheckUserRole";
 import { selectUser } from "../../redux/slices/UserSlice";
 import Applications from "./projectApplications/Applications";
+import keycloak from "../../keycloak/keycloak";
+import { checkUserStatus } from "../../util/CheckContributerStatus";
 
 
 export default function ProjectPage () {
 
-    const [projectRole, setProjectRole] = useState('');
+    const [projectRole, setProjectRole] = useState('non');
     const project = useSelector(selectProject);
     const user = useSelector(selectUser);
     const navigate = useNavigate();
@@ -46,6 +48,7 @@ export default function ProjectPage () {
         const role = await getAllContributers(project.id);
         if (role) {
             setProjectRole(checkUserRole(user, role));
+            console.log(projectRole);
         }
         const messageBoard = await getMessageBoard(project.id);
         if (messageBoard) {
@@ -106,7 +109,7 @@ export default function ProjectPage () {
                 <div className="statusField">
                     <p className="statusText">{project.status}</p>
                 </div>
-                <button className="joinButton" onClick={navigateToApplication}>Bli med</button>
+                {keycloak.authenticated && !checkUserStatus(project, user) && <button className="joinButton" onClick={navigateToApplication}>Bli med</button>}
                 <button className="adminButton" onClick={navigateToAdmin}>Administrer</button>
             </div>
             <div className="projectInfoField">
@@ -116,12 +119,15 @@ export default function ProjectPage () {
                 <BubbleList list={ project.keywords } />
                 <p>Ferdigheter vi trenger:</p>
                 <BubbleList list={ project.skills } />
-                {/* TODO: Legg til fetchMethod for statusBoard <ContentBoard id='UpdateBoard' list={} />*/}
-                {/* TODO: Legg til fetchMethod for messageBoard <ContentBoard id='MessageBoard' list={} />*/}
-                <Chat />
-                <MessageBoard />
                 <StatusBoard />
+                {keycloak.authenticated && 
+                    <div>
+                        <MessageBoard />
+                        <Chat />
+                    </div>
+                }
                 <Applications />
+                {projectRole === 'admin' || projectRole === 'owner' && <Applications />}
                 <div className="footer"></div>
             </div>
         </div>

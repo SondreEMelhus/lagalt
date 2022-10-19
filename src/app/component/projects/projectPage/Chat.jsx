@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProject } from "../../redux/slices/ProjectSlice";
 
@@ -10,6 +10,7 @@ import { getChat, addChatMessage } from "../../../../api/ProjectAPI/chatAPI";
 
 import '../../../../css/chat.css'
 import { trimTimestamp } from "../../util/TrimTimestamp";
+import { checkUserStatus } from "../../util/CheckContributerStatus";
 
 
 export default function Chat () {
@@ -24,15 +25,14 @@ export default function Chat () {
         setInputText(sanitize(event.target.value));
     }
 
-    const updateChat = () => {
+    const updateChat = async () => {
         const payload = {
             text: inputText,
             timestamp: generateTimestamp(),
             username: user.username,
-            project: project
         }
         
-        let response = addChatMessage(payload, project.id);
+        let response = await addChatMessage(payload, project.id);
         if (response[0]) {
             alert('Feil: Klarte ikke å sende melding. Kontakt administrator for hjelp.')
         } else {
@@ -67,10 +67,12 @@ export default function Chat () {
                     )
                 })}
             </div>
-            <div className='input-box'>
-                <input className='input-field' onChange={ handleInputChange } value={ inputText }/>
-                <button onClick= {updateChat} className="input-btn">Send</button>
-            </div>
+            {checkUserStatus(project, user) && 
+                <div className='input-box'>
+                    <input className='input-field' onChange={ handleInputChange } value={ inputText }/>
+                    <button onClick= {updateChat} className="input-btn">Send</button>
+                </div>
+            }
         </div>
     )
 }

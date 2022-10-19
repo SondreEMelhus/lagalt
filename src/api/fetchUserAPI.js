@@ -47,6 +47,42 @@ export const getUser = async () => {
 	}
 }
 
+export const updateUserInDb = async (user) => {
+    try{
+        const response = await fetch(`${apiUrl}/accounts/${user.id}`, {
+            method: 'PUT',
+            headers: createHeaders(),
+            body: JSON.stringify({
+                id: user.id,
+                username: user.username,
+                description: user.description,
+                portfolio: user.portfolio,
+                //skills: user.skills
+            })
+        })
+        if(!response.ok){
+            
+        }
+    }catch(error){
+        return error;
+    }
+}
+
+export const addSkillToUser = async (userId, skillId) => {
+    try{
+        const response = await fetch(`${apiUrl}/accounts/${userId}/addSkill`,{
+            method: 'PUT',
+            headers: createHeaders(),
+            body: skillId
+        })
+        if(!response.ok){
+            throw new Error("Skill could not be added")
+        }
+    }catch(error){
+        return error;
+    }
+}
+
 export const getUserProjects = async (userId) => {
 
     try {

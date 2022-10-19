@@ -28,10 +28,10 @@ export default function KeywordBox () {
                 variant="success"
                 id='KeywordBtn'
                 title={keyword}>
-            {industry.keywords.map((_keyword, index ) => {
+            {industry.keywords !== undefined && industry.keywords.map((_keyword, index ) => {
                 return (
                 
-                    <DropdownItem onClick={handleClick} id={_keyword} eventKey={index + '-' + _keyword} key={index + '-' + _keyword}>
+                    <DropdownItem onClick={event => dispatch( updateKeyword (_keyword) )} id={_keyword} eventKey={index + '-' + _keyword} key={index + '-' + _keyword}>
                         {_keyword}
                     </DropdownItem>
                 )

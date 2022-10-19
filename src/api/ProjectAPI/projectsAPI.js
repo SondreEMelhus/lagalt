@@ -9,12 +9,12 @@ export const getProjects = async () => {
             throw new Error ('Could not fetch projects');
         } else {
             const result = await response.json();
-            return result;
+            return [null, result];
         }
     }
     catch (error) {
         console.log(error);
-		return null
+		return [error, null]
 	}
 }
 

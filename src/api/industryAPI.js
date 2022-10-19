@@ -5,13 +5,37 @@ export const getIndustries = async () => {
         const response = await fetch(`${apiUrl}/industries`)
         if (!response.ok) {
             throw new Error ('Could not fetch industries');
-        } else {
-            const result = await response.json();
-            return result;
-        }
+        } 
+        const result = await response.json();
+        return [null, result];
     }
     catch (error) {
-        console.log(error);
-		return null
+		return [error, null]
 	}
+}
+
+export const getSkills = async (industryId) => {
+    try {
+        const response = await fetch(`${apiUrl}/industries/${industryId}/skills`);
+        if (!response.ok) {
+            throw new Error ('Kunne ikke hente ferdigheter for industri med id: ' + industryId);
+        }
+        const result = await response.json();
+        return [null, result];
+    } catch (error) {
+        return [error, null]
+    }
+}
+
+export const getKeywords = async (industryId) => {
+    try {
+        const response = await fetch(`${apiUrl}/industries/${industryId}/keywords`);
+        if (!response.ok) {
+            throw new Error ('Kunne ikke hente nøkkelord for industri med id: ' + industryId);
+        }
+        const result = await response.json();
+        return [null, result];
+    } catch (error) {
+        return [error, null]
+    }
 }

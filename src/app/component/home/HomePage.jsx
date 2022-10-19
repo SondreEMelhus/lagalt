@@ -10,39 +10,33 @@ import { selectFilteredProjects, updateFilteredProjects } from "../redux/slices/
 //Styling
 import '../../../css/home.css'
 
-import { selectUser, updateUser } from "../redux/slices/UserSlice";
+import { selectUser, updateUser, userSlice } from "../redux/slices/UserSlice";
 import { getUser, registerUser} from "../../../api/fetchUserAPI";
 import keycloak from "../keycloak/keycloak";
 import { getProjects } from "../../../api/project";
-import { getIndustries } from "../../../api/industryAPI";
+import { getIndustries, getKeywords, getSkills } from "../../../api/industryAPI";
 import { selectIndustries, updateIndustries } from "../redux/slices/filters/lists/IndustriesSlice";
+import { skillsSlice } from "../redux/slices/filters/lists/SkillsSlice";
+import { updateIndustry } from "../redux/slices/filters/IndustrySlice";
+import { updateInitialIndustry } from "../redux/slices/filters/InitialIndustry";
+import { scoreProjects } from "../util/SuggestionAlgorithm";
+import { selectSkillsAndKeywords } from "../redux/slices/filters/AllSkillsAndKeywords";
+import { selectMyProjects } from "../redux/slices/MyProjectsSlice";
 
 
 export default function HomePage () {
 
-    const user = useSelector(selectUser);
-    const projects = useSelector(selectProjects);
     const filteredProjects = useSelector(selectFilteredProjects);
-    const dispatch = useDispatch();
-
+    const user = useSelector(selectUser);
     const industries = useSelector(selectIndustries);
-
-    //Populate skills and keywords in filter
+    const dispatch = useDispatch();
 
     useEffect(() => {
         fetchUser();
         fetchProjects();
         fetchIndustries();
+        //genereateSuggestions()
     }, [])
-
-    /*
-    useEffect(() => {
-        dispatch( updateSkills( generateSkillsState(projects) ));
-        dispatch( updateKeywords( generateKeywordState(projects) ));
-        dispatch( updateProjectNames ( generateProjectNameState( projects )));
-        dispatch( updateFilteredProjects ( projects ));
-    }, [projects])
-    */
 
     //TODO: Fjern log, heller setError
     const fetchUser = async () => {
@@ -55,21 +49,61 @@ export default function HomePage () {
     //TODO: Fjern log, heller setError
     const fetchProjects = async () => {
         const data = await getProjects();
-        data ? dispatch ( updateProjects(data[1])) : console.log('Could not fetch projects');
+        if (data[0]) {
+            alert('Feil: Klarte ikke å hente prosjekter. Kontakt en administrator for hjelp')
+        } else {
+            dispatch ( updateProjects(data[1]))
+            dispatch ( updateFilteredProjects ( data[1] ))
+        }
     }
+
 
     //TODO: Fjern log, heller setError
     const fetchIndustries = async () => {
         const data = await getIndustries();
-        data ? dispatch ( updateIndustries(data)) : console.log('Could not fetch industries');
+        if (data[0]) {
+            alert('Feil: Klarte ikke å hente liste over industrier. Kontakt en administrator for hjelp')
+        } else {
+            dispatch ( updateIndustries(data[1]));
+            populateSkillsAndKeywords(data[1])
+        }
     }
+
+    const populateSkillsAndKeywords = (indust) => {
+        let keywords = []
+        let skills = []
+
+        for (let industry of indust) {
+            for (let keyword of industry.keywords) {
+                keywords = [...keywords, keyword];
+            }
+            for (let skill of industry.skills) {
+                skills = [...skills, skill]
+            }
+        }
+
+        const baseIndustry = {
+            title: 'Industrier',
+            skills: skills,
+            keywords: keywords
+        }
+        dispatch( updateIndustry ( baseIndustry ))
+        dispatch( updateInitialIndustry ( baseIndustry));
+    }
+
+    /*
+    const genereateSuggestions = async () => {
+        const suggestions = await scoreProjects(user, filteredProjects, industries);
+        dispatch ( updateFilteredProjects ( suggestions ))
+    }
+    */
 
   
     return (
         <div>
             <div className="home-outer-body">
                 <div className="home-body">
-                    { projects.map((project, index) => {
+                    { filteredProjects.map((project, index) => {
                         return (
                             <ProjectBanner key={index + '-' + project.id} project={project} />
                         )

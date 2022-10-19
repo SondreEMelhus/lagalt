@@ -15,7 +15,7 @@ Prio:
 */
 
 //Går gjennom viewHistory og contributionHistory og rangerer industry basert på mest views og contributions
-const generateScores = (user, listOfIndustries, listOfKeywords, listOfSkills) => {
+const generateScores = (user, viewHistory, contributions, listOfIndustries) => {
 
     let industriesMap = new Map();
 
@@ -27,24 +27,24 @@ const generateScores = (user, listOfIndustries, listOfKeywords, listOfSkills) =>
     //Generer maps for industry, keywords og skills (Kan kanskje passes inn via parameter)
     for (let industry of listOfIndustries) {
         industriesMap.set(industry, 0);
-    }
-
-    for (let keyword of listOfKeywords) {
-        if (!keywordMap.has(keyword)) {
-            keywordMap.set(keyword, 0);
+        for (let keyword of industry.keywords) {
+            if (!keywordMap.has(keyword)) {
+                keywordMap.set(keyword, 0);
+            }
+        }
+        for (let skill of industry.skills) {
+            if (!skillMap.has(skill)) {
+                skillMap.set(skill, 0);
+            }
         }
     }
 
-    for (let skill of listOfSkills) {
-        if (!skillMap.has(skill)) {
-            skillMap.set(skill, 0);
-        }
-    }
+
 
     //Iterer gjennom viewHistory og contribution history
     
     //TODO: Endre så denne matcher viewHistory attribut
-    user.viewHistory.forEach(project => {
+    viewHistory.forEach(project => {
         //Industry
         let industryScore = industriesMap.get(project.industry)
         industryScore += 3;
@@ -96,31 +96,40 @@ const generateScores = (user, listOfIndustries, listOfKeywords, listOfSkills) =>
     return [industriesMap, keywordMap, skillMap];
 }
 
-export const scoreProjects = (user, listOfProjects, allIndustries, allKewywords, allSkills) => {
+export const scoreProjects = (user, listOfProjects, listOfIndustries) => {
 
-    const scoreMaps = generateScores(user, allIndustries, allKewywords, allSkills);
+    console.log(user);
+    console.log(listOfProjects);
+    console.log(listOfIndustries);
 
-    const industryScores = scoreMaps[0];
-    const keywordScores = scoreMaps[1];
-    const skillScores = scoreMaps[2];
-
-    const projectScoreMap = new Map();
-
-    for (let project of listOfProjects) {
-
-
-        let score = 0;
-
-        score += industryScores.get(project.industry);
-
-        project.keywords.forEach(keyword => score += keywordScores.get(keyword));
+    if (user === undefined) {
+        return listOfProjects;
+    } else {
         
-        project.skills.forEach(skill => score += skillScores.get(skill));
+        const scoreMaps = generateScores(user, listOfIndustries);
 
-        //console.log('Prosjekt ' + project.title + ' got a score of ' + score);
-        projectScoreMap.set(project, score);
+        const industryScores = scoreMaps[0];
+        const keywordScores = scoreMaps[1];
+        const skillScores = scoreMaps[2];
+
+        const projectScoreMap = new Map();
+
+        for (let project of listOfProjects) {
+
+
+            let score = 0;
+
+            score += industryScores.get(project.industry);
+
+            project.keywords.forEach(keyword => score += keywordScores.get(keyword));
+            
+            project.skills.forEach(skill => score += skillScores.get(skill));
+
+            //console.log('Prosjekt ' + project.title + ' got a score of ' + score);
+            projectScoreMap.set(project, score);
+        }
+
+        let orderedProjects = new Map([...projectScoreMap].sort((a, b) => b[1] - a[1]));
+        return Array.from(orderedProjects.keys());
     }
-
-    let orderedProjects = new Map([...projectScoreMap].sort((a, b) => b[1] - a[1]));
-    return Array.from(orderedProjects.keys());
 }

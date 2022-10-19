@@ -26,17 +26,22 @@ export default function Chat () {
     }
 
     const updateChat = async () => {
-        const payload = {
-            text: inputText,
-            timestamp: generateTimestamp(),
-            username: user.username,
-        }
-        
-        let response = await addChatMessage(payload, project.id);
-        if (response[0]) {
-            alert('Feil: Klarte ikke å sende melding. Kontakt administrator for hjelp.')
+        if (inputText.length !== 0) {
+            const payload = {
+                text: inputText,
+                timestamp: generateTimestamp(),
+                username: user.username,
+            }
+            
+            let response = await addChatMessage(payload, project.id);
+            if (response[0] !== 'Unexpected end of JSON input') {
+                alert('Feil: Klarte ikke å sende melding. Kontakt administrator for hjelp.')
+            } else {
+                dispatch ( addMessage ( payload ))
+            }
+            setInputText('');
         } else {
-            dispatch ( addMessage ( payload ))
+            alert('Du må minimum skrive inn 1 tegn for å kunne sende en melding');
         }
     }
 

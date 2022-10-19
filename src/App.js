@@ -30,6 +30,7 @@ import ProjectPage from './app/component/projects/projectPage/ProjectPage';
 //Styling
 import './App.css';
 import Application from './app/component/projects/projectPage/projectApplications/Application';
+import MyProjects from './app/component/myProjects/myProjects';
 
 
 
@@ -41,7 +42,7 @@ function App() {
           <Route path="/" element={<IndexView />} />
           <Route path="/profile" element={<ProfileView />} />
           <Route path="/project" element={<ProjectView/>} />
-          <Route path="/projects" element={<UserProjectsView/>} />
+          <Route path="/projects" element={<MyProjects/>} />
           {/* Kanskje endre denne til projects eller noe realtert til main page */}
           <Route path="/create" element={<ProjectCreatorView/>} />
           <Route path="/admin" element={<ProjectAdminView />} />

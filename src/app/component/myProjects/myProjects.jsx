@@ -16,16 +16,31 @@ import ProjectBanner from "../projects/ProjectBanner";
 
 //Styling
 import '../../../css/profile.css'
-import { selectMyProjects } from "../redux/slices/MyProjectsSlice";
+import { selectUserProjects } from '../redux/slices/UserProjects'
+import { getUserProjects } from "../../../api/fetchUserAPI";
+import { updateUserProjects } from "../redux/slices/UserProjects";
 
 export default function MyProjects () {
 
     const user = useSelector(selectUser);
-    const userProjects = useSelector(selectMyProjects);
+    const userProjects = useSelector(selectUserProjects);
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     //Populate skills and keywords in filter
+    useEffect(() => {
+        fetchProjects();
+    }, [])
+
+    const fetchProjects = async () => {
+        const result = await getUserProjects(user.id);
+
+        if (result[0] !== null) {
+            alert('Feil: Kunne ikke hente dine prosjekter. Kontakt en administrator.')
+        } else {
+            console.log(result[1]);
+            dispatch( updateUserProjects (result[1]));
+        }
+    }
 
     //TODO: Antar det er protfolio som er en brukers prosjekter??
     return (
@@ -33,8 +48,8 @@ export default function MyProjects () {
             <Navbar/>
             <p>Mine prosjekter</p>
             <div className="home-body">
-                    {user.contributors.length === 0 && <h3 className="no-message">Du har ingen prosjekter</h3>}
-                    {user.contributors !== undefined && user.portfolio.map((project, index) => {
+                    {userProjects.length === 0 && <h3 className="no-message">Du har ingen prosjekter</h3>}
+                    {userProjects !== undefined && userProjects.map((project, index) => {
                         return (
                             <ProjectBanner key={index + '-' + project.id} project={project}/>
                         )

@@ -15,6 +15,7 @@ import messageReducer from './slices/ContentBoards/MessageBoard/MessageSlice';
 import statusReducer from './slices/ContentBoards/StatusBoard/StatusSlice';
 import applicationsReducer from './slices/Applications'
 import applicationReducer from './slices/Application'
+import userProjectsReducer from './slices/UserProjects';
 
 //Create project
 import projectIndustryReducer from './slices/createProjectSlices/ProjectIndustrySlice';
@@ -50,6 +51,7 @@ export const store = configureStore({
     status: statusReducer,
     applications: applicationsReducer,
     application: applicationReducer,
+    userProjects: userProjectsReducer,
 
     //Create project
     projectIndustry: projectIndustryReducer,

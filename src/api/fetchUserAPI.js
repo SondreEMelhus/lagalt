@@ -9,7 +9,6 @@ const apiUrl = "https://lagalt-java-backend.herokuapp.com/api/v1"
 export const registerUser = async () => {
 
     const username = keycloak.tokenParsed.preferred_username;
-    console.log("INDISE REGISTER")
     try{
         const response = await fetch(`${apiUrl}/accounts/`, {
             method: 'POST',
@@ -18,7 +17,6 @@ export const registerUser = async () => {
                 username: username,
             }),
         })
-        console.log(response);
         if (!response.ok) {
             throw new Error ('Could not create user with username ' + username);
         }
@@ -27,8 +25,7 @@ export const registerUser = async () => {
         return data;
     }
     catch(error){
-        console.log(error);
-        return[error.message, []];
+        return[error.message, null];
     } 
 }
 
@@ -46,7 +43,22 @@ export const getUser = async () => {
             return data ? data : await registerUser();
     }
     catch (error) {
-        console.log(error);
 		return null
 	}
+}
+
+export const getUserProjects = async (userId) => {
+
+    try {
+        const response = await fetch(`${apiUrl}/accounts/${userId}/projects`);
+        if (!response.ok) {
+            throw new Error('Could not get users projects');
+        }
+        const data = await response.json();
+        console.log(data);
+        return [null, data];
+
+    } catch (error) {
+        return [error.message, null]
+    }
 }

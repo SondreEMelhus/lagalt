@@ -1,4 +1,4 @@
-export const applyFilters = (listOfProjects, filterIndustry, filterKeyword, filterSkill, allProjects) => {
+export const applyFilters = (listOfProjects, filterIndustry, filterKeyword, filterSkill) => {
 
     /*
     Switch cases:
@@ -22,16 +22,19 @@ export const applyFilters = (listOfProjects, filterIndustry, filterKeyword, filt
     let filteredProjects = [];
 
     console.log(filterSelection);
+    console.log('Industry: ' + filterIndustry);
+    console.log('Nøkkelord: ' + filterKeyword);
+    console.log('Ferdighet: ' + filterSkill);
 
     //Decide filter combination
-    filterIndustry !== 'Industri' ? filterSelection += 1 : filterSelection += 0;
+    filterIndustry.title !== 'Industrier' ? filterSelection += 1 : filterSelection += 0;
     filterKeyword !== 'Nøkkelord' ? filterSelection += 2 : filterSelection += 0;
     filterSkill !== 'Ferdighet' ? filterSelection += 4 : filterSelection += 0;
 
     for (let project of listOfProjects) {
         switch(filterSelection) {
             case 1:
-                if (project.industry === filterIndustry) {
+                if (project.industry === filterIndustry.title) {
                     filteredProjects.push(project);
                 }
                 break;
@@ -41,7 +44,7 @@ export const applyFilters = (listOfProjects, filterIndustry, filterKeyword, filt
                 }
                 break;
             case 3:
-                if (project.keywords.includes(filterKeyword) && project.industry === filterIndustry) {
+                if (project.keywords.includes(filterKeyword) && project.industry === filterIndustry.title) {
                         filteredProjects.push(project);
                 }
                 break;
@@ -51,7 +54,7 @@ export const applyFilters = (listOfProjects, filterIndustry, filterKeyword, filt
                 }
                 break;
             case 5:
-                if (project.skills.includes(filterSkill) && project.industry === filterIndustry) {
+                if (project.skills.includes(filterSkill) && project.industry === filterIndustry.title) {
                     filteredProjects.push(project);
                 }
                 break;
@@ -61,7 +64,7 @@ export const applyFilters = (listOfProjects, filterIndustry, filterKeyword, filt
                 }
                 break;
             case 7:
-                if (project.keywords.includes(filterKeyword) && project.skills.includes(filterSkill) && project.industry === filterIndustry) {
+                if (project.keywords.includes(filterKeyword) && project.skills.includes(filterSkill) && project.industry === filterIndustry.title) {
                     filteredProjects.push(project);
                 }
                 break;

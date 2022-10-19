@@ -8,18 +8,22 @@ import '../../../../css/filterBox.css'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useDispatch, useSelector } from "react-redux";
-import { selectIndustry, resetIndustry } from "../../redux/slices/filters/IndustrySlice";
+import { updateIndustry } from "../../redux/slices/filters/IndustrySlice";
 import { resetKeyword, selectKeyword } from "../../redux/slices/filters/KeywordSlice";
 import { resetSkill, selectSkill } from "../../redux/slices/filters/SkillSlice";
 import { selectProjects } from "../../redux/slices/ProjectsSlice";
 import { updateFilteredProjects } from "../../redux/slices/filters/FilteredProjects";
+import { selectInitialIndustry } from "../../redux/slices/filters/InitialIndustry";
+import { selectIndustry } from "../../redux/slices/filters/IndustrySlice";
 import { selectIndustries } from "../../redux/slices/filters/lists/IndustriesSlice";
+import { applyFilters } from "./ApplyFilter";
 
 export default function FilterBox () {
 
     const [show, setShow] = useState(false);
 
     const projects = useSelector(selectProjects);
+    const initialIndustry = useSelector(selectInitialIndustry);
     const industries = useSelector(selectIndustries);
     const industryFilter = useSelector(selectIndustry);
     const keywordFilter = useSelector(selectKeyword);
@@ -30,15 +34,16 @@ export default function FilterBox () {
     const handleClose = () => {
 
         //TODO: Legg til en fetch av filteredProjects()
-        //dispatch( updateFilteredProjects());    
+        dispatch( updateFilteredProjects(applyFilters(projects, industryFilter, keywordFilter, skillFilter)));
+        console.log(applyFilters(projects, industryFilter, keywordFilter, skillFilter));    
         setShow(false);
     }
 
     const handleReset = () => {
         dispatch( updateFilteredProjects( projects ));
-        dispatch( resetIndustry() )
         dispatch( resetSkill () );
         dispatch( resetKeyword () );
+        dispatch( updateIndustry ( initialIndustry ))
         setShow(false);
     }
 

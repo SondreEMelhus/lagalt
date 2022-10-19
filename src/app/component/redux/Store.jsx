@@ -16,6 +16,8 @@ import statusReducer from './slices/ContentBoards/StatusBoard/StatusSlice';
 import applicationsReducer from './slices/Applications'
 import applicationReducer from './slices/Application'
 import userProjectsReducer from './slices/UserProjects';
+import skillsAndKeywordsReducer from './slices/filters/AllSkillsAndKeywords';
+import initialIndustryReducer from './slices/filters/InitialIndustry';
 
 //Create project
 import projectIndustryReducer from './slices/createProjectSlices/ProjectIndustrySlice';
@@ -52,6 +54,8 @@ export const store = configureStore({
     applications: applicationsReducer,
     application: applicationReducer,
     userProjects: userProjectsReducer,
+    skillsAndKeywords: skillsAndKeywordsReducer,
+    initialIndustry: initialIndustryReducer,
 
     //Create project
     projectIndustry: projectIndustryReducer,

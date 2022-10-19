@@ -21,7 +21,7 @@ export default function Profile () {
 
     const handleUpdateAccountClick = async (input) => {
         // 1) lagre bruker i db (og få tilbake endret bruker?)
-        await updateAccountInDB(user.id, user.username, input.portfolio, input.description)
+       // await updateAccountInDB(user.id, user.username, input.portfolio, input.description)
 
         // 2) lagre bruker fra db i redux
         //dispatch( updateUser(account))

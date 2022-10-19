@@ -49,3 +49,9 @@
     margin-left: 30px;
     color: #117AA0;
 }
+.addSkillToUserButton{
+    border: 2px solid #117AA0;
+    border-radius: 10px;
+    margin-left: 115px;
+    margin-top: 10px;
+}

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 //Components
 import { useDispatch, useSelector } from "react-redux";
-import { addSkillToUser } from "../../../api/fetchUserAPI";
+import { addSkillToUser, getSkillsOfUser } from "../../../api/fetchUserAPI";
 import { selectUser } from "../redux/slices/UserSlice";
 import { getAllSkills } from "../../../api/ProjectAPI/projectsAPI";
 
@@ -20,12 +20,22 @@ export default function ProfileCreateSkill(updating){
 
     useEffect(() => {
         fetchAllSkills();
+        fetchUserSkills();
     },[])
 
     useEffect(() => {
         pushSkillsToUser()
     },[updating])
 
+    async function fetchUserSkills() {
+        const userSkills = await getSkillsOfUser(user.id);
+        setNewSkills(userSkills);
+        console.log("-------------")
+        console.log(newSkills);
+        console.log("-------------")
+
+
+    }
 
    async function fetchAllSkills(){
     const skills = await getAllSkills();
@@ -59,6 +69,7 @@ export default function ProfileCreateSkill(updating){
         for(let e of newSkills){
             await addSkillToUser(user.id, e.id)
         }
+        console.log(user.skills)
     }
 
 

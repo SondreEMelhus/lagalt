@@ -47,7 +47,12 @@ export const getUser = async () => {
 	}
 }
 
+
 export const updateUserInDb = async (user) => {
+    const userSkills = await getSkillsOfUser(user.id)
+    
+
+
     try{
         const response = await fetch(`${apiUrl}/accounts/${user.id}`, {
             method: 'PUT',
@@ -57,13 +62,29 @@ export const updateUserInDb = async (user) => {
                 username: user.username,
                 description: user.description,
                 portfolio: user.portfolio,
-                //skills: user.skills
             })
         })
+
+        for(let s of userSkills){
+            await addSkillToUser(user.id, s.id);
+        }
+
         if(!response.ok){
             
         }
     }catch(error){
+        return error;
+    }
+}
+
+export const getSkillsOfUser = async (id) => {
+    try{
+         const response = await fetch(`${apiUrl}/accounts/${id}/skills`)
+        
+        const data = await response.json();
+        return data;
+    }
+    catch(error){
         return error;
     }
 }
@@ -82,7 +103,6 @@ export const addSkillToUser = async (userId, skillId) => {
         return error;
     }
 }
-
 export const getUserProjects = async (userId) => {
 
     try {

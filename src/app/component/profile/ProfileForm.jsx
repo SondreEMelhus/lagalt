@@ -1,11 +1,13 @@
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { selectUser, updatePortfolio, updateDescription } from "../redux/slices/UserSlice";
-import { updateUserInDb } from "../../../api/fetchUserAPI";
+import { selectUser, updatePortfolio } from "../redux/slices/UserSlice";
 import BubbleList from "../bubbleList/BubbleList";
 import { useState } from "react";
-import { sanitize } from "../util/InputSantizer";
+import { updateDescription } from "../redux/slices/ProjectSlice";
 import ProfileAddSkill from "./ProfileAddSkill";
+
+
+import { sanitize } from "../util/InputSantizer";
 
 const ProfileForm = ({handleUpdateAccountClick}) => {
 
@@ -13,6 +15,7 @@ const ProfileForm = ({handleUpdateAccountClick}) => {
     const user = useSelector(selectUser);
     const [portfolio, setPortfolio] = useState(user.portfolio)
     const [description, setDescription] = useState(user.description);
+    console.log("VALUES??? " + user.username);
 
     const submit = (input) => {
         handleUpdateAccountClick(input)
@@ -25,12 +28,9 @@ const ProfileForm = ({handleUpdateAccountClick}) => {
     const changeDescription = (event) => {
         setDescription(sanitize(event.target.value))
     }
-    const updateProfile = async () => {
+    const updateProfile = () => {
         updatePortfolio(portfolio);
-        updateDescription(document.getElementById("descriptionUser").value);
-        const newDescription = document.getElementById("descriptionUser").value;
-        const newUser = {id: user.id, username: user.username, description: newDescription, portfolio: user.portfolio, visible: user.visible, skills: user.skills}
-       await updateUserInDb(newUser);
+        updateDescription(description);
     }
 
 	return (
@@ -41,7 +41,7 @@ const ProfileForm = ({handleUpdateAccountClick}) => {
                 <div className="skillsFieldProfile">
                     <BubbleList list={user.skills} />
                 </div>
-                    <ProfileAddSkill/>
+                <ProfileAddSkill/>
             </div>
             <div className="portfolioFieldProfile">
                 <p className="portfolioHeadProfile">Portfolio</p>
@@ -49,7 +49,7 @@ const ProfileForm = ({handleUpdateAccountClick}) => {
             </div>
             <div className="portfolioFieldProfile">
                 <p className="portfolioHeadProfile">Min beskrivelse</p>
-                <textarea name="" id="descriptionUser" cols="80" rows="10" className="textAreaField" value={description} onChange={changeDescription} />
+                <textarea name="" id="" cols="80" rows="10" className="textAreaField" value={description} onChange={changeDescription} />
             </div>
             <div className="statusDiv">
                 <p className="profileStatusText">Profil status:</p>

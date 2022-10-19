@@ -2,10 +2,12 @@ import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { selectStatusBoard } from "../../redux/slices/ContentBoards/StatusBoard/StatusBoardSlice";
-import { updateStatus } from "../../redux/slices/ContentBoards/StatusBoard/StatusSlice";
+import { selectStatusBoard } from "../../../../redux/slices/ContentBoards/StatusBoard/StatusBoardSlice";
+import { updateStatus } from "../../../../redux/slices/ContentBoards/StatusBoard/StatusSlice";
 
-import '../../../../css/contentBoard.css'
+import create from '../../../../../../assets/create.png'
+
+import '../../../../../../css/contentBoard.css'
 
 export default function StatusBoard () {
 
@@ -15,7 +17,11 @@ export default function StatusBoard () {
 
     return (
         <div className="content-board">
-            <h1 className="content-title">Status</h1>
+            <div className="content-header">
+                <h1 className="content-title">Status</h1>
+                <img src={create} alt='create' onClick={(event) => navigate('/postStatus')} className="create-button" />
+            </div>
+            <div className="content-box">
             {statusBoard.length === 0 && <h3 className="no-message">Ingen status oppdateringer er postet enda</h3>}
             {statusBoard !== undefined && statusBoard.map((status, index) => {
                 return (
@@ -28,6 +34,7 @@ export default function StatusBoard () {
                     </div>
                 )
             })}
+            </div>
         </div>
     )
 }

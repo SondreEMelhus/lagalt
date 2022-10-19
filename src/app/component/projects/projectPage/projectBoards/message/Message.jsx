@@ -1,11 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { selectMessage } from "../../redux/slices/ContentBoards/MessageBoard/MessageSlice";
+import { selectMessage } from "../../../../redux/slices/ContentBoards/MessageBoard/MessageSlice";
 
-import '../../../../css/contentItem.css'
-import Navbar from "../../navbar/Navbar";
-import { trimTimestamp } from "../../util/TrimTimestamp";
+import '../../../../../../css/contentItem.css'
+import Navbar from "../../../../navbar/Navbar";
+import { trimTimestamp } from "../../../../util/TrimTimestamp";
 
 export default function Message () {
 

@@ -6,6 +6,8 @@ import { updateApplication } from "../../../redux/slices/Application";
 import { selectApplications, updateApplications } from "../../../redux/slices/Applications";
 import { selectProject } from "../../../redux/slices/ProjectSlice";
 
+import '../../../../../css/applications.css'
+
 export default function Applications () {
 
     const project = useSelector(selectProject);
@@ -25,11 +27,12 @@ export default function Applications () {
     }
     
     return (
-        <div>
+        <div className="applications-box">
+            <h1>Søkere</h1>
             {applications.length === 0 && <h3>Ingen ubehandlede søknader</h3>}
             {applications !== undefined && applications.map((application, index) => {
                 return (
-                    <div key={index + '-' + application.id}>
+                    <div className="application" key={index + '-' + application.id}>
                         <p onClick={(event) => {
                             dispatch( updateApplication(application));
                             navigate('/application');

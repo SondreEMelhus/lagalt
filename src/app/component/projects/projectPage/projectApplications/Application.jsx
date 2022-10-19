@@ -18,10 +18,10 @@ export default function Application () {
     const handleApprove = async () => {
         const response = await approveApplication(application.id);
         if (!response[0]) {
-            alert('Error: Could not approve application. Please contant an administrator.');
+            alert('Feil: Klarte ikke å godkjenne søknaden. Kontakt administrator for hjelp.');
             navigate('/project');
         } else {
-            alert('Application approved');
+            alert('Søknad godkjent');
             navigate('/project');
         }
     }
@@ -29,10 +29,10 @@ export default function Application () {
     const handleDecline = async () => {
         const response = await declineApplication(application.id);
         if (!response[0]) {
-            alert('Error: Could not decline application. Please contant an administrator.');
+            alert('Feil: Klarte ikke å avvise søknaden. Kontakt administrator for hjelp.');
             navigate('/project');
         } else {
-            alert('Application declined');
+            alert('Søknad avvist');
             navigate('/project');
         }
     }

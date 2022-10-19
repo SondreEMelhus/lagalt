@@ -15,8 +15,8 @@ import film from '../../../../assets/videoIcon.png';
 import game from '../../../../assets/playIcon.png';
 import coding from '../../../../assets/codingIcon.png';
 import Chat from "./Chat";
-import MessageBoard from "./MessageBoard";
-import StatusBoard from './StatusBoard';
+import MessageBoard from "./projectBoards/message/MessageBoard";
+import StatusBoard from './projectBoards/status/StatusBoard';
 import { resetMessageBoard, updateMessageBoard } from "../../redux/slices/ContentBoards/MessageBoard/MessageBoardSlice";
 import { getAllContributers } from '../../../../api/ProjectAPI/projectsAPI'
 import { getMessageBoard } from "../../../../api/ProjectAPI/messageBoardAPI";

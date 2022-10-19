@@ -1,6 +1,8 @@
 //Libraries
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 //Images/Icons
 import Logo from '../../../assets/Logo.png';
@@ -29,15 +31,21 @@ export default function Navbar() {
   return (
     <div className="navBar">
         <img src={Logo} alt="Logo" className="logo" onClick={handleNavigate}/>
-        {/* TODO: Fiks serarchbar <Searchbar />*/}
         <FilterBox />
         <Login />
         {/* TODO: Finn ut hvor vi kan hente ut en brukers prosjekter <NavigateMyProjects/>*/}
-        {/*<CreateProject/>*/}
-        <ProjectCreatorRework />
-        <NavigateMyProfile/>
         {/* TODO: Finn ut hvordan man henter en brukers prosjekte r<NavigateMyProfile/> */}
-        <img src={dropdown} alt="Dropdown" className="dropdown"/>
+        <DropdownButton id="dropdown-basic-button" title="Alternativer">
+          <Dropdown.Item>
+            <ProjectCreatorRework className="projectCreatorButton" /> 
+          </Dropdown.Item>
+          <Dropdown.Item>
+            <NavigateMyProfile/>
+          </Dropdown.Item>
+          <Dropdown.Item>
+            <NavigateMyProjects/>
+          </Dropdown.Item>
+        </DropdownButton>
     </div>
  
   );

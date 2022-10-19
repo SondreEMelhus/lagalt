@@ -50,7 +50,7 @@ export const getUser = async () => {
 
 export const updateUserInDb = async (user) => {
     const userSkills = await getSkillsOfUser(user.id)
-    
+    const visible = user.visible === "Privat" ? true: false
 
 
     try{
@@ -61,6 +61,7 @@ export const updateUserInDb = async (user) => {
                 id: user.id,
                 username: user.username,
                 description: user.description,
+                visible: visible,
                 portfolio: user.portfolio,
             })
         })

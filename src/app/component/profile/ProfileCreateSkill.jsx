@@ -70,6 +70,7 @@ export default function ProfileCreateSkill(updating){
             await addSkillToUser(user.id, e.id)
         }
         console.log(user.skills)
+
     }
 
 

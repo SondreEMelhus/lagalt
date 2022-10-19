@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import '../../../css/navbar.css'
 
 export default function NavigateMyProfile(){
 
@@ -9,6 +10,6 @@ export default function NavigateMyProfile(){
     }
 
     return(
-        <button onClick={handleClick}>Min Profil</button>
+        <button className="myProfileButton" onClick={handleClick}>Min Profil</button>
     )
 }

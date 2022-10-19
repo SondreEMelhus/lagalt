@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import {update} from '../redux/slices/MyProjectsSlice';
 import { getProjects } from "../../../api/project";
 import { selectMyProjects } from "../redux/slices/MyProjectsSlice";
+import '../../../css/navbar.css'
 
 export default function NavigateMyProjects(){
 
@@ -21,6 +22,6 @@ export default function NavigateMyProjects(){
     }
 
     return(
-        <button onClick={handleClick}>Mine Prosjekter</button>
+        <button className="myProjectsButton" onClick={handleClick}>Mine Prosjekter</button>
     )
 }

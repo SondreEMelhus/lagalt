@@ -12,8 +12,10 @@ import UserProjectsView from './app/component/views/UserProjectsView'
 import ProjectCreatorView from './app/component/views/ProjectCreatorView'
 import ProjectView from './app/component/views/ProjectView'
 import ProjectAdminView from './app/component/views/ProjectAdminView';
-import Message from './app/component/projects/projectPage/Message'
-import Status from './app/component/projects/projectPage/Status'
+import Message from './app/component/projects/projectPage/projectBoards/message/Message'
+import Status from './app/component/projects/projectPage/projectBoards/status/Status'
+import CreateMessagePost from './app/component/projects/projectPage/projectBoards/message/CreateMessagePost'
+import CreateStatusPost from './app/component/projects/projectPage/projectBoards/status/CreateStatusPost'
 
 
 
@@ -47,6 +49,8 @@ function App() {
           <Route path="/message" element={<Message />} />
           <Route path="/status" element={<Status />} />
           <Route path='/application' element={<Application />} />
+          <Route path='/postMessage' element={<CreateMessagePost />} />
+          <Route path='/postStatus' element={<CreateStatusPost />} />
           {/* TODO: Kun for utvikling, fjern før innlevering!!!!*/}
         </Routes>
       </Router>

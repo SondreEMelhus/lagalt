@@ -53,16 +53,46 @@ input{
     cursor: pointer;
 }
 
-.inputtext{
+.inputtext {
     border: none;
     background: #E7E7E7;
     outline: none;
     margin-top: 8px;
     border-left: 2px solid #656565;
 }
-.magnifyingGlass{
+.magnifyingGlass {
     height: 24px;
     margin-top: -5px;
     margin-left: 5px;
     margin-right: 8px;
+}
+
+.projectCreatorButton {
+    border: none;
+    color: white;
+    background:  #117AA0;
+    border-radius: 20px;
+    height: 40px;
+    width: 130px;
+    margin-top: 15px;
+}
+
+.myProfileButton {
+    border: none;
+    color: white;
+    background:  #117AA0;
+    border-radius: 20px;
+    height: 40px;
+    width: 130px;
+    margin-top: 15px; 
+}
+
+.myProjectsButton {
+    border: none;
+    color: white;
+    background:  #117AA0;
+    border-radius: 20px;
+    height: 40px;
+    width: 130px;
+    margin-top: 15px; 
 }

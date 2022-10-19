@@ -2,10 +2,12 @@ import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { selectMessageBoard } from "../../redux/slices/ContentBoards/MessageBoard/MessageBoardSlice";
-import { updateMessage } from "../../redux/slices/ContentBoards/MessageBoard/MessageSlice";
+import { selectMessageBoard } from "../../../../redux/slices/ContentBoards/MessageBoard/MessageBoardSlice";
+import { updateMessage } from "../../../../redux/slices/ContentBoards/MessageBoard/MessageSlice";
 
-import '../../../../css/contentBoard.css'
+import create from '../../../../../../assets/create.png'
+
+import '../../../../../../css/contentBoard.css'
 
 export default function ContentBoard () {
 
@@ -15,7 +17,11 @@ export default function ContentBoard () {
 
     return (
         <div className="content-board">
-            <h1 className="content-title">Meldinger</h1>
+            <div className="content-header">
+                <h1 className="content-title">Meldinger</h1>
+                <img src={create} alt='create' onClick={(event) => navigate('/postMessage')} className="create-button"/>
+            </div>
+            <div className="content-box">
             {messageBoard.length === 0 && <h3 className="no-content">Ingen beskjeder er postet enda</h3>}
             {messageBoard !== undefined && messageBoard.map((message, index) => {
                 return (
@@ -28,6 +34,7 @@ export default function ContentBoard () {
                     </div>
                 )
             })}
+            </div>
         </div>
     )
 }

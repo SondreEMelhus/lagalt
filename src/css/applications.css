@@ -1,0 +1,24 @@
+.applications-box {
+    border: solid 2px black;
+    border-radius: 10px;
+    overflow: scroll;
+    height: 200px;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+.application {
+    border: solid 2px black;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    height: 50px;
+    width: 90%;
+    background-color: #E7E7E7;
+    cursor: pointer;
+}

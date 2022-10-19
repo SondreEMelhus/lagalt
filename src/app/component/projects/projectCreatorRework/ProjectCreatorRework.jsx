@@ -15,6 +15,8 @@ import { selectUser } from "../../redux/slices/UserSlice";
 import { createProject } from "../../../../api/ProjectAPI/projectsAPI";
 import { sanitize } from "../../util/InputSantizer";
 
+import '../../../../css/navbar.css'
+
 
 
 export default function ProjectCreatorRework () {
@@ -63,7 +65,7 @@ export default function ProjectCreatorRework () {
     
     return (
         <div>
-            <button onClick={handleShow}>Opprett prosjekt</button>
+            <button className="projectCreatorButton" onClick={handleShow}>Opprett prosjekt</button>
             <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Opprett nytt prosjekt</Modal.Title>

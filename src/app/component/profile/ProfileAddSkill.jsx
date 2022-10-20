@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
 import ProfileCreateSkill from "./ProfileCreateSkill";
-export default function ProfileAddSkill(){
+export default function ProfileAddSkill({reload}){
 
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(true);
@@ -29,7 +29,7 @@ export default function ProfileAddSkill(){
 
             {/*Ferdigheter*/}
             <Form.Label>Velg ferdigheter for ditt prosjekt fra listen til venstre</Form.Label>
-            <ProfileCreateSkill updating={updating}/>
+            <ProfileCreateSkill updating={updating} reload={reload}/>
                 <br/>
         </Form>
         </Modal.Body>
@@ -44,8 +44,6 @@ export default function ProfileAddSkill(){
           </Button>
         </Modal.Footer>
         </Modal>
-
-
         </div>
     )
 }

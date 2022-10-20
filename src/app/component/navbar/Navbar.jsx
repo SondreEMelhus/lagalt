@@ -32,23 +32,23 @@ export default function Navbar() {
   return (
     <div className="navBar">
         <img src={Logo} alt="Logo" className="logo" onClick={handleNavigate}/>
-        <FilterBox />
-        <Login />
-        {/* TODO: Finn ut hvor vi kan hente ut en brukers prosjekter <NavigateMyProjects/>*/}
-        {/* TODO: Finn ut hvordan man henter en brukers prosjekte r<NavigateMyProfile/> */}
-        {keycloak.authenticated && 
-        <DropdownButton id="dropdown-basic-button" title="Alternativer">
-        <Dropdown.Item>
-          <ProjectCreatorRework className="projectCreatorButton" /> 
-        </Dropdown.Item>
-        <Dropdown.Item>
-          <NavigateMyProfile/>
-        </Dropdown.Item>
-        <Dropdown.Item>
-          <NavigateMyProjects/>
-        </Dropdown.Item>
-      </DropdownButton>
-        }
+          <FilterBox />
+          <Login />
+          {/* TODO: Finn ut hvor vi kan hente ut en brukers prosjekter <NavigateMyProjects/>*/}
+          {/* TODO: Finn ut hvordan man henter en brukers prosjekte r<NavigateMyProfile/> */}
+          {keycloak.authenticated && 
+          <DropdownButton id="dropdown-basic-button" title="Alternativer">
+          <Dropdown.Item>
+            <ProjectCreatorRework className="projectCreatorButton" /> 
+          </Dropdown.Item>
+          <Dropdown.Item>
+            <NavigateMyProfile/>
+          </Dropdown.Item>
+          <Dropdown.Item>
+            <NavigateMyProjects/>
+          </Dropdown.Item>
+        </DropdownButton>
+          }
     </div>
  
   );

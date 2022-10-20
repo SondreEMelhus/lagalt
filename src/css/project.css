@@ -1,7 +1,7 @@
 .topDivProject{
     display: flex;
     margin-top: 30px;
-    margin-left: 20px;
+    margin-left: 10%;
 }
 .icon{
     height: 30px;
@@ -39,24 +39,25 @@
     color: white;
     background: #FB4C34;
 }
+
+.adminButton:hover {
+    background-color: #e04834;
+}
+
 .projectInfoField{
     margin-top: 50px;
     min-height: 600px;
-    margin-left: 5%;
+    margin-left: 10%;
+    margin-bottom: 4%;
     min-width: 700px;
     width: 80%;
     border-radius: 15px;
     background: white;
+    padding: 2%;
+
 }
 .descriptionProject{
-    border: 2px solid #227C9D;
-    width: 500px;
-    margin-top: 30px;
-    margin-left: 30px;
-    border-radius: 15px;
-    text-align: center;
-    padding-left: 10px;
-    padding-right: 10px;
+    font-size: 22px;
 }
 .projecSubTitle{
     margin-left: 30px;

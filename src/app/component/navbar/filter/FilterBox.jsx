@@ -3,8 +3,8 @@ import IndustryBox from "./IndustryBox";
 import KeywordBox from "./KeywordBox";
 import SkillBox from "./SkillBox";
 
-import '../../../../css/filterBox.css'
-
+//import '../../../../css/filterBox.css'
+import '../../../../css/navbar.css'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useDispatch, useSelector } from "react-redux";

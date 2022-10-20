@@ -1,33 +1,38 @@
 .project-clickable {
-    border: 2px solid white;
+    border: 1px solid white;
     border-radius: 10px;
-    align-items: center;
+    /**align-items: center;**/
     background-color: white;
 }
 
 .project-clickable:hover {
-    border: 2px solid rgb(0, 132, 255);
+    border: 1px groove rgb(205, 207, 207); 
   }
 
 .project-header {
     margin-top: 10px;
-    margin-left: 2%;
+    /**margin-left: 2%;**/
     display: grid;
     grid-template-columns: 50% 50%;
-    gap: 175px;
+    gap: 18%;
 }
 
 .project-title {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-size: 2vw;
+    text-align: left;
+    padding-left: 8px;
 }
 
 .project-industry {
-   margin-right: 50%;
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 1;
 }
 
 .project-industry-image {
-  
+    width: 15%;
 }
 
 .project-body {
@@ -40,7 +45,8 @@
 }
 
 .project-skills {
-    margin-left: 2%;
+    /**margin-left: 2%;**/
+    padding-left: 8px;
     display: grid;
     grid-template-columns: 20% 20% 20% 20%;
     gap: 15px;

@@ -1,15 +1,13 @@
 .navBar{
     height: 70px;
-    display: flex;
     background: white;
-    justify-content: space-between;
     position: sticky;
     top: 0;
-
 }
 .logo{
     left: 10px;
     margin-top: 10px;
+    margin-left: 10px;
     height: 50px;
     cursor: pointer;
 }
@@ -21,10 +19,24 @@
     border: none;
     border-radius: 10px;
     min-width: 225px;
+    margin-left: 50%;
 }
 
 input{
     text-indent: 5px;
+}
+
+/* added this from filterBox.ccs */
+.filter {
+    margin-top: 15px;
+    margin-right: 10px;
+    float: right;
+}
+
+.filter-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .loginButton{
@@ -37,7 +49,15 @@ input{
     width: 130px;
     margin-top: 15px;
     min-width: 63px;
+    margin-left: 10px;
+    margin-right: 10px;
+    float: right;
 }
+
+.loginButton:hover {
+    background-color: rgb(246, 244, 244);
+}
+
 .registerButton{
     border: none;
     color: white;
@@ -46,11 +66,20 @@ input{
     height: 40px;
     width: 130px;
     margin-top: 15px; 
+    margin-left: 10px;
+    float: right;
 }
+
+.registerButton:hover {
+    background-color: #0f6f91;
+}
+
 .dropdown{
     height: 50px;
-    margin-top: 10px;
+    margin-top: 15px;
+    margin-right: 10px;
     cursor: pointer;
+    float: right;
 }
 
 .inputtext {

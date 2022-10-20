@@ -11,7 +11,7 @@ import { selectFilteredProjects, updateFilteredProjects } from "../redux/slices/
 import '../../../css/home.css'
 
 import { selectUser, updateUser, userSlice } from "../redux/slices/UserSlice";
-import { getUser, registerUser} from "../../../api/fetchUserAPI";
+import { getInteractionHistory, getUser, registerUser} from "../../../api/fetchUserAPI";
 import keycloak from "../keycloak/keycloak";
 import { getProjects } from "../../../api/project";
 import { getIndustries, getKeywords, getSkills } from "../../../api/industryAPI";
@@ -22,6 +22,7 @@ import { updateInitialIndustry } from "../redux/slices/filters/InitialIndustry";
 import { scoreProjects } from "../util/SuggestionAlgorithm";
 import { selectSkillsAndKeywords } from "../redux/slices/filters/AllSkillsAndKeywords";
 import { selectMyProjects } from "../redux/slices/MyProjectsSlice";
+import { updateInteractionHistory } from "../redux/slices/InteractionHistorySlice";
 
 
 export default function HomePage () {
@@ -38,15 +39,17 @@ export default function HomePage () {
         //genereateSuggestions()
     }, [])
 
-    //TODO: Fjern log, heller setError
     const fetchUser = async () => {
         if(keycloak.authenticated) { 
-            const userResponse = await getUser();
-            userResponse ? dispatch( updateUser(userResponse)): await registerUser();
+            const data = await getUser();
+            if (data[0]) {
+                alert('Klarte ikke å hente brukerinformasjon. Kontakt en administrator for hjelp')
+            } else {
+                dispatch( updateUser(data))
+            }
         }
     }
 
-    //TODO: Fjern log, heller setError
     const fetchProjects = async () => {
         const data = await getProjects();
         if (data[0]) {
@@ -58,7 +61,6 @@ export default function HomePage () {
     }
 
 
-    //TODO: Fjern log, heller setError
     const fetchIndustries = async () => {
         const data = await getIndustries();
         if (data[0]) {
@@ -68,6 +70,7 @@ export default function HomePage () {
             populateSkillsAndKeywords(data[1])
         }
     }
+
 
     const populateSkillsAndKeywords = (indust) => {
         let keywords = []
@@ -90,6 +93,7 @@ export default function HomePage () {
         dispatch( updateIndustry ( baseIndustry ))
         dispatch( updateInitialIndustry ( baseIndustry));
     }
+    
 
     /*
     const genereateSuggestions = async () => {

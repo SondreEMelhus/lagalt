@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 //Components
@@ -30,6 +30,9 @@ import { selectUser } from "../../redux/slices/UserSlice";
 import Applications from "./projectApplications/Applications";
 import keycloak from "../../keycloak/keycloak";
 import { checkUserStatus } from "../../util/CheckContributerStatus";
+import { addInteractionHistory, getInteractionHistory } from "../../../../api/fetchUserAPI";
+import { selectInteractionHistory, updateInteractionHistory } from "../../redux/slices/InteractionHistorySlice";
+import { generateTimestamp } from "../../util/Timestamp";
 
 
 export default function ProjectPage () {
@@ -39,16 +42,18 @@ export default function ProjectPage () {
     const user = useSelector(selectUser);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const interactionHistory = useSelector(selectInteractionHistory);
 
     useEffect( () => {
+        fetchInteractionHistory();
         fetchData();
     },[])
 
+    //TODO: Legg til [error, data]
     const fetchData = async () => {
         const role = await getAllContributers(project.id);
         if (role) {
             setProjectRole(checkUserRole(user, role));
-            console.log(projectRole);
         }
         const messageBoard = await getMessageBoard(project.id);
         if (messageBoard) {
@@ -64,13 +69,82 @@ export default function ProjectPage () {
         }
         const chat = await getChat(project.id);
         if (chat[0]) {
-            alert('Feil: klarte ikke å hente chat. Kontakt administrator for hjelp.')
+            alert('Feil: Klarte ikke å hente chat. Kontakt administrator for hjelp.')
         } else {
             if (chat[1].length !== 0) {
                 dispatch ( updateChat ( chat[1] ))
             } else {
                 dispatch ( updateChat ( [] ))
             }
+        }
+        if (keycloak.authenticated) {
+            handleInteractionHist(user.id, project.id);
+        }
+
+    }
+
+    const fetchInteractionHistory = async () => {
+        if (keycloak.authenticated) {
+            const data = await getInteractionHistory(user.id);
+            if (data[0]) {
+                alert('Feil: Klarte ikke å hente prosjekthistorikk. Kontakt en administrator for hjelp')
+            } else {
+                dispatch ( updateInteractionHistory ( data[1]));
+            }
+        }
+    }
+
+    const handleInteractionHist = async (userId, projectId) => {
+        let added = false;
+            if (interactionHistory === undefined) {
+                addNewProject(userId, projectId);
+            } else {
+                for (let projectInteraction of interactionHistory) {
+                    if (projectInteraction.projectId === project.id) {
+                        const interaction = {
+                            timestamp: generateTimestamp(),
+                            visited: true,
+                            account: {
+                                id: userId
+                            },
+                            project: {
+                                id: projectId
+                            }
+                        }
+                        const result = updateInteractionHistory(interaction, project.id);
+                        if (result[0]) {
+                            alert('Feil: Klarte ikke å oppdater prosjekthistorikken din. Kontakt administrator for hjelp.')
+                        } else {
+                            const newInteractionHistory = await getInteractionHistory(user.id);
+                            dispatch ( updateInteractionHistory( newInteractionHistory ) );
+                            added = true;
+                        }
+                        break;
+                    }
+                }
+                if (!added) {
+                    addNewProject(userId, projectId);
+                }
+            }
+        }
+    
+    const addNewProject = async ( userId, projectId) => {
+        const interaction = {
+            timestamp: generateTimestamp(),
+            visited: true,
+            account: {
+                id: userId
+            },
+            project: {
+                id: projectId
+            }
+        }
+        const result = addInteractionHistory(interaction);
+        if (result[0]) {
+            alert('Feil: Klarte ikke å legge prosjektet til i prosjekthistorikken din. Kontakt administrator for hjelp.')
+        } else {
+            const newInteractionHistory = await getInteractionHistory(user.id, userId, projectId);
+            dispatch ( updateInteractionHistory( newInteractionHistory[1] ) );
         }
     }
 
@@ -89,7 +163,6 @@ export default function ProjectPage () {
         }
     }
 
-    //TODO: Legg inn sjekk for å se om du er admin
     const navigateToAdmin = () => {
         navigate('/admin');
     }

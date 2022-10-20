@@ -1,7 +1,5 @@
 import keycloak from '../app/component/keycloak/keycloak';
 import { createHeaders } from './index'
-import { updateUser } from '../app/component/redux/slices/UserSlice';
-import { useDispatch } from 'react-redux';
 
 
 const apiUrl = "https://lagalt-java-backend.herokuapp.com/api/v1"
@@ -104,18 +102,89 @@ export const addSkillToUser = async (userId, skillId) => {
         return error;
     }
 }
-export const getUserProjects = async (userId) => {
 
+export const getUserProjects = async (userId) => {
     try {
         const response = await fetch(`${apiUrl}/accounts/${userId}/projects`);
         if (!response.ok) {
             throw new Error('Could not get users projects');
         }
         const data = await response.json();
-        console.log(data);
         return [null, data];
 
     } catch (error) {
         return [error.message, null]
     }
 }
+
+export const getInteractionHistory = async ( userId ) => {
+    try{
+        const response = await fetch(`${apiUrl}/projectInteractionHistories/account/${userId}`)
+        if (!response.ok) {
+            throw new Error ('Could not get the interaction history of ' + userId);
+        }
+        const data = await response.json();
+        return [null, data];
+    }
+    catch(error){
+        return[error, null];
+    } 
+}
+
+export const addInteractionHistory = async ( payload ) => {
+
+    try{
+        const response = await fetch(`${apiUrl}/projectInteractionHistories`, {
+            method: 'POST',
+            headers: createHeaders(),
+            body: JSON.stringify({
+                timestamp: payload.timestamp,
+                visited: true,
+                account: {
+                      id: payload.account.id
+                },
+                project: {
+                    id: payload.project.id
+                }
+            })
+        })
+        if (!response.ok) {
+            throw new Error ('Could not add the interaction history of ' + payload.username);
+        }
+        const data = await response.json();
+
+        return [null, data];
+    }
+    catch(error){
+        return[error.message, null];
+    } 
+}
+
+export const updateIntaractionHistory = async ( payload, projectId ) => {
+
+    try {
+        const response = await fetch(`${apiUrl}/projectInteractionHistories/${projectId}`, {
+            method: 'PUT',
+            headers: createHeaders(),
+            body: JSON.stringify({
+                    id: payload.id,
+                    timestamp: payload.timestamp,
+                    visited: payload.visited,
+                    account: {
+                        id: payload.id
+                    },
+                    project: {
+                        id: payload.project.id
+                    }
+                })
+            })
+            if (!response.ok) {
+                throw new Error ('Could not update the interaction history of ' + payload.username);
+            }
+            const data = await response.json();
+    
+            return [null, data];
+    } catch (error) {
+        return [error.message, null];
+    }
+} 

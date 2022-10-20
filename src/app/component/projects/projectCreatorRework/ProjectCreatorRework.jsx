@@ -32,6 +32,10 @@ export default function ProjectCreatorRework () {
     const skills = useSelector(selectProjectSkills);
     const user = useSelector(selectUser);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+      console.log(industries);
+    }, [])
     
     const handleClose = () => {
         dispatch ( removeAllSkills() )

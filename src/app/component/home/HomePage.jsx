@@ -45,7 +45,7 @@ export default function HomePage () {
             if (data[0]) {
                 alert('Klarte ikke å hente brukerinformasjon. Kontakt en administrator for hjelp')
             } else {
-                dispatch( updateUser(data))
+                dispatch( updateUser(data[1]))
             }
         }
     }

@@ -22,3 +22,8 @@
     background-color: #E7E7E7;
     cursor: pointer;
 }
+
+.applications-no-apps {
+    text-align: center;
+    margin-top: 20px;
+}

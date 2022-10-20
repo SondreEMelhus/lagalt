@@ -16,7 +16,7 @@ export default function BubbleList ({ list }) {
             {list !== undefined && list.map((item, index) => {
                 return (
                     <div>
-                        {checkSkillMatch(user, item) ? <p className="bubble-item-userMatch" key={index}>{item}</p> : <p className="bubble-item" key={index}>{item}</p>}
+                        {checkSkillMatch(user, item) ? <p className="bubble-item-userMatch" key={index + '-' + item}>{item}</p> : <p className="bubble-item" key={index}>{item}</p>}
                     </div>
                 )
             })}

@@ -4,32 +4,24 @@ import { useDispatch, useSelector } from "react-redux";
 
 //Components
 import ProjectBanner from "../projects/ProjectBanner";
-import { selectProjects, updateProjects } from "../redux/slices/ProjectsSlice";
+import { updateProjects } from "../redux/slices/ProjectsSlice";
 import { selectFilteredProjects, updateFilteredProjects } from "../redux/slices/filters/FilteredProjects";
+import { selectUser, updateUser } from "../redux/slices/UserSlice";
+import { getUser } from "../../../api/fetchUserAPI";
+import keycloak from "../keycloak/keycloak";
+import { getProjects } from "../../../api/project";
+import { getIndustries } from "../../../api/industryAPI";
+import { selectIndustries, updateIndustries } from "../redux/slices/filters/lists/IndustriesSlice";
+import { updateIndustry } from "../redux/slices/filters/IndustrySlice";
+import { updateInitialIndustry } from "../redux/slices/filters/InitialIndustry";
 
 //Styling
 import '../../../css/home.css'
-
-import { selectUser, updateUser, userSlice } from "../redux/slices/UserSlice";
-import { getInteractionHistory, getUser, registerUser} from "../../../api/fetchUserAPI";
-import keycloak from "../keycloak/keycloak";
-import { getProjects } from "../../../api/project";
-import { getIndustries, getKeywords, getSkills } from "../../../api/industryAPI";
-import { selectIndustries, updateIndustries } from "../redux/slices/filters/lists/IndustriesSlice";
-import { skillsSlice } from "../redux/slices/filters/lists/SkillsSlice";
-import { updateIndustry } from "../redux/slices/filters/IndustrySlice";
-import { updateInitialIndustry } from "../redux/slices/filters/InitialIndustry";
-import { scoreProjects } from "../util/SuggestionAlgorithm";
-import { selectSkillsAndKeywords } from "../redux/slices/filters/AllSkillsAndKeywords";
-import { selectMyProjects } from "../redux/slices/MyProjectsSlice";
-import { updateInteractionHistory } from "../redux/slices/InteractionHistorySlice";
 
 
 export default function HomePage () {
 
     const filteredProjects = useSelector(selectFilteredProjects);
-    const user = useSelector(selectUser);
-    const industries = useSelector(selectIndustries);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -45,6 +37,7 @@ export default function HomePage () {
             if (data[0]) {
                 alert('Klarte ikke å hente brukerinformasjon. Kontakt en administrator for hjelp')
             } else {
+                console.log(data[1]);
                 dispatch( updateUser(data[1]))
             }
         }

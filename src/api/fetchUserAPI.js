@@ -4,6 +4,7 @@ import { createHeaders } from './index'
 
 const apiUrl = "https://lagalt-java-backend.herokuapp.com/api/v1"
 
+
 export const registerUser = async () => {
 
     const username = keycloak.tokenParsed.preferred_username;
@@ -19,7 +20,6 @@ export const registerUser = async () => {
             throw new Error ('Could not create user with username ' + username);
         }
         const data = await response.json();
-
         return [null, data];
     }
     catch(error){
@@ -33,15 +33,18 @@ export const getUser = async () => {
     try {
         const username = keycloak.tokenParsed.preferred_username;
         const response = await fetch(`${apiUrl}/accounts/search?username=${username}`)
-        console.log(response);
-       if (!response.ok) {
-            return await registerUser();
+        if (!response.ok) {
+            const user = await registerUser();
+            const newUser = user[1];
+            getUser();
         } else {
             const data = await response.json();
             return [null, data]
         }
+
+
     } catch (error) {
-		return [error, null];
+		return [error.message, null];
 	}
 }
 

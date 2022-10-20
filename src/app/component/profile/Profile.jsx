@@ -30,6 +30,7 @@ function Profile () {
 
     useEffect(() => {
         getUserAcc();
+        console.log(user);
     }, [])
 
     async function getUserAcc(){

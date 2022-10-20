@@ -7,7 +7,7 @@ import ProjectBanner from "../projects/ProjectBanner";
 import { updateProjects } from "../redux/slices/ProjectsSlice";
 import { selectFilteredProjects, updateFilteredProjects } from "../redux/slices/filters/FilteredProjects";
 import { selectUser, updateUser } from "../redux/slices/UserSlice";
-import { getUser } from "../../../api/fetchUserAPI";
+import { getUser, registerUser } from "../../../api/fetchUserAPI";
 import keycloak from "../keycloak/keycloak";
 import { getProjects } from "../../../api/project";
 import { getIndustries } from "../../../api/industryAPI";
@@ -33,13 +33,9 @@ export default function HomePage () {
 
     const fetchUser = async () => {
         if(keycloak.authenticated) { 
-            const data = await getUser();
-            if (data[0]) {
-                alert('Klarte ikke å hente brukerinformasjon. Kontakt en administrator for hjelp')
-            } else {
-                console.log(data[1]);
-                dispatch( updateUser(data[1]))
-            }
+            const userResponse = await getUser();
+            console.log(userResponse);
+            userResponse ? dispatch( updateUser(userResponse)): await registerUser();
         }
     }
 

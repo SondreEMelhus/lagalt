@@ -20,11 +20,14 @@ export const userSlice = createSlice({
     },
     updateDescription: (state, action) => {
       state.value.description = action.payload;
+    },
+    updateSkillsOfCurrentUser: (state, action) => {
+      state.value.description = action.payload;
     }
   },
 });
 
-export const { updateUser, resetUser, updatePortfolio, updateDescription } = userSlice.actions;
+export const { updateUser, resetUser, updatePortfolio, updateDescription, updateSkillsOfCurrentUser } = userSlice.actions;
 
 
 export const selectUser = (state) => state.user.value;

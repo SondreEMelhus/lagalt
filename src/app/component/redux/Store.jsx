@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import filterReducer from './slices/FilteredSlice';
 import userReducer from './slices/UserSlice';
+import userAdminReducer from './slices/UserAdminSlice';
 import projectsReducer from './slices/ProjectsSlice';
 import externalUsersReducer from './slices/ExternalUsers';
 import myProjectsReducer from './slices/MyProjectsSlice';
@@ -41,6 +42,7 @@ export const store = configureStore({
   reducer: {
     filter: filterReducer,
     user: userReducer,
+    userAdmin: userAdminReducer,
     projects: projectsReducer,
     externalUsers: externalUsersReducer,
     myProjects: myProjectsReducer,

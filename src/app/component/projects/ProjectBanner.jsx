@@ -1,23 +1,22 @@
 //Libraries
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 //Components
 import BubbleList from "../bubbleList/BubbleList";
 import { set } from '../redux/slices/ProjectSlice';
+import { selectUserAdmin, updateAdminStatus } from "../redux/slices/UserAdminSlice";
 
 //Styling
-//import music from '../../../assets/musicalNote.png';
-//import film from '../../../assets/videoIcon.png';
-//import game from '../../../assets/playIcon.png';
-//import coding from '../../../assets/codingIcon.png';
-import music from '../../../assets/note-svgrepo-com.svg';
-import film from '../../../assets/movie-camera-svgrepo-com.svg';
-import game from '../../../assets/video-game-control-svgrepo-com.svg';
-import coding from '../../../assets/coding-svgrepo-com.svg';
+import music from '../../../assets/musicalNote.png';
+import film from '../../../assets/videoIcon.png';
+import game from '../../../assets/playIcon.png';
+import coding from '../../../assets/codingIcon.png';
 
 import '../../../css/projectBanner.css'
+import { getAllContributers } from "../../../api/ProjectAPI/projectsAPI";
+import { selectUser } from "../redux/slices/UserSlice";
 
 
 
@@ -29,9 +28,24 @@ export default function ProjectBanner ({ project }) {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const user = useSelector(selectUser);
+    const adminUser = useState(useSelector(selectUserAdmin));
 
     const navigateToProject = async () => {
         await dispatch( set(project) );
+        const contributers = await getAllContributers(project.id);
+        const loggedUser = [];
+        contributers.forEach((u) => u.username === user.username ? loggedUser.push(u): null);
+
+        if(loggedUser.length != 0){
+            if(loggedUser[0].role === "Owner" || loggedUser[0].role === "Admin"){
+                dispatch(updateAdminStatus(loggedUser));
+
+            }
+        }else{
+            dispatch(updateAdminStatus(null));
+        }
+
         navigate('/project');
 
     }

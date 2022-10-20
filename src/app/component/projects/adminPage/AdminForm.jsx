@@ -10,7 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { patchProject, updateProject } from "../../../../api/ProjectAPI/projectsAPI";
 import { selectProject, updateTitle, updateDescription, updateStatus } from "../../redux/slices/ProjectSlice";
 import withAuth from "../../../../hoc/withAuth";
-
+import withAdminAuth from "../../../../hoc/withAdminAuth";
+import { selectUserAdmin } from "../../redux/slices/UserAdminSlice";
+import { useNavigate } from "react-router-dom";
 
 
 function AdminForm( {setTitle} ){    
@@ -20,8 +22,14 @@ function AdminForm( {setTitle} ){
     const[descriptionInput, setDescriptionInput] = useState(project.description);
     const[status, setStatus] = useState(project.status);
     const dispatch = useDispatch();
+    const nav = useNavigate();
+    const userIsAdmin = useSelector(selectUserAdmin);
+
     
     useEffect(() => {
+        if(userIsAdmin === null){
+           nav("/") 
+        }
         if(status === 'Ferdig'){
             document.getElementById("finished").className = "statusButtonBlue"
         } else if(status === 'Planlegges'){
@@ -29,7 +37,7 @@ function AdminForm( {setTitle} ){
         } else if(status === 'Startet'){
             document.getElementById("started").className = "statusButtonBlue"
         }
-        console.log(project);
+
     }, [])
     const onChangeTitle = () =>{
         const t = document.getElementById("title").value;

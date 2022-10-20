@@ -28,7 +28,7 @@ export default function Applications () {
     
     return (
         <div className="applications-box">
-            <h1>Søkere</h1>
+            <h1 className="applicationTitle">Søkere</h1>
             {applications.length === 0 && <h3 className="applications-no-apps">Ingen ubehandlede søknader</h3>}
             {applications !== undefined && applications.map((application, index) => {
                 return (

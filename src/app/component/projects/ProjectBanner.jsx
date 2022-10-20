@@ -9,10 +9,10 @@ import { set } from '../redux/slices/ProjectSlice';
 import { selectUserAdmin, updateAdminStatus } from "../redux/slices/UserAdminSlice";
 
 //Styling
-import music from '../../../assets/musicalNote.png';
-import film from '../../../assets/videoIcon.png';
-import game from '../../../assets/playIcon.png';
-import coding from '../../../assets/codingIcon.png';
+import music from '../../../assets/note-svgrepo-com.svg';
+import film from '../../../assets/movie-camera-svgrepo-com.svg';
+import game from '../../../assets/video-game-control-svgrepo-com.svg';
+import coding from '../../../assets/coding-svgrepo-com.svg';
 
 import '../../../css/projectBanner.css'
 import { getAllContributers } from "../../../api/ProjectAPI/projectsAPI";

@@ -20,10 +20,11 @@ export const registerUser = async () => {
             throw new Error ('Could not create user with username ' + username);
         }
         const data = await response.json();
-        return [null, data];
+
+        return data;
     }
     catch(error){
-        return[error.message, null];
+        return error.message;
     } 
 }
 
@@ -33,18 +34,15 @@ export const getUser = async () => {
     try {
         const username = keycloak.tokenParsed.preferred_username;
         const response = await fetch(`${apiUrl}/accounts/search?username=${username}`)
-        if (!response.ok) {
-            const user = await registerUser();
-            const newUser = user[1];
-            getUser();
-        } else {
+       /* if (!response.ok) {
+            throw new Error ('Could not get user with username ' + username);
+            
+        } else { */
             const data = await response.json();
-            return [null, data]
-        }
-
-
-    } catch (error) {
-		return [error.message, null];
+            return data ? data : await registerUser();
+    }
+    catch (error) {
+		return null
 	}
 }
 

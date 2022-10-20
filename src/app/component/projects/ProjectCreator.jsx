@@ -6,9 +6,10 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import ProjectCreateKeyword from "./ProjectCreateKeyword";
 import ProjectCreateSkill from "./ProjectCreateSkill";
+import withAuth from "../../../hoc/withAuth";
 
 
-export default function CreateProject () {
+function CreateProject () {
     const [show, setShow] = useState(false);
     const [radioValue, setRadioValue] = useState("");
     const handleShow = () => setShow(true);
@@ -116,3 +117,4 @@ export default function CreateProject () {
         </div>
         )
 }
+export default withAuth(CreateProject);

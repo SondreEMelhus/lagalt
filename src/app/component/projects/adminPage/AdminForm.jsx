@@ -9,10 +9,11 @@ import Visibility from '../../../../assets/visibility.png'
 import { useDispatch, useSelector } from "react-redux";
 import { patchProject, updateProject } from "../../../../api/ProjectAPI/projectsAPI";
 import { selectProject, updateTitle, updateDescription, updateStatus } from "../../redux/slices/ProjectSlice";
+import withAuth from "../../../../hoc/withAuth";
 
 
 
-export default function AdminForm( {setTitle} ){    
+function AdminForm( {setTitle} ){    
 
     const project = useSelector(selectProject);
     const[titleInput, setTitleInput] = useState(project.title);
@@ -104,3 +105,4 @@ export default function AdminForm( {setTitle} ){
     )
 
 }
+export default withAuth(AdminForm);

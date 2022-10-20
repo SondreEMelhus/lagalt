@@ -20,7 +20,7 @@ export const registerUser = async () => {
         }
         const data = await response.json();
 
-        return data;
+        return [null, data];
     }
     catch(error){
         return[error.message, null];
@@ -33,15 +33,15 @@ export const getUser = async () => {
     try {
         const username = keycloak.tokenParsed.preferred_username;
         const response = await fetch(`${apiUrl}/accounts/search?username=${username}`)
-       /* if (!response.ok) {
-            throw new Error ('Could not get user with username ' + username);
-            
-        } else { */
+        console.log(response);
+       if (!response.ok) {
+            return await registerUser();
+        } else {
             const data = await response.json();
-            return data ? data : await registerUser();
-    }
-    catch (error) {
-		return null
+            return [null, data]
+        }
+    } catch (error) {
+		return [error, null];
 	}
 }
 

@@ -10,10 +10,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectProject } from "../../redux/slices/ProjectSlice";
 import BubbleList from "../../bubbleList/BubbleList";
 
-import music from '../../../../assets/musicalNote.png';
-import film from '../../../../assets/videoIcon.png';
-import game from '../../../../assets/playIcon.png';
-import coding from '../../../../assets/codingIcon.png';
+import music from '../../../../assets/note-svgrepo-com.svg';
+import film from '../../../../assets/movie-camera-svgrepo-com.svg';
+import game from '../../../../assets/video-game-control-svgrepo-com.svg';
+import coding from '../../../../assets/coding-svgrepo-com.svg';
 import Chat from "./Chat";
 import MessageBoard from "./projectBoards/message/MessageBoard";
 import StatusBoard from './projectBoards/status/StatusBoard';
@@ -113,7 +113,6 @@ export default function ProjectPage () {
                 <button className="adminButton" onClick={navigateToAdmin}>Administrer</button>
             </div>
             <div className="projectInfoField">
-                <h3 className="projecSubTitle">Sub-header</h3>
                 <p className="descriptionProject">{project.description}</p>
                 <p>Nøkkelord:</p>
                 <BubbleList list={ project.keywords } />

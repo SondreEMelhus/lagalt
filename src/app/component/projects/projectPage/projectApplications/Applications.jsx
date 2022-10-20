@@ -28,12 +28,12 @@ export default function Applications () {
     
     return (
         <div className="applications-box">
-            <h1>Søkere</h1>
-            {applications.length === 0 && <h3>Ingen ubehandlede søknader</h3>}
+            <h1 className="applicationTitle">Søkere</h1>
+            {applications.length === 0 && <h3 class="noApplicationsMessage">Ingen ubehandlede søknader</h3>}
             {applications !== undefined && applications.map((application, index) => {
                 return (
                     <div className="application" key={index + '-' + application.id}>
-                        <p onClick={(event) => {
+                        <p className="applicationName" onClick={(event) => {
                             dispatch( updateApplication(application));
                             navigate('/application');
                         }}

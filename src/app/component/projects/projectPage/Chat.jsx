@@ -58,7 +58,7 @@ export default function Chat () {
 
     return (
         <div className='chat-box'>
-            <h1>Chat</h1>
+            <h1 className="chat-title">Chat</h1>
             {/*<button onClick={handleChatRefresh}>Refresh</button>*/}
             <div className='message-box'>
                 {chat.length === 0 && <h3 className="no-message">Ingen meldinger er sendt enda</h3>}

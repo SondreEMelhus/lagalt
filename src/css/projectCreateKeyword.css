@@ -13,6 +13,17 @@
     overflow: auto;
     text-align: center;
 }
+.allSkillsBox{
+  width: 220px;
+  height: 200px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  border: 1px solid black;
+  border-radius: 15px;
+  text-indent: 5px;
+  overflow: auto;
+  text-align: center;
+}
 .keywordElementCreateKeyword{
     border: 1px solid black;
     border-radius: 8px;

@@ -11,17 +11,18 @@ import Navbar from "../navbar/Navbar";
 import ProfileForm from "./ProfileForm";
 import { updateAccountInDB } from "../../../api/profile";
 import { getUser } from "../../../api/fetchUserAPI";
+import withAuth from "../../../hoc/withAuth";
 
 
 
-export default function Profile () {
+function Profile () {
     
     const user = useSelector(selectUser);
     const dispatch = useDispatch();
 
     const handleUpdateAccountClick = async (input) => {
         // 1) lagre bruker i db (og få tilbake endret bruker?)
-        await updateAccountInDB(user.id, user.username, input.portfolio, input.description)
+       // await updateAccountInDB(user.id, user.username, input.portfolio, input.description)
 
         // 2) lagre bruker fra db i redux
         //dispatch( updateUser(account))
@@ -47,3 +48,5 @@ export default function Profile () {
         </>
     )
 }
+
+export default withAuth(Profile);

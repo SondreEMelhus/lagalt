@@ -19,8 +19,9 @@ import '../../../css/profile.css'
 import { selectUserProjects } from '../redux/slices/UserProjects'
 import { getUserProjects } from "../../../api/fetchUserAPI";
 import { updateUserProjects } from "../redux/slices/UserProjects";
+import withAuth from "../../../hoc/withAuth";
 
-export default function MyProjects () {
+function MyProjects () {
 
     const user = useSelector(selectUser);
     const userProjects = useSelector(selectUserProjects);
@@ -61,3 +62,4 @@ export default function MyProjects () {
         </>
     )
 }
+export default withAuth(MyProjects);

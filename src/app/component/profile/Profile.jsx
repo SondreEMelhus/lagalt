@@ -11,10 +11,11 @@ import Navbar from "../navbar/Navbar";
 import ProfileForm from "./ProfileForm";
 import { updateAccountInDB } from "../../../api/profile";
 import { getUser } from "../../../api/fetchUserAPI";
+import withAuth from "../../../hoc/withAuth";
 
 
 
-export default function Profile () {
+function Profile () {
     
     const user = useSelector(selectUser);
     const dispatch = useDispatch();
@@ -47,3 +48,5 @@ export default function Profile () {
         </>
     )
 }
+
+export default withAuth(Profile);

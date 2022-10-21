@@ -59,14 +59,18 @@ export default function CreateProjectMessage () {
         <>
             <div className="application-form">
                 <h1 className="application-title">Opprett og post en ny melding til {project.title} prosjektet:</h1>
-                <h3>Skriv inn tittelen på meldingen:</h3>
-                <input types='text' onChange={(event) => setTitle(sanitize(event.target.value))} id='motivation-input' className='application-motivation-text' />
                 <div className="application-motivation">
+                    <p>Skriv tittel:</p>
+                    <form>
+                        <textarea onChange={(event) => setTitle(sanitize(event.target.value))} id='motivation-input' className='title-input'></textarea>
+                    </form>
                     <p>Skriv meldingen din:</p>
-                    <input types='text' onChange={(event) => setMessage(sanitize(event.target.value))} id='motivation-input' className='application-motivation-text' />
+                    <form>
+                        <textarea onChange={(event) => setMessage(sanitize(event.target.value))} id='motivation-input' className='application-motivation-text'></textarea>
+                    </form>
                 </div>
-                <button onClick={(event) => navigate('/project')}>Avbryt</button>
-                <button onClick={handleClick}>Send</button>
+                <button className="send-btn" onClick={handleClick}>Send</button>
+                <button className="cancel-btn" onClick={(event) => navigate('/project')}>Avbryt</button>
             </div>
         </>
     )

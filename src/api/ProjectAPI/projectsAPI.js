@@ -13,7 +13,6 @@ export const getProjects = async () => {
         }
     }
     catch (error) {
-        console.log(error);
 		return [error, null]
 	}
 }
@@ -171,7 +170,7 @@ export const createProject = async (payload, user) => {
 
     for(let sk of payload.skills){
         for(let y of mm) {
-            if(sk === y.title){
+            if(sk.title === y.title){
                 aSkills.push(y.id)
             }
         }
@@ -181,8 +180,19 @@ export const createProject = async (payload, user) => {
     aKeyword.forEach((s) => keywordsToAdd.push(s));
     aSkills.forEach((s) => skillsToAdd.push({id: s}));
 
+
+    let indus = {};
+    if(payload.industry === "Musikk"){
+        indus = {id: 1};
+    }else if(payload.industry === "Film"){
+        indus = {id: 2};
+    }else if (payload.industry === "Webutvikling"){
+        indus = {id: 4};
+    }else if (payload.industry === "Spillutvikling"){
+        indus = {id: 3};
+    }
+
     try {
-        let ind = {id: payload.industry}
         const response = await fetch(`${apiUrl}/projects`, {
             method: 'POST',
             headers: createHeaders(),
@@ -198,13 +208,11 @@ export const createProject = async (payload, user) => {
                 statusUpdateBoards: [],
                 projectInteractionHistory: [],
                 skills: skillsToAdd,
-                industry: ind,
+                industry: indus,
             })
         })
-
-        for(let k of keywordsToAdd){
-
-            addKeywordToProject(payload.title, k)
+        for(let k of payload.keywords){
+           await addKeywordToProject(payload.title, k.id)
         }
             const projectObject = await getProjectByName(payload.title);
 
@@ -245,7 +253,6 @@ export const addOwnerContributor = async (user, project) => {
 }
 
 export const addKeywordToProject = async (title, keywordId) => {
-
     const idObj = await getProjectByName(title);
     const id = idObj[0].id;
 
@@ -330,7 +337,6 @@ export const approveApplication = async ( projectId ) => {
         if (!response.ok) {
             throw new Error ('Could not approve application')
         }
-        console.log(response);
 
         const result = await response.json();
         return [null, result]

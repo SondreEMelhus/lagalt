@@ -1,5 +1,5 @@
 //Libraries
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 //Components
@@ -8,34 +8,75 @@ import { addIndustryKeyword, removeIndustryKeyword, selectProjectIndustry } from
 
 //Styling
 import '../../../../css/projectCreateKeyword.css'
+import { getKeyWordsOfIndustry } from "../../../../api/attributes";
 
 
-export default function ProjectCreateKeywordRework(){
+export default function ProjectCreateKeywordRework({industry, submitted, setKeywords}){
 
-    const industry = useSelector(selectProjectIndustry)
-    const keywords = useSelector(selectProjectKeywords);
-    const dispatch = useDispatch();
+    const [industryKeywords, setIndustryKeywords] = useState([]);
+    const [selectedKeywords, setSelectedKeywords] = useState([]);
+
+    useEffect(() => {
+        getKeywords();
+    }, [industry])
+
+    useEffect(() => {
+        setKeywords(selectedKeywords);
+    }, [submitted])
+
+    async function getKeywords(){
+        console.log(industry);
+        const newKeywords = await getKeyWordsOfIndustry(industry);
+        const allKeywords = [];
+        console.log("KKKKKKKKKKKKKKKKKKKKKKKKK")
+        console.log(newKeywords);
+        console.log("KKKKKKKKKKKKKKKKKKKKKKKKK")
+
+        newKeywords.forEach((keyword) => allKeywords.push(keyword));
+        setIndustryKeywords(allKeywords);
+    }
+
+    function selectKeyword(keyword){
+        const newIndustryKeywords = [];
+        const newSelectedKeywords = [];
+
+        selectedKeywords.forEach((s => newSelectedKeywords.push(s)));
+        newSelectedKeywords.push(keyword);
+        setSelectedKeywords(newSelectedKeywords);
+
+        industryKeywords.forEach((s) => s.title !== keyword.title ? newIndustryKeywords.push(s): null);
+        setIndustryKeywords(newIndustryKeywords);
+    }
+
+    function removeSelectedKeyword(keyword){
+        const newIndustryKeywords = [];
+        const newSelectedKeywords = [];
+
+        selectedKeywords.forEach((s) => s.title !== keyword.title ? newSelectedKeywords.push(s): null);
+        setSelectedKeywords(newSelectedKeywords);
+
+        industryKeywords.forEach((s) => newIndustryKeywords.push(s));
+        newIndustryKeywords.push(keyword);
+        setIndustryKeywords(newIndustryKeywords);
+    }
+
+    function submitted(){
+        setKeywords(selectedKeywords);
+    }
 
     return(
         <div className="projectCreateKeywordBoxes">
             <div className="allKeywordBox">
-                {industry.keywords !== undefined && industry.keywords.map((keyword, index) => {
+                {industryKeywords !== undefined && industryKeywords.map((keyword) => {
                     return(
-                        <p className="keywordElementCreateKeyword" onClick={() => {
-                            dispatch( addKeyword(keyword))
-                            dispatch( removeIndustryKeyword(keyword))
-                        }
-                        } key={'Add' + '-' + index}>{keyword}</p>
+                        <p className="keywordElementCreateKeyword" onClick={() => selectKeyword(keyword)}>{keyword.title}</p>
                     )
                 })}
             </div>
             <div className="allKeywordBox">
-            {keywords !== undefined && keywords.map((keyword, index) => {
+            {selectedKeywords !== undefined && selectedKeywords.map((keyword) => {
                     return(
-                        <p className="keywordElementCreateKeyword" onClick={() => {
-                            dispatch( removeKeyword(keyword))
-                            dispatch( addIndustryKeyword(keyword))
-                        }} key={'Remove' + '-' + index}>{keyword}</p>
+                        <p className="keywordElementCreateKeyword" onClick={() => removeSelectedKeyword(keyword)}>{keyword.title}</p>
                     )
                 })}
             </div>

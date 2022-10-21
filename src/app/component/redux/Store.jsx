@@ -35,6 +35,7 @@ import filteredProjectsReducer from './slices/filters/FilteredProjects';
 
 //Filter singles
 import industryReducer from './slices/filters/IndustrySlice';
+import createIndustryReducer from './slices/filters/lists/CreateIndustrySlice';
 import keywordReducer from './slices/filters/KeywordSlice';
 import skillReducer from './slices/filters/SkillSlice'
 
@@ -75,6 +76,7 @@ export const store = configureStore({
     
     //Filter singles
     industry: industryReducer,
+    createIndustry: createIndustryReducer,
     keyword: keywordReducer,
     skill: skillReducer
   },

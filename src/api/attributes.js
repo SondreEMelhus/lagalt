@@ -30,6 +30,7 @@ export const getSkillsOfIndustry = async (industry) => {
             throw new Error("No skills found");
         }
         const data = await response.json();
+        console.log(data);
         return data
 
     }catch(error){

@@ -14,6 +14,7 @@ import { getIndustries } from "../../../api/industryAPI";
 import { selectIndustries, updateIndustries } from "../redux/slices/filters/lists/IndustriesSlice";
 import { updateIndustry } from "../redux/slices/filters/IndustrySlice";
 import { updateInitialIndustry } from "../redux/slices/filters/InitialIndustry";
+import { updateCreateIndustry } from "../redux/slices/filters/lists/CreateIndustrySlice";
 
 //Styling
 import '../../../css/home.css'
@@ -45,6 +46,7 @@ export default function HomePage () {
             alert('Feil: Klarte ikke å hente prosjekter. Kontakt en administrator for hjelp')
         } else {
             dispatch ( updateProjects(data[1]))
+            dispatch ( updateCreateIndustry(data[1]))
             dispatch ( updateFilteredProjects ( data[1] ))
         }
     }

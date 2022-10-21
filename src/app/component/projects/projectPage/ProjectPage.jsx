@@ -10,7 +10,7 @@ import BubbleList from "../../bubbleList/BubbleList";
 import { checkUserRole } from "../../util/CheckUserRole";
 import { generateTimestamp } from "../../util/Timestamp";
 import StatusBoard from './projectBoards/status/StatusBoard';
-import Applications from "./projectApplications/Applications";
+import Applications from "./projectApplications/ApplicationsRenderer";
 import MessageBoard from "./projectBoards/message/MessageBoard";
 import { checkUserStatus } from "../../util/CheckContributerStatus";
 
@@ -186,8 +186,6 @@ export default function ProjectPage () {
                         <Chat />
                     </div>
                 }
-                <Applications />
-                {projectRole === 'admin' || projectRole === 'owner' && <Applications />}
                 <div className="footer"></div>
             </div>
         </div>

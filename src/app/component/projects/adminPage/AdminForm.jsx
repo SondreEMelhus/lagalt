@@ -6,10 +6,10 @@ import { useNavigate } from "react-router-dom";
 //Components
 import ProjectSkills from "./ProjectSkills"
 import ProjectKeyWords from "./ProjectKeywords";
-import ProjectApplicants from "../ProjectApplicants";
+import withAuth from "../../../../hoc/withAuth";
 import IndusrtyChanger from "../../dropdown/industyChanger";
 import { updateProject } from "../../../../api/ProjectAPI/projectsAPI";
-import withAuth from "../../../../hoc/withAuth";
+import Applications from "../projectPage/projectApplications/ApplicationsRenderer";
 
 //Redux slices
 import { selectUserAdmin } from "../../redux/slices/UserAdminSlice";
@@ -18,7 +18,9 @@ import { selectProject, updateTitle, updateDescription, updateStatus } from "../
 //Styling
 import Visibility from '../../../../assets/visibility.png'
 
-
+/**
+ * Component that renders the admin page, and allows users to make changes to their projects.
+ */
 function AdminForm(){    
 
     //Hooks
@@ -34,29 +36,45 @@ function AdminForm(){
 
     
     useEffect(() => {
+        //Check if user has Admin or Owner role
         if (userIsAdmin === null) { navigate('/') };
+
+        //Check what status the project has
         if (status === 'Ferdig') { document.getElementById("finished").className = "statusButtonBlue" };
         if (status === 'Planlegges') { document.getElementById("planing").className = "statusButtonBlue" }
         if (status === 'Startet') { document.getElementById("started").className = "statusButtonBlue" }
     }, [])
 
     //Event handlers
+
+    /**
+     * Method that handles changes in the project title
+     */
     const onChangeTitle = () =>{
         const title = document.getElementById("title").value;
         setTitleInput(title);
         dispatch( updateTitle ( title ) );
     }
 
+    /**
+     * Method that handles changes in the project description
+     */
     const onChangeDescription = () => {
         setDescriptionInput(document.getElementById("description").value);
         dispatch(updateDescription(document.getElementById("description").value));
     }
 
     //TODO: Legg til sjekk om oppdatering ble fullført
+    /**
+     * Method used to update the entire project
+     */
     const sendUpdatedForm = async () => {
         await updateProject(project);
     }
 
+    /**
+     * Method used to handle clicking of the status buttons
+     */
     const statusClicked = (event) =>{
         document.getElementById("planing").className = "statusButtonWhite"
         document.getElementById("started").className = "statusButtonWhite"
@@ -64,12 +82,16 @@ function AdminForm(){
         event.currentTarget.className = "statusButtonBlue"
     }
     
+    /**
+     * Method used to handle changes in the project status
+     */
     const changeStatus = (event) =>{
         setStatus(event.target.value)
         statusClicked(event)
         dispatch( updateStatus ( status ) );
     }
 
+    //Render function
     return (
         <div>
             <div className="pageAdmin">
@@ -108,7 +130,7 @@ function AdminForm(){
                     <ProjectKeyWords/>
                 </div>
                 <div className="cards">
-                    <ProjectApplicants/>
+                    <Applications />
                 </div>
             </div>
         </div>

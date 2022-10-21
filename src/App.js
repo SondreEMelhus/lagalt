@@ -17,18 +17,15 @@ import Status from './app/component/projects/projectPage/projectBoards/status/St
 import CreateMessagePost from './app/component/projects/projectPage/projectBoards/message/CreateMessagePost'
 import CreateStatusPost from './app/component/projects/projectPage/projectBoards/status/CreateStatusPost'
 
-
-
 //Components
-import ProjectAdmin from './app/component/projects/adminPage/ProjectAdmin';
-import ProjectApplication from './app/component/projects/ProjectApplication';
+import ApplicationCreator from './app/component/projects/projectPage/projectApplications/ApplicationCreator';
 
-import ProjectPage from './app/component/projects/projectPage/ProjectPage';
 
 
 //Styling
 import './App.css';
-import Application from './app/component/projects/projectPage/projectApplications/Application';
+
+import ApplicationHandler from './app/component/projects/projectPage/projectApplications/ApplicationHandler';
 import MyProjects from './app/component/myProjects/myProjects';
 import Navbar from './app/component/navbar/Navbar';
 
@@ -47,10 +44,10 @@ function App() {
           {/* Kanskje endre denne til projects eller noe realtert til main page */}
           <Route path="/create" element={<ProjectCreatorView/>} />
           <Route path="/admin" element={<ProjectAdminView />} />
-          <Route path="/apply" element={<ProjectApplication/>} />
+          <Route path="/apply" element={<ApplicationCreator/>} />
           <Route path="/message" element={<Message />} />
           <Route path="/status" element={<Status />} />
-          <Route path='/application' element={<Application />} />
+          <Route path='/application' element={<ApplicationHandler />} />
           <Route path='/postMessage' element={<CreateMessagePost />} />
           <Route path='/postStatus' element={<CreateStatusPost />} />
           {/* TODO: Kun for utvikling, fjern før innlevering!!!!*/}

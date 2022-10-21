@@ -55,6 +55,7 @@ export default function ProjectBanner ({ project }) {
     }
 
 
+    //Render function
     return (
         <button className="project-clickable" onClick={navigateToProject}>
             <div className="project-banner">

@@ -1,22 +1,25 @@
 //Libraries
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 //Components
 import keycloak from "../../../../keycloak/keycloak";
+import { trimTimestamp } from "../../../../util/TrimTimestamp";
 import { checkUserStatus } from "../../../../util/CheckContributerStatus";
+
+//API
+import { getMessageBoard } from "../../../../../../api/ProjectAPI/messageBoardAPI";
 
 //Redux slices
 import { selectUser } from "../../../../redux/slices/UserSlice";
 import { selectProject } from "../../../../redux/slices/ProjectSlice";
 import { updateMessage } from "../../../../redux/slices/ContentBoards/MessageBoard/MessageSlice";
-import { selectMessageBoard } from "../../../../redux/slices/ContentBoards/MessageBoard/MessageBoardSlice";
+import { resetMessageBoard, selectMessageBoard, updateMessageBoard } from "../../../../redux/slices/ContentBoards/MessageBoard/MessageBoardSlice";
 
 //Styling
 import '../../../../../../css/contentBoard.css'
 import create from '../../../../../../assets/create.png'
-import { trimTimestamp } from "../../../../util/TrimTimestamp";
 
 
 export default function ContentBoard () {
@@ -27,6 +30,29 @@ export default function ContentBoard () {
     const user = useSelector(selectUser);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    //States
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        const id = setInterval(() => setCount((oldCount) => oldCount + 1), 1000);
+
+        return () => {
+          clearInterval(id);
+        };
+    }, [])
+
+    useEffect(() => {
+        if (count % 15 === 0) {
+            fetchMessageBoard()
+        }
+    }, [count])
+
+    const fetchMessageBoard = async () => {
+        const messageBoard = await getMessageBoard(project.id);
+        messageBoard.sort((a,b) => (a.id < b.id) ? 1 : ((b.id < a.id) ? -1 : 0));
+        messageBoard ? dispatch ( updateMessageBoard (messageBoard) ) : dispatch ( resetMessageBoard () );
+    }
 
     //Render function
     return (

@@ -171,10 +171,6 @@ export default function ProjectPage () {
         }
     }
 
-    const handleRefresh = () => {
-        fetchChat();
-    }
-
     //Render function
     return(
         <div>
@@ -201,7 +197,6 @@ export default function ProjectPage () {
                 {keycloak.authenticated && 
                     <div>
                         <MessageBoard />
-                        <button onClick={handleRefresh}>Refresh</button>
                         <Chat />
                     </div>
                 }

@@ -8,22 +8,25 @@ import { generateTimestamp } from '../../util/Timestamp';
 import { trimTimestamp } from "../../util/TrimTimestamp";
 import { checkUserStatus } from "../../util/CheckContributerStatus";
 
+
 //API
-import { addChatMessage } from "../../../../api/ProjectAPI/chatAPI";
+import { addChatMessage, getChat } from "../../../../api/ProjectAPI/chatAPI";
 
 //Redux slices
 import { selectUser } from "../../redux/slices/UserSlice";
 import { selectProject } from "../../redux/slices/ProjectSlice";
-import { addMessage, selectChat } from "../../redux/slices/Chat";
+import { addMessage, selectChat, updateChat } from "../../redux/slices/Chat";
 
 //Styling
 import '../../../../css/chat.css'
+import { useEffect } from "react";
 
 
 export default function Chat () {
 
     //States
     const [inputText, setInputText] = useState('');
+    const [count, setCount] = useState(0);
 
     //Hooks
     const project = useSelector(selectProject);
@@ -31,11 +34,39 @@ export default function Chat () {
     const chat = useSelector(selectChat);
     const dispatch = useDispatch();
 
-    //Event handlers
+    useEffect(() => {
+        const id = setInterval(() => setCount((oldCount) => oldCount + 1), 1000);
 
+        return () => {
+          clearInterval(id);
+        };
+    }, [])
+
+    useEffect(() => {
+        if (count % 5 === 0) {
+            fetchChat()
+        }
+    }, [count])
+
+
+    //Event handlers
     const handleInputChange = (event) => setInputText( sanitize(event.target.value) );
 
-    const updateChat = async () => {
+    const fetchChat = async () => {
+        const chat = await getChat(project.id);
+        if (chat[0]) {
+            alert('Feil: Klarte ikke å hente chat. Kontakt administrator for hjelp.')
+        } else {
+            if (chat[1].length !== 0) {
+                chat[1].sort((a,b) => (a.id < b.id) ? 1 : ((b.id < a.id) ? -1 : 0));
+                dispatch ( updateChat ( chat[1] ))
+            } else {
+                dispatch ( updateChat ( [] ))
+            }
+        }
+    }
+
+    const updateChatLog = async () => {
         if (inputText.length !== 0) {
             const payload = {
                 text: inputText,
@@ -69,7 +100,7 @@ export default function Chat () {
             {checkUserStatus(project, user) && 
                 <div className='input-box'>
                     <input className='input-field' onChange={ handleInputChange } value={ inputText }/>
-                    <button onClick= {updateChat} className="input-btn">Send</button>
+                    <button onClick= {updateChatLog} className="input-btn">Send</button>
                 </div>
             }
         </div>

@@ -33,7 +33,6 @@ export default function Navbar() {
     <div className="navBar">
         <img src={Logo} alt="Logo" className="logo" onClick={handleNavigate}/>
           <FilterBox />
-          <Login />
           {/* TODO: Finn ut hvor vi kan hente ut en brukers prosjekter <NavigateMyProjects/>*/}
           {/* TODO: Finn ut hvordan man henter en brukers prosjekte r<NavigateMyProfile/> */}
           {keycloak.authenticated && 
@@ -49,6 +48,7 @@ export default function Navbar() {
           </Dropdown.Item>
         </DropdownButton>
           }
+          <Login />
     </div>
  
   );

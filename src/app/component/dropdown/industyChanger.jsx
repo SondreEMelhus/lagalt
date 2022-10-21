@@ -7,6 +7,8 @@ import videoIcon from '../../../assets/videoIcon.png'
 import codingIcon from '../../../assets/codingIcon.png'
 import playIcon from '../../../assets/playIcon.png'
 import { updateIndustry } from "../redux/slices/ProjectSlice";
+import { updateSkill } from "../redux/slices/ProjectSlice";
+import { updateKeywords } from "../redux/slices/ProjectSlice";
 
 
 //Styling
@@ -28,6 +30,9 @@ export default function IndusrtyChanger (industry) {
         document.getElementById("selectedIcon").src = icon;
         const indu = getIndustryForIcon(icon);
         dispatch(updateIndustry(indu));
+        dispatch(updateSkill([]));
+        dispatch(updateKeywords([]));
+
     }
 
     const openDiv = () =>{

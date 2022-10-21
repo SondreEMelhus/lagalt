@@ -88,7 +88,7 @@ function AdminForm(){
     const changeStatus = (event) =>{
         setStatus(event.target.value)
         statusClicked(event)
-        dispatch( updateStatus ( status ) );
+        dispatch( updateStatus ( event.target.value ) );
     }
 
     //Render function

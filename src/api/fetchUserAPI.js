@@ -104,6 +104,23 @@ export const addSkillToUser = async (userId, skillId) => {
     }
 }
 
+export const removeSkillFromUser = async (userId, skillId) => {
+    console.log("USER ID: " + userId)
+    console.log(skillId)
+    try{
+        const response = await fetch(`${apiUrl}/accounts/${userId}/removeSkill`,{
+            method: 'PUT',
+            headers: createHeaders(),
+            body: skillId
+        })
+        if(!response.ok){
+            throw new Error("Skill could not be removed")
+        }
+    }catch(error){
+        return error;
+    }
+}
+
 export const getUserProjects = async (userId) => {
     try {
         const response = await fetch(`${apiUrl}/accounts/${userId}/projects`);

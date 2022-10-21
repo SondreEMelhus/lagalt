@@ -6,7 +6,9 @@ import BubbleList from "../bubbleList/BubbleList";
 import { useEffect, useState } from "react";
 import { sanitize } from "../util/InputSantizer";
 import ProfileAddSkill from "./ProfileAddSkill";
+
 import { Navigate, useNavigate } from "react-router-dom";
+import ProfileRemovekill from "./ProfileRemoveSkill";
 
 const ProfileForm = ({handleUpdateAccountClick}) => {
 
@@ -17,11 +19,6 @@ const ProfileForm = ({handleUpdateAccountClick}) => {
     const [privateAcc, setPrivate] = useState("Offentlig");
     const [userSkills, setUserSkills] = useState(user.skills)
     const navigate = useNavigate();
-
-
-   /* useEffect(() => {
-        setUserSkills(user.skills);
-    }, [user.skills]) */
 
     const reload = (input) => {
         setUserSkills(input)
@@ -55,6 +52,7 @@ const ProfileForm = ({handleUpdateAccountClick}) => {
             setPrivate("Offentlig")
         }
     }
+
 	return (
         <form onSubmit={ handleSubmit(submit) }>
             <h2 className="yourProfile"> { user.username } </h2>
@@ -64,6 +62,8 @@ const ProfileForm = ({handleUpdateAccountClick}) => {
                     <BubbleList list={userSkills} />
                 </div>
                     <ProfileAddSkill reload={reload}/>
+                    <ProfileRemovekill reload={reload}/>
+                    
             </div>
             <div className="portfolioFieldProfile">
                 <p className="portfolioHeadProfile">Portfolio</p>

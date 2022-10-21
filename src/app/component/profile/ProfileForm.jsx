@@ -54,30 +54,29 @@ const ProfileForm = ({handleUpdateAccountClick}) => {
     }
 
 	return (
-        <form onSubmit={ handleSubmit(submit) }>
+        <form className="profileForm" onSubmit={ handleSubmit(submit) }>
             <h2 className="yourProfile"> { user.username } </h2>
             <div>
                 <p className="skillsHeadProfile">Mine ferdigheter</p>
                 <div className="skillsFieldProfile">
                     <BubbleList list={userSkills} />
                 </div>
-                    <ProfileAddSkill reload={reload}/>
-                    <ProfileRemovekill reload={reload}/>
-                    
+                <ProfileAddSkill reload={reload}/>
+                <ProfileRemovekill reload={reload}/>      
             </div>
             <div className="portfolioFieldProfile">
                 <p className="portfolioHeadProfile">Portfolio</p>
-                <textarea name="" id="portfolio" cols="80" rows="10" className="textAreaField" value={portfolio} onChange={changePortfolio} />
+                <textarea name="" id="portfolio" cols="80" rows="10" className="application-motivation-text" value={portfolio} onChange={changePortfolio} />
             </div>
             <div className="portfolioFieldProfile">
                 <p className="portfolioHeadProfile">Min beskrivelse</p>
-                <textarea name="" id="descriptionUser" cols="80" rows="10" className="textAreaField" value={description} onChange={changeDescription} />
+                <textarea name="" id="descriptionUser" cols="80" rows="10" className="application-motivation-text" value={description} onChange={changeDescription} />
             </div>
             <div className="statusDiv">
                 <p className="profileStatusText">Profil status:</p>
                 <button className="statusButtonProfile" onClick={() => changePrivate()}>{privateAcc}</button>
             </div>
-            <button className="btn btn-primary" type="submit" onClick={updateProfile}>Lagre</button>
+            <button className="btn btn-primary save-btn" type="submit" onClick={updateProfile}>Lagre</button>
         </form>
     )
 };

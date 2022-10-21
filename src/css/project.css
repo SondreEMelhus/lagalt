@@ -67,3 +67,19 @@
     padding-bottom: 20px;
     margin-bottom: 20px;
 }
+
+.projectList {
+    margin-left: -2%;
+}
+
+.content-title {
+    padding-top: 1%;
+}
+
+.chat-title {
+    padding-top: 1%;
+}
+
+.applicationTitle {
+    padding-top: 1%;
+}

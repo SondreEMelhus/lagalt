@@ -176,9 +176,13 @@ export default function ProjectPage () {
             <div className="projectInfoField">
                 <p className="descriptionProject">{project.description}</p>
                 <p>Nøkkelord:</p>
-                <BubbleList list={ project.keywords } />
+                <div className="projectList">
+                    <BubbleList list={ project.keywords } />
+                </div>
                 <p>Ferdigheter vi trenger:</p>
-                <BubbleList list={ project.skills } />
+                <div className="projectList">
+                    <BubbleList list={ project.skills } />
+                </div>
                 <StatusBoard />
                 {keycloak.authenticated && 
                     <div>

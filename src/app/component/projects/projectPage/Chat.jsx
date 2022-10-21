@@ -1,29 +1,39 @@
+//Libraries
 import React, { useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectProject } from "../../redux/slices/ProjectSlice";
 
+//Components
 import { sanitize } from "../../util/InputSantizer";
 import { generateTimestamp } from '../../util/Timestamp';
-import { selectUser } from "../../redux/slices/UserSlice";
-import { addMessage, selectChat } from "../../redux/slices/Chat";
-import { getChat, addChatMessage } from "../../../../api/ProjectAPI/chatAPI";
-
-import '../../../../css/chat.css'
 import { trimTimestamp } from "../../util/TrimTimestamp";
 import { checkUserStatus } from "../../util/CheckContributerStatus";
+
+//API
+import { addChatMessage } from "../../../../api/ProjectAPI/chatAPI";
+
+//Redux slices
+import { selectUser } from "../../redux/slices/UserSlice";
+import { selectProject } from "../../redux/slices/ProjectSlice";
+import { addMessage, selectChat } from "../../redux/slices/Chat";
+
+//Styling
+import '../../../../css/chat.css'
 
 
 export default function Chat () {
 
+    //States
     const [inputText, setInputText] = useState('');
+
+    //Hooks
     const project = useSelector(selectProject);
     const user = useSelector(selectUser);
     const chat = useSelector(selectChat);
     const dispatch = useDispatch();
 
-    const handleInputChange = (event) => {
-        setInputText(sanitize(event.target.value));
-    }
+    //Event handlers
+
+    const handleInputChange = (event) => setInputText( sanitize(event.target.value) );
 
     const updateChat = async () => {
         if (inputText.length !== 0) {
@@ -34,17 +44,14 @@ export default function Chat () {
             }
             
             let response = await addChatMessage(payload, project.id);
-            if (response[0] !== 'Unexpected end of JSON input') {
-                alert('Feil: Klarte ikke å sende melding. Kontakt administrator for hjelp.')
-            } else {
-                dispatch ( addMessage ( payload ))
-            }
+            response[0] !== 'Unexpected end of JSON input' ? alert('Feil: Klarte ikke å sende melding. Kontakt administrator for hjelp.') : dispatch ( addMessage (payload) );
             setInputText('');
         } else {
             alert('Du må minimum skrive inn 1 tegn for å kunne sende en melding');
         }
     }
 
+    /*TODO: Implementer om vi får tid
     const handleChatRefresh = async () => {
         const response = await getChat(project.id);
         if (response[0]) {
@@ -55,6 +62,7 @@ export default function Chat () {
             } 
         }
     }
+    */
 
     return (
         <div className='chat-box'>

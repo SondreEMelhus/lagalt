@@ -1,70 +1,73 @@
+//Libraries
 import React, { useEffect, useState } from "react";
-
-//Components
-import ProjectSkills from "../ProjectSkills";
-import ProjectKeyWords from "../ProjectKeyWords";
-import ProjectApplicants from "../ProjectApplicants";
-import IndusrtyChanger from "../../dropdown/industyChanger";
-import Visibility from '../../../../assets/visibility.png'
 import { useDispatch, useSelector } from "react-redux";
-import { patchProject, updateProject } from "../../../../api/ProjectAPI/projectsAPI";
-import { selectProject, updateTitle, updateDescription, updateStatus } from "../../redux/slices/ProjectSlice";
-import withAuth from "../../../../hoc/withAuth";
-import withAdminAuth from "../../../../hoc/withAdminAuth";
-import { selectUserAdmin } from "../../redux/slices/UserAdminSlice";
 import { useNavigate } from "react-router-dom";
 
+//Components
+import ProjectSkills from "./ProjectSkills"
+import ProjectKeyWords from "./ProjectKeywords";
+import ProjectApplicants from "../ProjectApplicants";
+import IndusrtyChanger from "../../dropdown/industyChanger";
+import { updateProject } from "../../../../api/ProjectAPI/projectsAPI";
+import withAuth from "../../../../hoc/withAuth";
 
-function AdminForm( {setTitle} ){    
+//Redux slices
+import { selectUserAdmin } from "../../redux/slices/UserAdminSlice";
+import { selectProject, updateTitle, updateDescription, updateStatus } from "../../redux/slices/ProjectSlice";
 
+//Styling
+import Visibility from '../../../../assets/visibility.png'
+
+
+function AdminForm(){    
+
+    //Hooks
+    const userIsAdmin = useSelector(selectUserAdmin);
     const project = useSelector(selectProject);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    //States
     const[titleInput, setTitleInput] = useState(project.title);
     const[descriptionInput, setDescriptionInput] = useState(project.description);
     const[status, setStatus] = useState(project.status);
-    const dispatch = useDispatch();
-    const nav = useNavigate();
-    const userIsAdmin = useSelector(selectUserAdmin);
 
     
     useEffect(() => {
-        if(userIsAdmin === null){
-           nav("/") 
-        }
-        if(status === 'Ferdig'){
-            document.getElementById("finished").className = "statusButtonBlue"
-        } else if(status === 'Planlegges'){
-            document.getElementById("planing").className = "statusButtonBlue"
-        } else if(status === 'Startet'){
-            document.getElementById("started").className = "statusButtonBlue"
-        }
-
+        if (userIsAdmin === null) { navigate('/') };
+        if (status === 'Ferdig') { document.getElementById("finished").className = "statusButtonBlue" };
+        if (status === 'Planlegges') { document.getElementById("planing").className = "statusButtonBlue" }
+        if (status === 'Startet') { document.getElementById("started").className = "statusButtonBlue" }
     }, [])
+
+    //Event handlers
     const onChangeTitle = () =>{
-        const t = document.getElementById("title").value;
-        setTitleInput(t)
-        dispatch(updateTitle(t));
+        const title = document.getElementById("title").value;
+        setTitleInput(title);
+        dispatch( updateTitle ( title ) );
     }
 
     const onChangeDescription = () => {
         setDescriptionInput(document.getElementById("description").value);
         dispatch(updateDescription(document.getElementById("description").value));
     }
-    async function sendUpdatedForm(){
-        // patchProject(project)
+
+    //TODO: Legg til sjekk om oppdatering ble fullført
+    const sendUpdatedForm = async () => {
         await updateProject(project);
-        //const newProject = useSelector(selectProject)
     }
-    
-    const changeStatus = (event) =>{
-        setStatus(event.target.value)
-        StatusClicked(event)
-        dispatch(updateStatus(status));
-    }
-    const StatusClicked = (event) =>{
+
+    const statusClicked = (event) =>{
         document.getElementById("planing").className = "statusButtonWhite"
         document.getElementById("started").className = "statusButtonWhite"
         document.getElementById("finished").className = "statusButtonWhite"
         event.currentTarget.className = "statusButtonBlue"
+    }
+    
+    const changeStatus = (event) =>{
+        setStatus(event.target.value)
+        statusClicked(event)
+        dispatch( updateStatus ( status ) );
     }
 
     return (
@@ -79,7 +82,7 @@ function AdminForm( {setTitle} ){
                 <p className="titleTextAdmin">Tittel:</p>
                 <input type="text" className="titleInputAdmin" id="title" value={titleInput} onChange={onChangeTitle}/>
                 <div className="industryChanger">
-                <IndusrtyChanger industry={project.industry}/>
+                    <IndusrtyChanger industry={project.industry}/>
                 </div>
             </div>
             <div className="titleDivAdmin">

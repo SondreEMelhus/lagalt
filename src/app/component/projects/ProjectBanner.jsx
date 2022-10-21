@@ -5,20 +5,20 @@ import { useNavigate } from "react-router-dom";
 
 //Components
 import BubbleList from "../bubbleList/BubbleList";
+import { getAllContributers } from "../../../api/ProjectAPI/projectsAPI";
+
+//Redux slices
 import { set } from '../redux/slices/ProjectSlice';
+import { selectUser } from "../redux/slices/UserSlice";
 import { selectUserAdmin, updateAdminStatus } from "../redux/slices/UserAdminSlice";
 
 //Styling
+import '../../../css/projectBanner.css'
+
 import music from '../../../assets/note-svgrepo-com.svg';
 import film from '../../../assets/movie-camera-svgrepo-com.svg';
 import game from '../../../assets/video-game-control-svgrepo-com.svg';
 import coding from '../../../assets/coding-svgrepo-com.svg';
-
-import '../../../css/projectBanner.css'
-import { getAllContributers } from "../../../api/ProjectAPI/projectsAPI";
-import { selectUser } from "../redux/slices/UserSlice";
-
-
 
 /*TODO: 
     - Fiks på CSS så den er mer responsiv og fin
@@ -26,43 +26,32 @@ import { selectUser } from "../redux/slices/UserSlice";
 */
 export default function ProjectBanner ({ project }) {
 
+    //Hooks
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector(selectUser);
-    const adminUser = useState(useSelector(selectUserAdmin));
 
+    //Event handlers
+    //TODO: Legg til error handling 
     const navigateToProject = async () => {
-        await dispatch( set(project) );
+        dispatch( set(project) );
         const contributers = await getAllContributers(project.id);
         const loggedUser = [];
-        contributers.forEach((u) => u.username === user.username ? loggedUser.push(u): null);
+        contributers.forEach(contributer => contributer.username === user.username ? loggedUser.push(contributer): null);
 
-        if(loggedUser.length != 0){
-            if(loggedUser[0].role === "Owner" || loggedUser[0].role === "Admin"){
-                dispatch(updateAdminStatus(loggedUser));
-
-            }
+        if(loggedUser.length !== 0){
+            if(loggedUser[0].role === "Owner" || loggedUser[0].role === "Admin") { dispatch( updateAdminStatus(loggedUser) ); }
         }else{
-            dispatch(updateAdminStatus(null));
+            dispatch( updateAdminStatus(null) );
         }
-
         navigate('/project');
-
     }
 
     const chooseIcon = (industry) => {
-        if (industry === 'Musikk') {
-            return music;
-        }
-        if (industry === 'Film') {
-            return film;
-        }
-        if (industry === 'Spillutvikling') {
-            return game;
-        }
-        if (industry === 'Webutvikling') {
-            return coding;
-        }
+        if (industry === 'Musikk') { return music };
+        if (industry === 'Film') { return film };
+        if (industry === 'Spillutvikling') { return game };
+        if (industry === 'Webutvikling') { return coding };
     }
 
 

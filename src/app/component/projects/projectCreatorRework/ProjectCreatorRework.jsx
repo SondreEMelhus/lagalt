@@ -6,11 +6,8 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import ProjectCreateKeywordRework from './ProjectCreateKeywordRework';
 import ProjectCreateSkillRework from "./ProjectCreateSkillRework";
-import { useDispatch, useSelector } from "react-redux";
-import { selectIndustries } from "../../redux/slices/filters/lists/IndustriesSlice";
-import { selectProjectIndustry, setIndustry } from "../../redux/slices/createProjectSlices/ProjectIndustrySlice";
-import { removeAllKeywords, selectProjectKeywords } from "../../redux/slices/createProjectSlices/ProjectKeywordsSlice";
-import { removeAllSkills, selectProjectSkills } from "../../redux/slices/createProjectSlices/ProjectSkillsSlice";
+import { useSelector } from "react-redux";
+
 import { selectUser } from "../../redux/slices/UserSlice";
 import { createProject } from "../../../../api/ProjectAPI/projectsAPI";
 import { sanitize } from "../../util/InputSantizer";
@@ -24,28 +21,32 @@ export default function ProjectCreatorRework () {
     const [show, setShow] = useState(false);
     const [radioValue, setRadioValue] = useState('');
     const handleShow = () => setShow(true);
+    const [industry, setIndustry] = useState(0);
+    const [submitted, setSubmitted] = useState(0);
 
-    //Redux states
-    const industries = useSelector(selectIndustries);
-    const industry = useSelector(selectProjectIndustry);
-    const keywords = useSelector(selectProjectKeywords);
-    const skills = useSelector(selectProjectSkills);
+    //1const industry = useSelector(selectProjectIndustry);
+    const [skills, setSkills] = useState([]);
+    const [keywords, setKeywords] = useState([]);
     const user = useSelector(selectUser);
-    const dispatch = useDispatch();
 
-    useEffect(() => {
-      console.log(industries);
-    }, [])
+
+    const radios = [
+      { name: "Musikk",         value: "Musikk"},
+      { name: "Film",           value: "Film"},
+      { name: "Spillutvikling", value: "Spillutvikling"},
+      { name: "Webutvikling",   value: "Webutvikling"},
+    ]
     
     const handleClose = () => {
-        dispatch ( removeAllSkills() )
-        dispatch ( removeAllKeywords() );
-        dispatch( setIndustry({}));
         setShow(false);
     }
 
     const handleSubmit = async () => {
-      const project = {
+      setSubmitted(submitted + 1);
+
+
+
+    const project = {
         title: sanitize(document.getElementById("title").value),
         description: sanitize(document.getElementById("description").value),
         status: 'Started',
@@ -55,16 +56,17 @@ export default function ProjectCreatorRework () {
         statusUpdateBoards: [],
         projectInteractionHistory: [],
         skills: skills,
-        industry: industry.id,
+        industry: industry,
         keywords: keywords 
       }
       const response = await createProject(project, user);
-      console.log(response);
-      console.log(project);
-      dispatch ( removeAllSkills() )
-      dispatch ( removeAllKeywords() );
-      dispatch( setIndustry({}));
-      setShow(false);
+      setShow(false); 
+    }
+    
+    function updateRadio(inp) {
+      setRadioValue(inp);
+      setIndustry(inp);
+      
     }
     
     return (
@@ -80,7 +82,7 @@ export default function ProjectCreatorRework () {
             {/*Title*/}
             <Form.Group className="mb-3">
               <Form.Label>Tittel</Form.Label>
-              <Form.Control type="text" autoFocus id="title"/>
+              <Form.Control type="text" id="title"/>
             </Form.Group>
 
             {/*Description*/}
@@ -93,34 +95,29 @@ export default function ProjectCreatorRework () {
             <Form.Label>Industri</Form.Label>
                 <br/>
             <ButtonGroup className="mb-2">
-                {industries.map((radio, index) => (
+                {radios.map((radio, index) => (
                     <ToggleButton
                     key={index}
                     id={`radio-${index}`}
                     type="radio"
                     variant="secondary"
                     name="radio"
-                    value={radio.title}
-                    checked={radioValue === radio.title}
-                    onChange={(e) => {
-                      setRadioValue(e.currentTarget.value)
-                      dispatch( setIndustry(radio))
-                      dispatch( removeAllKeywords())
-                      dispatch( removeAllSkills())
-                    }}
+                    value={radio.name}
+                    checked={radioValue === radio.name}
+                    onClick={() => updateRadio(radio.value)}
                     >
-                    {radio.title}
+                    {radio.name}
                     </ToggleButton>
                 ))}
             </ButtonGroup>
 
             {/*Nøkkelord*/}
             <Form.Label>Velg nøkkelord for ditt prosjekt fra listen til venstre</Form.Label>
-            <ProjectCreateKeywordRework />
+            <ProjectCreateKeywordRework industry={industry} setKeywords={setKeywords} submitted={submitted}/>
 
             {/*Ferdigheter*/}
             <Form.Label>Velg ferdigheter for ditt prosjekt fra listen til venstre</Form.Label>
-            <ProjectCreateSkillRework />
+            <ProjectCreateSkillRework industry={industry} setSkills={setSkills} submitted={submitted}/>
         </Form>
         </Modal.Body>
 

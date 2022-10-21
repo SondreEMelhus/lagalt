@@ -33,13 +33,8 @@ export default function ApplicationHandler () {
      */
     const handleApprove = async () => {
         const response = await approveApplication(application.id);
-        if (!response[0]) {
-            alert('Feil: Klarte ikke å godkjenne søknaden. Kontakt administrator for hjelp.');
-            navigate('/project');
-        } else {
-            alert('Søknad godkjent');
-            navigate('/project');
-        }
+        alert('Søknad godkjent');
+        navigate('/project');
     }
 
     /**
@@ -47,13 +42,8 @@ export default function ApplicationHandler () {
      */
     const handleDecline = async () => {
         const response = await declineApplication(application.id);
-        if (!response[0]) {
-            alert('Feil: Klarte ikke å avvise søknaden. Kontakt administrator for hjelp.');
-            navigate('/project');
-        } else {
-            alert('Søknad avvist');
-            navigate('/project');
-        }
+        alert('Søknad avvist');
+        navigate('/project');
     }
 
     //Render function

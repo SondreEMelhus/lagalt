@@ -6,6 +6,8 @@ import BubbleList from "../bubbleList/BubbleList";
 import { useEffect, useState } from "react";
 import { sanitize } from "../util/InputSantizer";
 import ProfileAddSkill from "./ProfileAddSkill";
+
+import { Navigate, useNavigate } from "react-router-dom";
 import ProfileRemovekill from "./ProfileRemoveSkill";
 
 const ProfileForm = ({handleUpdateAccountClick}) => {
@@ -16,6 +18,7 @@ const ProfileForm = ({handleUpdateAccountClick}) => {
     const [description, setDescription] = useState(user.description);
     const [privateAcc, setPrivate] = useState("Offentlig");
     const [userSkills, setUserSkills] = useState(user.skills)
+    const navigate = useNavigate();
 
     const reload = (input) => {
         setUserSkills(input)
@@ -38,7 +41,8 @@ const ProfileForm = ({handleUpdateAccountClick}) => {
         const newDescription = document.getElementById("descriptionUser").value;
         const newPortfolio = document.getElementById("portfolio").value
         const newUser = {id: user.id, username: user.username, description: newDescription, portfolio: newPortfolio, visible: privateAcc, skills: user.skills,}
-       await updateUserInDb(newUser);
+        await updateUserInDb(newUser);
+        navigate('/');
     }
 
     function changePrivate(){

@@ -18,7 +18,6 @@ export default function Status () {
 
     return (
         <div className="item">
-            <Navbar />
             <button onClick={navigateBack} className="item-btn">Tilbake</button>
             <div className="item-content">
                 <p className="item-timestamp">Postet: {trimTimestamp(status.timestamp)}</p>

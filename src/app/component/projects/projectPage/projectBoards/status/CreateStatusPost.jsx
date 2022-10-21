@@ -50,7 +50,6 @@ export default function CreateProjectMessage () {
 
     return (
         <>
-            <Navbar />
             <div className="application-form">
                 <h1 className="application-title">Opprett og post en ny statusmelding til {project.title} prosjektet:</h1>
                 <input types='text' onChange={(event) => setTitle(sanitize(event.target.value))} id='motivation-input' className='application-motivation-text' />

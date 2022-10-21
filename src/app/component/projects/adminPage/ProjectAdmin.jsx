@@ -37,7 +37,6 @@ export default function ProjectAdmin () {
     
     return (
         <div>
-            <Navbar/>
             <AdminForm setTitle={setTitle}/>
         </div>
         

@@ -16,6 +16,7 @@ import { selectMessageBoard } from "../../../../redux/slices/ContentBoards/Messa
 //Styling
 import '../../../../../../css/contentBoard.css'
 import create from '../../../../../../assets/create.png'
+import { trimTimestamp } from "../../../../util/TrimTimestamp";
 
 
 export default function ContentBoard () {
@@ -44,6 +45,7 @@ export default function ContentBoard () {
                             dispatch( updateMessage ( message ))
                             navigate('/message')
                         }} obj={message} className="content-text">{message.text}</p>
+                        <em className="content-author">Postet av: {message.username}, {trimTimestamp(message.timestamp)}</em>
                     </div>
                 )
             })}

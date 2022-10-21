@@ -62,10 +62,12 @@ export default function ProjectPage () {
        
         //Fetch messageboard
         const messageBoard = await getMessageBoard(project.id);
+        messageBoard.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0));
         messageBoard ? dispatch ( updateMessageBoard (messageBoard) ) : dispatch ( resetMessageBoard () );
 
         //Fetch statusboard
         const statusBoard = await getStatusBoard(project.id);
+        statusBoard.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0));
         statusBoard ? dispatch ( updateStatusBoard ( statusBoard )) : dispatch ( resetStatusBoard () );
 
         //Fetch chat
@@ -74,6 +76,7 @@ export default function ProjectPage () {
             alert('Feil: Klarte ikke å hente chat. Kontakt administrator for hjelp.')
         } else {
             if (chat[1].length !== 0) {
+                chat[1].sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0));
                 dispatch ( updateChat ( chat[1] ))
             } else {
                 dispatch ( updateChat ( [] ))

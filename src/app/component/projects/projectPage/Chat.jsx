@@ -51,23 +51,9 @@ export default function Chat () {
         }
     }
 
-    /*TODO: Implementer om vi får tid
-    const handleChatRefresh = async () => {
-        const response = await getChat(project.id);
-        if (response[0]) {
-            alert('Feil: klarte ikke å hente chat. Kontakt administrator for hjelp.')
-        } else {
-            if (response[1].length !== 0) {
-                const data = response[1];
-            } 
-        }
-    }
-    */
-
     return (
         <div className='chat-box'>
             <h1 className="chat-title">Chat</h1>
-            {/*<button onClick={handleChatRefresh}>Refresh</button>*/}
             <div className='message-box'>
                 {chat.length === 0 && <h3 className="no-message">Ingen meldinger er sendt enda</h3>}
                 {chat !== undefined && chat.map((message, index) => {

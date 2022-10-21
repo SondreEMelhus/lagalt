@@ -55,7 +55,6 @@ export default function ProjectApplication () {
         <>
             <div className="application-form">
                 <h1 className="application-title">Søknad om å bli med i {project.title} prosjektet</h1>
-                <h3 className="application-error">{error}</h3>
                 <div className="application-motivation">
                     <p>Hvorfor vil jeg bli med i prosjektet:</p>
                     <form>
@@ -66,6 +65,7 @@ export default function ProjectApplication () {
                     <label>Jeg godtar at prosjekt eier og administrator får tilgang til all informasjon som ligger på min profil:</label>
                     <input className="information-approval-checkbox" type="checkbox" onClick={handleChecked}></input>
                 </div>
+                <h3 className="application-error">{error}</h3>
                 <button className="application-button" onClick={handleClick}>Send inn søknad</button>
             </div>
         </>

@@ -3,6 +3,7 @@
     border-radius: 10px;
     /**align-items: center;**/
     background-color: white;
+    padding: 2%;
 }
 
 .project-clickable:hover {
@@ -10,8 +11,7 @@
   }
 
 .project-header {
-    margin-top: 10px;
-    /**margin-left: 2%;**/
+    margin-top: 2px;
     display: grid;
     grid-template-columns: 50% 50%;
     gap: 18%;
@@ -19,9 +19,10 @@
 
 .project-title {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 2vw;
+    font-size: 40px;
     text-align: left;
-    padding-left: 8px;
+    padding-left: 3%;
+    padding-top: 3%;
 }
 
 .project-industry {
@@ -33,6 +34,7 @@
 
 .project-industry-image {
     width: 15%;
+    padding-top: 2%;
 }
 
 .project-body {
@@ -40,12 +42,11 @@
 }
 
 .project-skill-intro {
-    font-size: 1vw;
-    margin-right: 65%;
+    font-size: 0.9vw;
+    margin-right: 72%;
 }
 
 .project-skills {
-    /**margin-left: 2%;**/
     padding-left: 8px;
     display: grid;
     grid-template-columns: 20% 20% 20% 20%;
@@ -73,8 +74,8 @@
 }
 
 .project-keyword-intro {
-    font-size: 1vw;
-    margin-right: 60%;
+    font-size: 0.9vw;
+    margin-right: 68%;
     margin-top: 10px;
 }
 

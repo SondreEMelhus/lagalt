@@ -33,7 +33,7 @@ export default function Applications () {
             {applications !== undefined && applications.map((application, index) => {
                 return (
                     <div className="application" key={index + '-' + application.id}>
-                        <p onClick={(event) => {
+                        <p className="applicationName" onClick={(event) => {
                             dispatch( updateApplication(application));
                             navigate('/application');
                         }}

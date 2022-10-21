@@ -18,17 +18,6 @@
 }
 
 .message {
-    border: solid 1px #1796c4;
-    background-color: #117aa025;
-    border-radius: 10px;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    margin-left: 2%;
-    margin-right: 2%;
-    cursor: pointer;
-}
-
-.message {
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: auto;
@@ -40,6 +29,7 @@
     background-color: white;
     border: solid 1px #117AA0;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .input-box {

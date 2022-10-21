@@ -30,6 +30,7 @@
     margin-left: 2%;
     margin-right: 2%;
     cursor: pointer;
+    padding-bottom: 5px;
 }
 
 .content-item:hover {
@@ -51,4 +52,10 @@
     width: 45px;
     height: 40px;
     cursor: pointer;
+}
+
+.content-author {
+    font-size: 12px;
+    margin-left: 1%;
+    color: rgb(70, 69, 69);
 }

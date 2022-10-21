@@ -16,6 +16,7 @@ import { selectStatusBoard } from "../../../../redux/slices/ContentBoards/Status
 //Styling
 import '../../../../../../css/contentBoard.css'
 import create from '../../../../../../assets/create.png'
+import { trimTimestamp } from "../../../../util/TrimTimestamp";
 
 
 export default function StatusBoard () {
@@ -43,6 +44,7 @@ export default function StatusBoard () {
                             dispatch( updateStatus ( status ))
                             navigate('/status')
                         }} obj={status} className="content-text">{status.text}</p>
+                        <em className="content-author">Postet av: {status.username}, {trimTimestamp(status.timestamp)}</em>
                     </div>
                 )
             })}

@@ -44,7 +44,6 @@ function Profile () {
 
     return (
         <>
-            <Navbar/>
             <ProfileForm handleUpdateAccountClick={ handleUpdateAccountClick }/>
         </>
     )

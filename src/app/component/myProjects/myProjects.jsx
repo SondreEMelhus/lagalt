@@ -46,7 +46,6 @@ function MyProjects () {
     //TODO: Antar det er protfolio som er en brukers prosjekter??
     return (
         <>
-            <Navbar/>
             <p>Mine prosjekter</p>
             <div className="home-body">
                     {userProjects.length === 0 && <h3 className="no-message">Du har ingen prosjekter</h3>}

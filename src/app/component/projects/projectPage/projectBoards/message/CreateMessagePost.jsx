@@ -50,7 +50,6 @@ export default function CreateProjectMessage () {
 
     return (
         <>
-            <Navbar />
             <div className="application-form">
                 <h1 className="application-title">Opprett og post en ny melding til {project.title} prosjektet:</h1>
                 <h3>Skriv inn tittelen på meldingen:</h3>

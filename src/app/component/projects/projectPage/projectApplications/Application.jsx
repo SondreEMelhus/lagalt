@@ -44,7 +44,6 @@ export default function Application () {
 
     return (
         <div>
-            <Navbar />
             <button onClick={handleBack}>Tilbake</button>
             <div className="application-box">
                 <h1 className="application-title">Søknad fra {application.username}</h1>

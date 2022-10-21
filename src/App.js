@@ -20,7 +20,6 @@ import CreateStatusPost from './app/component/projects/projectPage/projectBoards
 
 
 //Components
-import Projects from './app/component/projects/Projects';
 import ProjectAdmin from './app/component/projects/adminPage/ProjectAdmin';
 import ProjectApplication from './app/component/projects/ProjectApplication';
 
@@ -31,6 +30,7 @@ import ProjectPage from './app/component/projects/projectPage/ProjectPage';
 import './App.css';
 import Application from './app/component/projects/projectPage/projectApplications/Application';
 import MyProjects from './app/component/myProjects/myProjects';
+import Navbar from './app/component/navbar/Navbar';
 
 
 
@@ -38,6 +38,7 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <Navbar />
         <Routes>
           <Route path="/" element={<IndexView />} />
           <Route path="/profile" element={<ProfileView />} />

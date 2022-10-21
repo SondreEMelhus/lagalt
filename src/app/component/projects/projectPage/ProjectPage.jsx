@@ -175,7 +175,6 @@ export default function ProjectPage () {
 
     return(
         <div>
-            <Navbar/>
             <div className="topDivProject">
                 <img src={ chooseIcon(project.industry) } alt="" className="icon"/>
                 <h2>{project.title}</h2>

@@ -53,7 +53,6 @@ export default function ProjectApplication () {
 
     return (
         <>
-            <Navbar />
             <div className="application-form">
                 <h1 className="application-title">Søknad om å bli med i {project.title} prosjektet</h1>
                 <h3 className="application-error">{error}</h3>

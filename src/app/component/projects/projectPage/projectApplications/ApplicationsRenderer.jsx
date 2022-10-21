@@ -1,24 +1,38 @@
+//Libraries
 import React, {useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
+//API
 import { getApplications } from "../../../../../api/ProjectAPI/projectsAPI";
+
+//Redux slices
+import { selectProject } from "../../../redux/slices/ProjectSlice";
 import { updateApplication } from "../../../redux/slices/Application";
 import { selectApplications, updateApplications } from "../../../redux/slices/Applications";
-import { selectProject } from "../../../redux/slices/ProjectSlice";
 
+//Styling
 import '../../../../../css/applications.css'
 
-export default function Applications () {
 
+/**
+ * Component used to render all the applications for a project.
+ */
+export default function ApplicationsRenderer () {
+
+    //Hooks
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const project = useSelector(selectProject);
     const applications = useSelector(selectApplications);
-    const dispatch = useDispatch();
-    const navigate = useNavigate()
 
     useEffect(() => {
         fetchApplications()
     }, [])
 
+    /**
+     * Method that fetches all applications for a project
+     */
     const fetchApplications = async () => {
         const data = await getApplications(project.id);
         if (data) {
@@ -26,6 +40,7 @@ export default function Applications () {
         }
     }
     
+    //Render function
     return (
         <div className="applications-box">
             <h1 className="applicationTitle">Søkere</h1>

@@ -1,25 +1,36 @@
+//Libraries
 import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { approveApplication, declineApplication } from "../../../../../api/ProjectAPI/projectsAPI";
-import BubbleList from "../../../bubbleList/BubbleList";
-import Navbar from "../../../navbar/Navbar";
-import { selectApplication} from '../../../redux/slices/Application'
-import { selectUser } from "../../../redux/slices/UserSlice";
 
+//Components
+import BubbleList from "../../../bubbleList/BubbleList";
+
+//API
+import { approveApplication, declineApplication } from "../../../../../api/ProjectAPI/projectsAPI";
+
+//Redux slices
+import { selectUser } from "../../../redux/slices/UserSlice";
+import { selectApplication} from '../../../redux/slices/Application'
+
+//Styling
 import '../../../../../css/application.css'
 
-export default function Application () {
+/**
+ * Component used to manage and handle the process of handling a project application.
+ */
+export default function ApplicationHandler () {
 
-    //application slice
-    const application = useSelector(selectApplication);
-    const user = useSelector(selectUser);
+    //Hooks
     const navigate = useNavigate()
+    const user = useSelector(selectUser);
+    const application = useSelector(selectApplication);
 
-    const handleBack = () => {
-        navigate('/project');
-    }
+    //Event handlers
 
+    /**
+     * Method used to a approve a project application.
+     */
     const handleApprove = async () => {
         const response = await approveApplication(application.id);
         if (!response[0]) {
@@ -30,7 +41,10 @@ export default function Application () {
             navigate('/project');
         }
     }
-//
+
+    /**
+     * Method used to decline a project application
+     */
     const handleDecline = async () => {
         const response = await declineApplication(application.id);
         if (!response[0]) {
@@ -42,9 +56,10 @@ export default function Application () {
         }
     }
 
+    //Render function
     return (
         <div>
-            <button onClick={handleBack}>Tilbake</button>
+            <button onClick={() => navigate('/project')}>Tilbake</button>
             <div className="application-box">
                 <h1 className="application-title">Søknad fra {application.username}</h1>
                 <div className="application-skills">

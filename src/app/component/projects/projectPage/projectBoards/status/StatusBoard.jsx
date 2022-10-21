@@ -1,22 +1,25 @@
 //Libraries
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 //Components
 import keycloak from "../../../../keycloak/keycloak";
+import { trimTimestamp } from "../../../../util/TrimTimestamp";
 import { checkUserStatus } from "../../../../util/CheckContributerStatus";
+
+//API
+import { getStatusBoard } from "../../../../../../api/ProjectAPI/statusBoardAPI";
 
 //Redux slices
 import { selectUser } from "../../../../redux/slices/UserSlice";
 import { selectProject } from "../../../../redux/slices/ProjectSlice";
 import { updateStatus } from "../../../../redux/slices/ContentBoards/StatusBoard/StatusSlice";
-import { selectStatusBoard } from "../../../../redux/slices/ContentBoards/StatusBoard/StatusBoardSlice";
+import { resetStatusBoard, selectStatusBoard, updateStatusBoard } from "../../../../redux/slices/ContentBoards/StatusBoard/StatusBoardSlice";
 
 //Styling
 import '../../../../../../css/contentBoard.css'
 import create from '../../../../../../assets/create.png'
-import { trimTimestamp } from "../../../../util/TrimTimestamp";
 
 
 export default function StatusBoard () {
@@ -27,6 +30,30 @@ export default function StatusBoard () {
    const user = useSelector(selectUser);
    const dispatch = useDispatch();
    const navigate = useNavigate();
+
+   //States
+   const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        const id = setInterval(() => setCount((oldCount) => oldCount + 1), 1000);
+
+        return () => {
+          clearInterval(id);
+        };
+    }, [])
+
+    useEffect(() => {
+        if (count % 15 === 0) {
+            fetchStatusBoard()
+        }
+    }, [count])
+
+    //Fetch statusboard
+    const fetchStatusBoard = async () => {
+        const statusBoard = await getStatusBoard(project.id);
+        statusBoard.sort((a,b) => (a.id < b.id) ? 1 : ((b.id < a.id) ? -1 : 0));
+        statusBoard ? dispatch ( updateStatusBoard ( statusBoard )) : dispatch ( resetStatusBoard () );
+    }
 
    //Render function
     return (

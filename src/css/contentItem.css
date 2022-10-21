@@ -1,13 +1,12 @@
-.item {
-
-}
-
 .item-btn {
-    margin-top: 20px;
-    margin-left: 20px;
-    border: solid 2px black;
-    border-radius: 10px;
-    background-color: white;
+    border-radius: 15px;
+    border: none;
+    margin-left: 2%;
+    min-width: 90px;
+    height: 40px;
+    color: white;
+    background: #227C9D;
+    margin-top: 1%;
 }
 
 .item-content {
@@ -16,23 +15,14 @@
     margin-right: auto;
 }
 
-.item-timestamp {
-
-}
-
-.item-username {
-
-}
-
-.item-title {
-
-}
-
 .item-text-box {
-    border: solid 2px black;
+    border: solid 1px lightgray;
     border-radius: 10px;
     width: 80%;
     background-color: white;
+    margin-top: 2%;
+    height: 150px;
+    padding: 0.5%;
 }
 
 .item-text {

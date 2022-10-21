@@ -59,13 +59,15 @@ export default function ProjectApplication () {
                 <h3 className="application-error">{error}</h3>
                 <div className="application-motivation">
                     <p>Hvorfor vil jeg bli med i prosjektet:</p>
-                    <input types='text' onChange={(event) => setMotvation(sanitize(event.target.value))} id='motivation-input' className='application-motivation-text' />
+                    <form>
+                        <textarea onChange={(event) => setMotvation(sanitize(event.target.value))} id='motivation-input' className='application-motivation-text'></textarea>
+                    </form>
                 </div>
-                <div>
-                    <p>Jeg godtar at prosjekt eier og administrator får tilgang til all informasjon som ligger på min profil:</p>
-                    <input type="checkbox" onClick={handleChecked}></input>
+                <div className="information-request">
+                    <label>Jeg godtar at prosjekt eier og administrator får tilgang til all informasjon som ligger på min profil:</label>
+                    <input className="information-approval-checkbox" type="checkbox" onClick={handleChecked}></input>
                 </div>
-                <button onClick={handleClick}>Send inn søknad</button>
+                <button className="application-button" onClick={handleClick}>Send inn søknad</button>
             </div>
         </>
     )

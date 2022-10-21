@@ -1,26 +1,33 @@
+//Libraries
 import React from "react";
-
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { selectStatusBoard } from "../../../../redux/slices/ContentBoards/StatusBoard/StatusBoardSlice";
-import { updateStatus } from "../../../../redux/slices/ContentBoards/StatusBoard/StatusSlice";
+import { useDispatch, useSelector } from "react-redux";
+
+//Components
 import keycloak from "../../../../keycloak/keycloak";
 import { checkUserStatus } from "../../../../util/CheckContributerStatus";
 
+//Redux slices
+import { selectUser } from "../../../../redux/slices/UserSlice";
+import { selectProject } from "../../../../redux/slices/ProjectSlice";
+import { updateStatus } from "../../../../redux/slices/ContentBoards/StatusBoard/StatusSlice";
+import { selectStatusBoard } from "../../../../redux/slices/ContentBoards/StatusBoard/StatusBoardSlice";
+
+//Styling
+import '../../../../../../css/contentBoard.css'
 import create from '../../../../../../assets/create.png'
 
-import '../../../../../../css/contentBoard.css'
-import { selectProject } from "../../../../redux/slices/ProjectSlice";
-import { selectUser } from "../../../../redux/slices/UserSlice";
 
 export default function StatusBoard () {
 
+    //Hooks
    const statusBoard = useSelector(selectStatusBoard);
    const project = useSelector(selectProject);
    const user = useSelector(selectUser);
    const dispatch = useDispatch();
    const navigate = useNavigate();
 
+   //Render function
     return (
         <div className="content-board">
             <div className="content-header">
@@ -31,7 +38,6 @@ export default function StatusBoard () {
             {statusBoard.length === 0 && <h3 className="no-message">Ingen status oppdateringer er postet enda</h3>}
             {statusBoard !== undefined && statusBoard.map((status, index) => {
                 return (
-                    //TODO: Bruk message-board controller
                     <div key={index} className="content-item">
                         <p onClick={(e) => {
                             dispatch( updateStatus ( status ))

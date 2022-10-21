@@ -1,42 +1,45 @@
-import React, { useEffect, useState } from "react";
+//Libraries
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 //components
-import XLetter from '../../../assets/xLetter.png'
 import { selectProject, updateSkill } from "../redux/slices/ProjectSlice";
-
 
 //Styling
 import '../../../css/projectKeywordPopup.css'
-import { useDispatch, useSelector } from "react-redux";
 
+/**
+ * Component used to manage and render popup box containing all choosable skills.
+ */
 export default function ProjectSkillsPopup({show, onHide, fetchedSkills}){
 
+    //Hooks
     const project = useSelector(selectProject);
     const dispatch = useDispatch();
 
     useEffect(() => {
-
         if(show){
             document.getElementById("popupSkill").className = "visiblePopup";
-        }else if(!show){
+        } else if (!show){
             document.getElementById("popupSkill").className = "popupBox";
         }
-
     }, [show])
 
+    //Eventhandlers
     function addSkill(skillGiven){
-        const newSkills = [];
-        const alreadyIn = false;
+        let newSkills = [];
+        let alreadyIn = false;
         for(let skill of project.skills){
             newSkills.push(skill);
             if(skill === skillGiven){
                 alreadyIn = true;
             }
         }
+
         if(!alreadyIn){
             newSkills.push(skillGiven);
             dispatch(updateSkill(newSkills));
-        }else{ //Not sure why not working
+        } else { //Not sure why not working
             prompt("Ferdigheten " + skillGiven + " er allerede koblet opp til prosjektet")
         }
     }
@@ -44,9 +47,9 @@ export default function ProjectSkillsPopup({show, onHide, fetchedSkills}){
     return(
         <div className="popupBox" id="popupSkill">
             <p>Trykk på nøkkelordet du vil ha</p>
-            {fetchedSkills.map((skill) => {
+            {fetchedSkills.map((skill, index) => {
                 return(
-                    <div className="keywordsDiv">
+                    <div className="keywordsDiv" key={index}>
                         <button className="wordToSelect" onClick={() => addSkill(skill)}>{skill}</button>
                     </div>
                 )

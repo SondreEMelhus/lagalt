@@ -1,24 +1,28 @@
+//Libraries
 import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
+//Components
+import { trimTimestamp } from "../../../../util/TrimTimestamp";
+
+//Redux slices
 import { selectStatus } from "../../../../redux/slices/ContentBoards/StatusBoard/StatusSlice";
 
+//Styling
 import '../../../../../../css/contentItem.css'
-import Navbar from "../../../../navbar/Navbar";
-import { trimTimestamp } from "../../../../util/TrimTimestamp";
+
 
 export default function Status () {
 
+    //Hooks
     const status = useSelector(selectStatus)
     const navigate = useNavigate();
 
-    const navigateBack = () => {
-        navigate('/project');
-    }
-
+    //Render function
     return (
         <div className="item">
-            <button onClick={navigateBack} className="item-btn">Tilbake</button>
+            <button onClick={() => navigate('/project')} className="item-btn">Tilbake</button>
             <div className="item-content">
                 <p className="item-timestamp">Postet: {trimTimestamp(status.timestamp)}</p>
                 <p className="item-username">Postet av: {status.username}</p>

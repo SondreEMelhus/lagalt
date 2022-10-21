@@ -1,45 +1,52 @@
 //Libraries
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 //Components
-import SkillIcon from '../../../assets/Skillicon.png'
-import XLetter from '../../../assets/xLetter.png'
-import { useDispatch, useSelector } from "react-redux";
-import { selectProject, updateSkill } from "../redux/slices/ProjectSlice";
-import { getSkillsOfIndustry } from "../../../api/attributes";
-import ProjectSkillsPopup from "./ProjectSkillsPopup";
-//Styling
-import '../../../css/projectSkills.css'
+import { getSkillsOfIndustry } from "../../../../api/attributes";
+import ProjectSkillsPopup from "../ProjectSkillsPopup";
 
+//Redux slices
+import { selectProject, updateSkill } from "../../redux/slices/ProjectSlice";
+
+//Styling
+import '../../../../css/projectSkills.css'
+import SkillIcon from '../../../../assets/Skillicon.png'
+import XLetter from '../../../../assets/xLetter.png'
+
+/**
+ * Component responsible managing and handling a projects skills
+ */
 export default function ProjectSkills () {
 
+    //Hooks
     const project = useSelector(selectProject);
     const projectSkills = project.skills;
     const dispatch = useDispatch();
-    const [show, setShow] = useState(false);
+
+    //States
     const [fetchedSkills, setFetchedSkills] = useState([]);
+    const [show, setShow] = useState(false);
 
-
-    function removeSkill(selected){
+    //Event handlers
+    const removeSkill = (selected) => {
         const newSkillList = [];
-        for(let skill of projectSkills){
-            if(skill != selected){
-                newSkillList.push(skill);
-            }
-        }
+        projectSkills.forEach(skill => skill !== selected ? newSkillList.push(skill) : null);
         dispatch(updateSkill(newSkillList));
     }
 
-    async function showSkillsSelection(){
+    const showSkillsSelection = async () => {
         setShow(true);
         const allSkills = await getSkillsOfIndustry(project.industry)
         let skills = []
         allSkills.forEach(word => skills.push(word.title));
         setFetchedSkills(skills);
      }
-     function hide(){
+
+     const hide = () => {
          setShow(false);
      }
+
     return (
         <div className="skillsdivAdmin">
         <div className="topPartSkillAdmin">
@@ -48,10 +55,9 @@ export default function ProjectSkills () {
         </div>
         <div className="skillElementsContainer">
             <div className="keywordElementsContainer">
-        {projectSkills.map((skill) => {
+        {projectSkills.map((skill, index) => {
             return(
-                
-                <div class="skillElementAdmin">
+                <div class="skillElementAdmin" key={index}>
                     <p className="eachSkillElementAdmin">{skill}</p>
                     <img src={XLetter} alt="" className="xletterAdmin" onClick={() => removeSkill(skill)}/>
                 </div>

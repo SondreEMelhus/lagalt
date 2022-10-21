@@ -30,18 +30,13 @@ function Profile () {
 
     useEffect(() => {
         getUserAcc();
-        console.log(user);
     }, [])
 
     async function getUserAcc(){
         const currUser = await getUser() 
-        console.log( currUser.username + " MMMMMMMMMMMMMMMMM")
         dispatch(updateUser(currUser))
 
     }
-
-    console.log(user.username);
-
     return (
         <>
             <ProfileForm handleUpdateAccountClick={ handleUpdateAccountClick }/>

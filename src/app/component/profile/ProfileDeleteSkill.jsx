@@ -7,22 +7,22 @@ import { addSkillToUser, getSkillsOfUser } from "../../../api/fetchUserAPI";
 import { selectUser } from "../redux/slices/UserSlice";
 import { getAllSkills } from "../../../api/ProjectAPI/projectsAPI";
 import { updateSkillsOfCurrentUser } from "../redux/slices/UserSlice";
+import { removeSkillFromUser } from "../../../api/fetchUserAPI";
 
 
 //Styling
 import '../../../css/projectCreateKeyword.css'
 
 
-export default function ProfileCreateSkill({updating, reload}){
+export default function ProfileDeleteSkill({updating, reload}){
 
     const [allSkills, setAllSkills] = useState([]);
-    const [newSkills, setNewSkills] = useState([]);
+    const [skillsToRemove, setSkillsToRemove] = useState([]);
     const user = useSelector(selectUser);
     const dispatch = useDispatch();
 
     //On load, get fetch all existing user skills, and all skills
     useEffect(() => {
-        fetchAllSkills();
         fetchUserSkills();
     },[])
 
@@ -33,40 +33,40 @@ export default function ProfileCreateSkill({updating, reload}){
     //Method sending request to get skills of a user
     async function fetchUserSkills() {
         const userSkills = await getSkillsOfUser(user.id);
-        setNewSkills(userSkills);
 
+        setAllSkills(userSkills);
     }
-    //Method requesting all skills
-   async function fetchAllSkills(){
-    const skills = await getAllSkills();
-       setAllSkills(skills); 
-    }
-    //Method to update the list available skills when one is selected
     function updateMySkills(skill){
-        const s = [];
-        newSkills.forEach((skil) => s.push(skil));
-        s.push(skill);
-        setNewSkills(s);
-        const oldSkills = [];
-        allSkills.forEach((skil => skil != skill ? oldSkills.push(skil):  null))
-        setAllSkills(oldSkills);
+
+        const newMySkills = []
+        const newRemovingSkills = [];
+
+        allSkills.forEach((s) => s.title !== skill.title ? newMySkills.push(s): null);
+        setAllSkills(newMySkills);
+
+        skillsToRemove.forEach((s) => newRemovingSkills.push(s));
+        newRemovingSkills.push(skill);
+        setSkillsToRemove(newRemovingSkills);
 
     }
     //Updating array of selected skills
     function updateSelectedSkills(skill){
-        const s = [];
-        newSkills.forEach((skil) => skil != skill ? s.push(skil): null);
-        setNewSkills(s);
-        const old = [];
-        allSkills.forEach((skil) => old.push(skil));
-        old.push(skill);
-        setAllSkills(old);
+
+        const newMySkills = [];
+        const newRemovingSkills = [];
+
+        skillsToRemove.forEach((s) => s.title !== skill.title ? newRemovingSkills.push(s): null);
+        setSkillsToRemove(newRemovingSkills);
+
+        allSkills.forEach((s) => newMySkills.push(s));
+        newMySkills.push(skill);
+        setAllSkills(newMySkills);
     }
 
-    //Actually adding the skill in DB, and the display of the new skills
-    async function pushSkillsToUser(){
-        for(let e of newSkills){
-            await addSkillToUser(user.id, e.id)
+    //Actually removing the skill in DB, and the display of the new skills
+    async function pushSkillsToUser(){        
+        for(let e of skillsToRemove){
+            await removeSkillFromUser(user.id, e.id)
         }
         const allNewSkills = await getSkillsOfUser(user.id);
         const titleOfNewSkills = [];
@@ -78,6 +78,9 @@ export default function ProfileCreateSkill({updating, reload}){
 
     }
 
+
+
+
     return(
         <div className="projectCreateKeywordBoxes">
             <div className="allSkillsBox">
@@ -88,7 +91,7 @@ export default function ProfileCreateSkill({updating, reload}){
                 })}
             </div>
             <div className="allSkillsBox">
-            {newSkills.map((skill, index) => {
+            {skillsToRemove.map((skill, index) => {
                     return(
                         <p className="keywordElementCreateKeyword" onClick={() => updateSelectedSkills(skill)}>{skill.title}</p>
                     )

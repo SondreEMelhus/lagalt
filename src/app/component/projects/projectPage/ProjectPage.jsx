@@ -10,7 +10,6 @@ import BubbleList from "../../bubbleList/BubbleList";
 import { checkUserRole } from "../../util/CheckUserRole";
 import { generateTimestamp } from "../../util/Timestamp";
 import StatusBoard from './projectBoards/status/StatusBoard';
-import Applications from "./projectApplications/ApplicationsRenderer";
 import MessageBoard from "./projectBoards/message/MessageBoard";
 import { checkUserStatus } from "../../util/CheckContributerStatus";
 
@@ -54,6 +53,9 @@ export default function ProjectPage () {
         fetchData();
     },[])
 
+    
+
+
     //TODO: Legg til [error, data]
     const fetchData = async () => {
         //Fetch user role
@@ -71,6 +73,15 @@ export default function ProjectPage () {
         statusBoard ? dispatch ( updateStatusBoard ( statusBoard )) : dispatch ( resetStatusBoard () );
 
         //Fetch chat
+        fetchChat();
+
+        //Fetch user interaction history
+        if (keycloak.authenticated) {
+            handleInteractionHist(user.id, project.id);
+        }
+    }
+
+    const fetchChat = async () => {
         const chat = await getChat(project.id);
         if (chat[0]) {
             alert('Feil: Klarte ikke å hente chat. Kontakt administrator for hjelp.')
@@ -81,11 +92,6 @@ export default function ProjectPage () {
             } else {
                 dispatch ( updateChat ( [] ))
             }
-        }
-
-        //Fetch user interaction history
-        if (keycloak.authenticated) {
-            handleInteractionHist(user.id, project.id);
         }
     }
 
@@ -165,6 +171,11 @@ export default function ProjectPage () {
         }
     }
 
+    const handleRefresh = () => {
+        fetchChat();
+    }
+
+    //Render function
     return(
         <div>
             <div className="topDivProject">
@@ -190,6 +201,7 @@ export default function ProjectPage () {
                 {keycloak.authenticated && 
                     <div>
                         <MessageBoard />
+                        <button onClick={handleRefresh}>Refresh</button>
                         <Chat />
                     </div>
                 }

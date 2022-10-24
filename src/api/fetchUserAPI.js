@@ -46,6 +46,21 @@ export const getUser = async () => {
 	}
 }
 
+export const getUserWithUsername = async (username) => {
+    try {
+        const response = await fetch(`${apiUrl}/accounts/search?username=${username}`)
+       /* if (!response.ok) {
+            throw new Error ('Could not get user with username ' + username);
+            
+        } else { */
+            const data = await response.json();
+            return [null, data]
+    }
+    catch (error) {
+		return [error, null]
+	}
+}
+
 
 export const updateUserInDb = async (user) => {
     const userSkills = await getSkillsOfUser(user.id)

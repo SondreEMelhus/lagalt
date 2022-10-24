@@ -49,7 +49,7 @@ export default function ApplicationHandler () {
     //Render function
     return (
         <div>
-            <button onClick={() => navigate('/project')}>Tilbake</button>
+            <button className="item-btn" onClick={() => navigate('/project')}>Tilbake</button>
             <div className="application-box">
                 <h1 className="application-title">Søknad fra {application.username}</h1>
                 <div className="application-skills">

@@ -3,11 +3,12 @@
     margin-right: auto;
     padding-bottom: 10px;
     text-align: center;
-    border: solid 2px black;
+    border: solid 1px grey;
     border-radius: 10px;
     width: 80%;
     background-color: white;
-
+    margin-bottom: 5%;
+    margin-top: 2%;
 }
 
 .application-title {
@@ -18,10 +19,11 @@
 }
 
 .application-infobox {
-    border: solid 2px black;
+    background-color:rgb(249, 246, 246);
+    border: solid 1px rgb(212, 210, 210);
     border-radius: 10px;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 3%;
     margin-left: auto;
     margin-right: auto;
     width: 60%;
@@ -50,15 +52,23 @@
 }
 
 .application-approve {
-    background-color: rgb(100, 255, 100);
-    border: solid 2px rgb(28, 255, 28);
+    background-color: 	 #79d279;
+    border: solid 2px 	 #67b367;
     border-radius: 10px;
+}
+
+.application-approve:hover {
+    background-color: 	 #79d279c6;
 }
 
 .application-decline {
     background-color: rgb(255, 65, 65);
     border: solid 2px rgb(255, 29, 29);
     border-radius: 10px;
+}
+
+.application-decline:hover {
+    background-color: rgba(255, 65, 65, 0.832);
 }
 
 .application-motivation {

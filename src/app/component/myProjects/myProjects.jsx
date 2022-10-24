@@ -49,7 +49,7 @@ function MyProjects () {
     //Render function
     return (
         <>
-            <p>Mine prosjekter</p>
+            <h3 className="myProjects">Mine prosjekter</h3>
             <div className="home-body">
                     {userProjects.length === 0 && <h3 className="no-message">Du har ingen prosjekter</h3>}
                     {userProjects !== undefined && userProjects.map((project, index) => {

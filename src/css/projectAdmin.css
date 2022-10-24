@@ -1,11 +1,10 @@
 .headProjectAdmin{
     display: flex;
-    margin-top: 40px;
-    margin-left: 40px;
+    margin-top: 30px;
+    margin-left: 10%;
+    margin-bottom: 2%;
 }
-.leftSide{
-    margin-top: 40px;
-}
+
 .buttonUpdateAdmin{
     margin-left: 40px;
     width: 120px;
@@ -14,25 +13,39 @@
     background: #FB4C34;
     color: white;
 }
-.industryChanger{
-    margin-left: 32px;
-    margin-top: -1px;
+
+.buttonUpdateAdmin:hover {
+    background: #ff391f;
 }
+
+.industryChanger{
+    margin-top: -1px;
+    padding-left: 6%;
+}
+
+.musicNoteAdmin:hover {
+    filter: drop-shadow(0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.3));
+    padding: 1%;
+}
+
 .titleDivAdmin{
     display: flex;
-    margin-top: 51px;
+    margin-top: 4%;
 }
 .titleTextAdmin{
-    margin-left: 80px;
+    margin-left: 3%;
     font-weight: bold;
-    margin-top: 6px;
+    margin-top: 2%;
+    margin-right: 5px;
 }
 .titleInputAdmin{
     height: 38px;
-    margin-left: 30px;
+    width: 100%;
     border-radius: 10px;
-    border: none;
-    width: 270px;
+    resize: none;
+    padding: 20px 5px;
+    background-color:rgb(249, 246, 246);
+    border: solid 1px rgb(212, 210, 210);
 }
 .musicNoteAdmin{
     height: 30px;
@@ -64,24 +77,35 @@
     color: white;
 }
 .textAreaAdmin{
-    border: none;
     border-radius: 20px;
     resize: none;
     padding: 20px 5px;
+    background-color:rgb(249, 246, 246);
+    border: solid 1px rgb(212, 210, 210);
 }
 .descriptionDivAdmin{
     margin-top: 60px;
-    margin-left: 80px;
+    margin-left: 3%;
     font-weight: bold;
 }
 .pageAdmin{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 4%;
+    margin-top: 50px;
+    background-color: white;
+    border-radius: 15px;
+    padding: 2%;
 }
 .cards{
     margin-bottom: 10px;
 }
+.adminPageTitle {
+    margin-right: 2%;
+}
 
-
-
-
+.hideDivShow {
+    padding-left: 15%;
+}

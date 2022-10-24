@@ -50,7 +50,7 @@ export default function ProjectKeyWordsPopup({show, onHide, fetchedKeywords}){
     //Render function
     return(
         <div className="popupBox" id="popup">
-            <p>Trykk på nøkkelordet du vil ha</p>
+            <p className="keywordSelectionText">Trykk på nøkkelordet du vil ha</p>
             <div className="popupContent">
             {fetchedKeywords.map((word, index) => {
                 return(

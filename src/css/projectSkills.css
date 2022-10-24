@@ -1,9 +1,10 @@
 .skillsdivAdmin{
-
     border-radius: 20px;
     height: 200px;
-    width: 400px;
     background: white;
+    padding-bottom: 4%;
+    background-color:rgb(249, 246, 246);
+    border: solid 1px rgb(212, 210, 210);
 }
 .topPartSkillAdmin{
     display: flex;
@@ -39,7 +40,27 @@
 }
 .xletterAdmin{
     height: 15px;
-    margin-top: 6px;
     margin-right: 10px;
     cursor: pointer;
+}
+
+.add-keyword-btn{
+    border: 2px solid #117AA0;
+    color: #117AA0;
+    font-weight: bold;
+    background: white;
+    border-radius: 20px;
+    height: 40px;
+    width: 80px;
+    margin-top: 15px;
+    min-width: 63px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.skillTitle {
+    margin-top: 4%;
+    margin-left: 4%;
+    margin-right: 30%;
+    font-size: 20px;
 }

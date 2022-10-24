@@ -11,7 +11,7 @@ import { selectProject, updateSkill } from "../../redux/slices/ProjectSlice";
 
 //Styling
 import '../../../../css/projectSkills.css'
-import SkillIcon from '../../../../assets/Skillicon.png'
+import SkillIcon from '../../../../assets/puzzle-svgrepo-com.svg'
 import XLetter from '../../../../assets/xLetter.png'
 
 /**
@@ -59,7 +59,8 @@ export default function ProjectSkills () {
         <div className="skillsdivAdmin">
         <div className="topPartSkillAdmin">
                 <img src={SkillIcon} alt=""  className="skillIconAdmin"/>
-                <button onClick={() => showSkillsSelection()} className="addKeyWordButton">Legg til</button>
+                <p className="skillTitle">Ferdigheter</p>
+                <button onClick={() => showSkillsSelection()} className="input-btn">Legg til</button>
         </div>
         <div className="skillElementsContainer">
             <div className="keywordElementsContainer">

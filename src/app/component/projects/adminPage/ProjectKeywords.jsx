@@ -11,7 +11,7 @@ import { selectProject, updateKeywords } from "../../redux/slices/ProjectSlice";
 
 //Styling
 import '../../../../css/projectKeyWords.css'
-import KeyWord from '../../../../assets/KeyWord.png'
+import KeyWord from '../../../../assets/key-svgrepo-com.svg'
 import XLetter from '../../../../assets/xLetter.png'
 
 export default function ProjectKeyWords () {
@@ -50,7 +50,8 @@ export default function ProjectKeyWords () {
         <div className="keyWorddivAdmin">
         <div className="topPartKeyWordAdmin">
             <img src={KeyWord} alt=""  className="keyWordIconAdmin"/>
-            <button onClick={() => showKeywordSelection()} className="addKeyWordButton">Legg til</button>
+            <p className="skillTitle">Nøkkelord</p>
+            <button onClick={() => showKeywordSelection()} className="input-btn">Legg til</button>
         </div>
         <div className="keywordElementsContainer">
         {keywords.map((keyword, index) => {

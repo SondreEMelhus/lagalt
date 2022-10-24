@@ -94,12 +94,12 @@ function AdminForm(){
     //Render function
     return (
         <div>
+            <div className="headProjectAdmin">
+                <h2 className="adminPageTitle">Administrer prosjekt</h2>
+                <button className="adminButton" onClick={sendUpdatedForm}>Oppdater</button>
+            </div>
             <div className="pageAdmin">
             <div>
-            <div className="headProjectAdmin">
-                <h2>Administrer prosjekt</h2>
-                <button className="buttonUpdateAdmin" onClick={sendUpdatedForm}>Oppdater</button>
-            </div>
             <div className="titleDivAdmin">
                 <p className="titleTextAdmin">Tittel:</p>
                 <input type="text" className="titleInputAdmin" id="title" value={titleInput} onChange={onChangeTitle}/>
@@ -112,9 +112,6 @@ function AdminForm(){
                 <button className="statusButtonWhite" onClick={changeStatus} id="planing" value="Planlegges">Planlegges</button>
                 <button className="statusButtonWhite" onClick={changeStatus} id="started" value="Startet">Startet</button>
                 <button className="statusButtonWhite" onClick={changeStatus} id="finished" value="Ferdig">Ferdig</button>
-                <div class="musicNoteBoxAdmin">
-                    <img src={Visibility} alt="" className="visibilityIconAdmin"/>
-                </div>
             </div>
             <div className="descriptionDivAdmin">
                 <p>Prosjekt beskrivelse</p>

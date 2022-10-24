@@ -8,13 +8,17 @@ Team Members:
 - Sondre Melhus
 - Trygve Johannessen
 
-Links to the deployment of our app on Heroku:
-https://lagalt-java.herokuapp.com/
-https://lagalt-java-backend.herokuapp.com/swagger-ui/index.html
-
-Links to our Back end and keycloack:
+Our Back end git repository 
 https://github.com/SondreEMelhus/lagalt-back-end
+
+Our keycloack git repository 
 https://github.com/SondreEMelhus/lagaltKeycloak
+
+Our front end app on Heroku:
+https://lagalt-java.herokuapp.com/
+
+Our back end api on Heroku:
+https://lagalt-java-backend.herokuapp.com/swagger-ui/index.html
 
 If you wish to run the back end api of our application localy:
 1) You need to have inteliji, posgres, pgAdmin

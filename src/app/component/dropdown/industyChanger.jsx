@@ -14,10 +14,7 @@ import { updateKeywords } from "../redux/slices/ProjectSlice";
 
 //Styling
 import '../../../css/industryChanger.css'
-import musicNote from '../../../assets/musicalNote.png'
-import videoIcon from '../../../assets/videoIcon.png'
-import codingIcon from '../../../assets/codingIcon.png'
-import playIcon from '../../../assets/playIcon.png'
+
 
 
 /**

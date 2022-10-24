@@ -55,7 +55,7 @@ export default function ProjectCreatorRework () {
    */
   const handleSubmit = async () => {
     setSubmitted(submitted + 1);
-
+    
     const project = {
         title: sanitize(document.getElementById("title").value),
         description: sanitize(document.getElementById("description").value),
@@ -69,9 +69,12 @@ export default function ProjectCreatorRework () {
         industry: industry,
         keywords: keywords 
       }
-
-      await createProject(project, user);
-      setShow(false); 
+      if(project.title === "" || project.description === "" || project.industry === 0){
+        alert("Tittel, beskrivelse og industri må legges til")
+      }else{
+        await createProject(project, user);
+        setShow(false); 
+      }
   }
   
   /**

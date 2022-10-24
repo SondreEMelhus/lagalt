@@ -1,3 +1,41 @@
+# Lagalt Bergen Team Case Period submission october 2022
+
+This is the front end part of our case period submission for the Java Fullstack course at Noroff Bergen. 
+
+Team Members:
+- Ulrik Lunde
+- Karolie Øijorden
+- Sondre Melhus
+- Trygve Johannessen
+
+Links to the deployment of our app on Heroku:
+https://lagalt-java.herokuapp.com/
+https://lagalt-java-backend.herokuapp.com/swagger-ui/index.html
+
+Links to our Back end and keycloack:
+https://github.com/SondreEMelhus/lagalt-back-end
+https://github.com/SondreEMelhus/lagaltKeycloak
+
+If you wish to run the back end api of our application localy:
+1) You need to have inteliji, posgres, pgAdmin
+2) Clone the spring boot project https://github.com/SondreEMelhus/lagalt-back-end
+3) Open postgres, PostgreSQL 14 and create a new database called "lagalt"
+4) Open the project in Inteliji, open the application.properties file. Set the database credentials to match you postgres database
+5) Run the project in inteliji
+6) Open http://localhost:8080/swagger-ui.html
+
+If you wish to run the front end react app of our application localy:
+1) You need to have visual studio code, npm and node.js installed
+2) Clone the react application https://github.com/SondreEMelhus/lagalt
+3) Open the project in visual studio code.
+4) Open src/app/component/keycloack/ceycloak.js
+5) Change line 3 to: 
+    const keycloak = new Keycloak("/keycloak_dev.json");
+7) Run npm install
+8) Run npm start
+
+Unfortunatly our react application has several hard coded references to the deployment of our back end API on Heroku. We are working to fix this to make it easier to test everyting localy
+
 # Getting Started with Create React App and Redux
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.

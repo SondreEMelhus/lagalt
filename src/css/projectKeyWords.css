@@ -2,7 +2,8 @@
     border-radius: 20px;
     height: 200px;
     width: 400px;
-    background: white;
+    background-color:rgb(249, 246, 246);
+    border: solid 1px rgb(212, 210, 210);
 }
 .topPartKeyWordAdmin{
     display: flex;

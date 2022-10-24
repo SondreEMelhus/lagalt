@@ -7,11 +7,12 @@
     background: white;
     border-radius: 15px;
     visibility: hidden;
-    text-align: center;
+    padding: 2%;
+    /*text-align: center;*/
+
 }
 .visiblePopup{
     position: absolute;
-    text-align: center;
     border: 1px solid black;
     left: 40%;
     top: 20%;
@@ -19,13 +20,17 @@
     height: 400px;
     background: white;
     border-radius: 15px;
+    padding: 2%;
 }
+
 .popupContent{
     height: 290px;
     overflow: auto;
 }
 .keywordsDiv{
-    text-align: center;
+    margin-right: 5%;
+    margin-top: 2%;
+    margin-bottom: 2%;
    
 }
 .wordToSelect{
@@ -36,6 +41,26 @@
     width: fit-content;
 }
 .closeButton{
-    position:relative;
-    bottom: 0;
+    position: relative;
+    margin-left: 30%;
+    margin-right: 30%;
+    border: 1px solid #117AA0;
+    border-radius: 10px;
+    padding: 2%;
+}
+
+.closeButton:hover {
+    background-color: rgba(211, 211, 211, 0.116);
+}
+
+.wordToSelect{
+    border: 2px solid #117AA0;
+    color: #117AA0;
+    background: white;
+    border-radius: 10px;
+    min-width: 63px;
+}
+
+.wordToSelect:hover {
+    background-color: rgba(211, 211, 211, 0.202);
 }

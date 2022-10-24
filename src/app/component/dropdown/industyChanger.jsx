@@ -2,10 +2,10 @@
 import React from "react";
 
 //Components
-import musicNote from '../../../assets/musicalNote.png'
-import videoIcon from '../../../assets/videoIcon.png'
-import codingIcon from '../../../assets/codingIcon.png'
-import playIcon from '../../../assets/playIcon.png'
+import musicNote from '../../../assets/note-svgrepo-com.svg'
+import videoIcon from '../../../assets/movie-camera-svgrepo-com.svg'
+import codingIcon from '../../../assets/video-game-control-svgrepo-com.svg'
+import playIcon from '../../../assets/coding-svgrepo-com.svg'
 import { updateIndustry } from "../redux/slices/ProjectSlice";
 import { updateSkill } from "../redux/slices/ProjectSlice";
 import { updateKeywords } from "../redux/slices/ProjectSlice";

@@ -5,7 +5,6 @@ import filterReducer from './slices/FilteredSlice';
 import userReducer from './slices/UserSlice';
 import userAdminReducer from './slices/UserAdminSlice';
 import projectsReducer from './slices/ProjectsSlice';
-import externalUsersReducer from './slices/ExternalUsers';
 import myProjectsReducer from './slices/MyProjectsSlice';
 import adminReducer from './slices/AdminSlice';
 import projectReducer from './slices/ProjectSlice';
@@ -17,7 +16,6 @@ import statusReducer from './slices/ContentBoards/StatusBoard/StatusSlice';
 import applicationsReducer from './slices/Applications'
 import applicationReducer from './slices/Application'
 import userProjectsReducer from './slices/UserProjects';
-import skillsAndKeywordsReducer from './slices/filters/AllSkillsAndKeywords';
 import initialIndustryReducer from './slices/filters/InitialIndustry';
 import interactionHistoryReducer from './slices/InteractionHistorySlice'
 
@@ -38,14 +36,15 @@ import createIndustryReducer from './slices/filters/lists/CreateIndustrySlice';
 import keywordReducer from './slices/filters/KeywordSlice';
 import skillReducer from './slices/filters/SkillSlice'
 
-
+/**
+ * Redux store used to store the state of all the applications reducers
+ */
 export const store = configureStore({
   reducer: {
     filter: filterReducer,
     user: userReducer,
     userAdmin: userAdminReducer,
     projects: projectsReducer,
-    externalUsers: externalUsersReducer,
     myProjects: myProjectsReducer,
     admin: adminReducer,
     project: projectReducer,
@@ -57,11 +56,9 @@ export const store = configureStore({
     applications: applicationsReducer,
     application: applicationReducer,
     userProjects: userProjectsReducer,
-    skillsAndKeywords: skillsAndKeywordsReducer,
+    
     initialIndustry: initialIndustryReducer,
     interactionHistory: interactionHistoryReducer,
-
-    //Create project
     projectIndustry: projectIndustryReducer,
     projectKeywords: projectKeywordsReducer,
     projectSkills: projectSkillsReducer,

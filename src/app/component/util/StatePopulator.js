@@ -1,3 +1,6 @@
+/**
+ * Method used to populate a list of keywords related to a project
+ */
 export const generateKeywordState = (listOfProjects) => {
 
     let keywords = new Set();
@@ -14,6 +17,9 @@ export const generateKeywordState = (listOfProjects) => {
     return array;
 }
 
+/**
+ * Method used to populate a list of skills related to a project
+ */
 export const generateSkillsState = (listOfProjects) => {
 
     let skills = new Set();
@@ -30,6 +36,9 @@ export const generateSkillsState = (listOfProjects) => {
     return array;
 }
 
+/**
+ * Method used to populate a list of project names related to a project
+ */
 export const generateProjectNameState = (listOfProjects) => {
 
     let names = new Set();

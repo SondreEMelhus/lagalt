@@ -14,7 +14,9 @@ Prio:
   - Dersom bruker har til samme skill som et prosjekt --> 4 poeng per matchende skill
 */
 
-//Går gjennom viewHistory og contributionHistory og rangerer industry basert på mest views og contributions
+/**
+ * Method used to score each project based on a users skills, interaction historu and contribution history
+ */
 const generateScores = (user, viewHistory, contributions, listOfIndustries) => {
 
     let industriesMap = new Map();
@@ -96,11 +98,11 @@ const generateScores = (user, viewHistory, contributions, listOfIndustries) => {
     return [industriesMap, keywordMap, skillMap];
 }
 
+/**
+ * Method used to accumulate each projects score based in skills matching users skills, interaction history and
+ * contribution history
+ */
 export const scoreProjects = (user, listOfProjects, listOfIndustries) => {
-
-    console.log(user);
-    console.log(listOfProjects);
-    console.log(listOfIndustries);
 
     if (user === undefined) {
         return listOfProjects;

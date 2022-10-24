@@ -5,6 +5,9 @@ const initialState = {
   status: 'idle',
 };
 
+/**
+ * Redux slice used to manage the state of the filterbox
+ */
 export const filterSlice = createSlice({
   name: 'filter',
   initialState,

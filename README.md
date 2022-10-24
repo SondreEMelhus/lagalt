@@ -21,7 +21,7 @@ Our back end api on Heroku:
 https://lagalt-java-backend.herokuapp.com/swagger-ui/index.html
 
 If you wish to run the back end api of our application localy:
-1) You need to have inteliji, posgres, pgAdmin
+1) You need to have inteliji, posgres and pgAdmin installed
 2) Clone the spring boot project https://github.com/SondreEMelhus/lagalt-back-end
 3) Open postgres, PostgreSQL 14 and create a new database called "lagalt"
 4) Open the project in Inteliji, open the application.properties file. Set the database credentials to match you postgres database

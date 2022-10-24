@@ -5,6 +5,9 @@ const initialState = {
   status: 'idle',
 };
 
+/**
+ * Redux slice used to manage the state of a skill
+ */
 export const skillSlice = createSlice({
   name: 'skill',
   initialState,

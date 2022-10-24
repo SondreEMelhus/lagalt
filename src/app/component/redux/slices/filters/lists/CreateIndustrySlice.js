@@ -5,6 +5,9 @@ const initialState = {
   status: 'idle',
 };
 
+/**
+ * Redux slice used to manage the state of a projects industry during the project creator process
+ */
 export const CreateIndustrySlice = createSlice({
   name: 'CreateIndustry',
   initialState,

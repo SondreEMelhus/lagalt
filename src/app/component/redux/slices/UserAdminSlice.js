@@ -5,6 +5,9 @@ const initialState = {
   status: 'idle',
 };
 
+/**
+ * Redux slice used to manage the state of a user administrator
+ */
 export const userAdminSlice = createSlice({
   name: 'userAdmin',
   initialState,

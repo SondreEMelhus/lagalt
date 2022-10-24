@@ -5,6 +5,9 @@ const initialState = {
   status: 'idle',
 };
 
+/**
+ * Redux slice used to manage the state of a user
+ */
 export const userSlice = createSlice({
   name: 'user',
   initialState,

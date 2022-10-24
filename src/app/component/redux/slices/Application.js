@@ -6,6 +6,9 @@ const initialState = {
   status: 'idle',
 };
 
+/**
+ * Redux slice used to manage the state of a application
+ */
 export const applicationSlice = createSlice({
   name: 'application',
   initialState,

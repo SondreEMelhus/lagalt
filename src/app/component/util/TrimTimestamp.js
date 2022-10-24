@@ -1,3 +1,6 @@
+/**
+ * Method used to trim a timestamp
+ */
 export const trimTimestamp = (timestamp) => {
 
     if (timestamp.length === 23) {

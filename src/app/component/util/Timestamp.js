@@ -1,3 +1,6 @@
+/**
+ * Method used to generate a timestamp
+ */
 export const generateTimestamp = () => {
     //2022-10-14T10:10:10+00:00
     let date = new Date();

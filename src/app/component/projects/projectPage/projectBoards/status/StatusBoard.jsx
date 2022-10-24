@@ -21,18 +21,20 @@ import { resetStatusBoard, selectStatusBoard, updateStatusBoard } from "../../..
 import '../../../../../../css/contentBoard.css'
 import create from '../../../../../../assets/create.png'
 
-
+/**
+ * Component responsible for rendering and manageing a projects statusboard
+ */
 export default function StatusBoard () {
 
-    //Hooks
-   const statusBoard = useSelector(selectStatusBoard);
-   const project = useSelector(selectProject);
-   const user = useSelector(selectUser);
-   const dispatch = useDispatch();
-   const navigate = useNavigate();
+    //States
+    const [count, setCount] = useState(0);
 
-   //States
-   const [count, setCount] = useState(0);
+     //Hooks
+    const statusBoard = useSelector(selectStatusBoard);
+    const project = useSelector(selectProject);
+    const user = useSelector(selectUser);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const id = setInterval(() => setCount((oldCount) => oldCount + 1), 1000);
@@ -48,7 +50,9 @@ export default function StatusBoard () {
         }
     }, [count])
 
-    //Fetch statusboard
+    /**
+     * Method used to fetch a projects statusboards
+     */
     const fetchStatusBoard = async () => {
         const statusBoard = await getStatusBoard(project.id);
         statusBoard.sort((a,b) => (a.id < b.id) ? 1 : ((b.id < a.id) ? -1 : 0));

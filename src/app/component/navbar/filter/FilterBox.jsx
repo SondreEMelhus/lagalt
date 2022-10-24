@@ -1,44 +1,56 @@
+//Libraries
 import React, { useState } from "react";
-import IndustryBox from "./IndustryBox";
-import KeywordBox from "./KeywordBox";
-import SkillBox from "./SkillBox";
-
-//import '../../../../css/filterBox.css'
-import '../../../../css/navbar.css'
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from "react-redux";
-import { updateIndustry } from "../../redux/slices/filters/IndustrySlice";
-import { resetKeyword, selectKeyword } from "../../redux/slices/filters/KeywordSlice";
-import { resetSkill, selectSkill } from "../../redux/slices/filters/SkillSlice";
-import { selectProjects } from "../../redux/slices/ProjectsSlice";
-import { updateFilteredProjects } from "../../redux/slices/filters/FilteredProjects";
-import { selectInitialIndustry } from "../../redux/slices/filters/InitialIndustry";
-import { selectIndustry } from "../../redux/slices/filters/IndustrySlice";
-import { selectIndustries } from "../../redux/slices/filters/lists/IndustriesSlice";
+
+//Components
+import SkillBox from "./SkillBox";
+import KeywordBox from "./KeywordBox";
+import IndustryBox from "./IndustryBox";
 import { applyFilters } from "./ApplyFilter";
 
+//Redux slices
+import { selectProjects } from "../../redux/slices/ProjectsSlice";
+import { selectIndustry } from "../../redux/slices/filters/IndustrySlice";
+import { updateIndustry } from "../../redux/slices/filters/IndustrySlice";
+import { resetSkill, selectSkill } from "../../redux/slices/filters/SkillSlice";
+import { selectInitialIndustry } from "../../redux/slices/filters/InitialIndustry";
+import { updateFilteredProjects } from "../../redux/slices/filters/FilteredProjects";
+import { resetKeyword, selectKeyword } from "../../redux/slices/filters/KeywordSlice";
+
+//Styling
+import '../../../../css/navbar.css'
+
+/**
+ * Component responsible for rendering and handling the filter box, and the filter functionality
+ */
 export default function FilterBox () {
 
-    const [show, setShow] = useState(false);
-
+    //Hooks
     const projects = useSelector(selectProjects);
-    const initialIndustry = useSelector(selectInitialIndustry);
-    const industries = useSelector(selectIndustries);
-    const industryFilter = useSelector(selectIndustry);
-    const keywordFilter = useSelector(selectKeyword);
     const skillFilter = useSelector(selectSkill);
+    const keywordFilter = useSelector(selectKeyword);
+    const industryFilter = useSelector(selectIndustry);
+    const initialIndustry = useSelector(selectInitialIndustry);
 
+    //States
+    const [show, setShow] = useState(false);
     const dispatch = useDispatch();
 
-    const handleClose = () => {
+    //Event handlers
 
-        //TODO: Legg til en fetch av filteredProjects()
-        dispatch( updateFilteredProjects(applyFilters(projects, industryFilter, keywordFilter, skillFilter)));
-        console.log(applyFilters(projects, industryFilter, keywordFilter, skillFilter));    
+    /**
+     * Method used to update the filtered projects when the filterbox is closed
+     */
+    const handleClose = () => {
+        dispatch( updateFilteredProjects(applyFilters(projects, industryFilter, keywordFilter, skillFilter)));    
         setShow(false);
     }
 
+    /**
+     * Method used to reset the filtered projects when the user presses the nullstill button
+     */
     const handleReset = () => {
         dispatch( updateFilteredProjects( projects ));
         dispatch( resetSkill () );
@@ -47,8 +59,12 @@ export default function FilterBox () {
         setShow(false);
     }
 
+    /**
+     * Method used to toggle the visibility of the filterbox
+     */
     const handleShow = () => setShow(true);
 
+    //Render function
     return (
         <div className="filter">
             <Button variant="primary" onClick={handleShow}>

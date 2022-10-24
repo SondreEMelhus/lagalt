@@ -3,18 +3,22 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 //Components
-import ProjectBanner from "../projects/ProjectBanner";
-import { updateProjects } from "../redux/slices/ProjectsSlice";
-import { selectFilteredProjects, updateFilteredProjects } from "../redux/slices/filters/FilteredProjects";
-import { selectUser, updateUser } from "../redux/slices/UserSlice";
-import { getUser, registerUser } from "../../../api/fetchUserAPI";
 import keycloak from "../keycloak/keycloak";
-import { getProjects } from "../../../api/project";
-import { getIndustries } from "../../../api/industryAPI";
-import { selectIndustries, updateIndustries } from "../redux/slices/filters/lists/IndustriesSlice";
+import ProjectBanner from "../projects/ProjectBanner";
+
+//Redux slices
+import { updateUser } from "../redux/slices/UserSlice";
+import { updateProjects } from "../redux/slices/ProjectsSlice";
 import { updateIndustry } from "../redux/slices/filters/IndustrySlice";
 import { updateInitialIndustry } from "../redux/slices/filters/InitialIndustry";
+import { updateIndustries } from "../redux/slices/filters/lists/IndustriesSlice";
 import { updateCreateIndustry } from "../redux/slices/filters/lists/CreateIndustrySlice";
+import { selectFilteredProjects, updateFilteredProjects } from "../redux/slices/filters/FilteredProjects";
+
+//API
+import { getProjects } from "../../../api/project";
+import { getIndustries } from "../../../api/industryAPI";
+import { getUser, registerUser } from "../../../api/fetchUserAPI";
 
 //Styling
 import '../../../css/home.css'
@@ -22,6 +26,7 @@ import '../../../css/home.css'
 
 export default function HomePage () {
 
+    //Hooks
     const filteredProjects = useSelector(selectFilteredProjects);
     const dispatch = useDispatch();
 
@@ -29,9 +34,14 @@ export default function HomePage () {
         fetchUser();
         fetchProjects();
         fetchIndustries();
-        //genereateSuggestions()
     }, [])
 
+
+    //API fetch methods
+
+    /**
+     * Method used to fetch a user from the back-end with a username mathcing the keycloak username
+     */
     const fetchUser = async () => {
         if(keycloak.authenticated) { 
             const userResponse = await getUser();
@@ -39,6 +49,9 @@ export default function HomePage () {
         }
     }
 
+    /**
+     * Method used to fetch projects from the back-end
+     */
     const fetchProjects = async () => {
         const data = await getProjects();
         if (data[0]) {
@@ -50,7 +63,9 @@ export default function HomePage () {
         }
     }
 
-
+    /**
+     * Method used to fetch all the industries
+     */
     const fetchIndustries = async () => {
         const data = await getIndustries();
         if (data[0]) {
@@ -62,6 +77,9 @@ export default function HomePage () {
     }
 
 
+    /**
+    * Method used to fetch all skills and keywords and instanciate a base industry object
+    */
     const populateSkillsAndKeywords = (indust) => {
         let keywords = []
         let skills = []
@@ -83,16 +101,8 @@ export default function HomePage () {
         dispatch( updateIndustry ( baseIndustry ))
         dispatch( updateInitialIndustry ( baseIndustry));
     }
-    
 
-    /*
-    const genereateSuggestions = async () => {
-        const suggestions = await scoreProjects(user, filteredProjects, industries);
-        dispatch ( updateFilteredProjects ( suggestions ))
-    }
-    */
-
-  
+    //Render function
     return (
         <div>
             <div className="home-outer-body">

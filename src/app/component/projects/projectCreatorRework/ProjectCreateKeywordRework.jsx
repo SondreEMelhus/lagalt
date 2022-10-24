@@ -1,21 +1,20 @@
 //Libraries
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-//Components
-import { addKeyword, removeKeyword, selectProjectKeywords } from "../../redux/slices/createProjectSlices/ProjectKeywordsSlice";
-import { addIndustryKeyword, removeIndustryKeyword, selectProjectIndustry } from "../../redux/slices/createProjectSlices/ProjectIndustrySlice";
 
 //Styling
 import '../../../../css/projectCreateKeyword.css'
 import { getKeyWordsOfIndustry } from "../../../../api/attributes";
 
+/**
+ * Component used to render and manage keywords in the projectCreatorRework component
+ */
+export default function ProjectCreateKeywordRework({ industry, submitted, setKeywords }){
 
-export default function ProjectCreateKeywordRework({industry, submitted, setKeywords}){
-
+    //States
     const [industryKeywords, setIndustryKeywords] = useState([]);
     const [selectedKeywords, setSelectedKeywords] = useState([]);
 
+    //Hooks
     useEffect(() => {
         getKeywords();
     }, [industry])
@@ -24,21 +23,23 @@ export default function ProjectCreateKeywordRework({industry, submitted, setKeyw
         setKeywords(selectedKeywords);
     }, [submitted])
 
-    async function getKeywords(){
-        console.log(industry);
+    /**
+     * Method used to get all the keywords of a given industry
+     */
+    const getKeywords = async () => {
         const newKeywords = await getKeyWordsOfIndustry(industry);
-        const allKeywords = [];
-        console.log("KKKKKKKKKKKKKKKKKKKKKKKKK")
-        console.log(newKeywords);
-        console.log("KKKKKKKKKKKKKKKKKKKKKKKKK")
+        let allKeywords = [];
 
         newKeywords.forEach((keyword) => allKeywords.push(keyword));
         setIndustryKeywords(allKeywords);
     }
 
-    function selectKeyword(keyword){
-        const newIndustryKeywords = [];
-        const newSelectedKeywords = [];
+    /**
+     * Method used to select a keyword
+     */
+    const selectKeyword = (keyword) => {
+        let newIndustryKeywords = [];
+        let newSelectedKeywords = [];
 
         selectedKeywords.forEach((s => newSelectedKeywords.push(s)));
         newSelectedKeywords.push(keyword);
@@ -48,9 +49,12 @@ export default function ProjectCreateKeywordRework({industry, submitted, setKeyw
         setIndustryKeywords(newIndustryKeywords);
     }
 
-    function removeSelectedKeyword(keyword){
-        const newIndustryKeywords = [];
-        const newSelectedKeywords = [];
+    /**
+     * Method used to remvoe the selected keyword from the list of selcted keywords
+     */
+    const removeSelectedKeyword = (keyword) => {
+        let newIndustryKeywords = [];
+        let newSelectedKeywords = [];
 
         selectedKeywords.forEach((s) => s.title !== keyword.title ? newSelectedKeywords.push(s): null);
         setSelectedKeywords(newSelectedKeywords);
@@ -60,23 +64,25 @@ export default function ProjectCreateKeywordRework({industry, submitted, setKeyw
         setIndustryKeywords(newIndustryKeywords);
     }
 
-    function submitted(){
+    function submitted () {
         setKeywords(selectedKeywords);
     }
 
+    //Render function
     return(
         <div className="projectCreateKeywordBoxes">
             <div className="allKeywordBox">
-                {industryKeywords !== undefined && industryKeywords.map((keyword) => {
+                {industryKeywords !== undefined && industryKeywords.map((keyword, index) => {
                     return(
-                        <p className="keywordElementCreateKeyword" onClick={() => selectKeyword(keyword)}>{keyword.title}</p>
+                        <p className="keywordElementCreateKeyword" onClick={() => selectKeyword(keyword)} key={index}>{keyword.title}</p>
                     )
                 })}
             </div>
+
             <div className="allKeywordBox">
-            {selectedKeywords !== undefined && selectedKeywords.map((keyword) => {
+            {selectedKeywords !== undefined && selectedKeywords.map((keyword, index) => {
                     return(
-                        <p className="keywordElementCreateKeyword" onClick={() => removeSelectedKeyword(keyword)}>{keyword.title}</p>
+                        <p className="keywordElementCreateKeyword" onClick={() => removeSelectedKeyword(keyword)} key={index}>{keyword.title}</p>
                     )
                 })}
             </div>

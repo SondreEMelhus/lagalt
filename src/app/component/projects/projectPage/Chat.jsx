@@ -21,7 +21,9 @@ import { addMessage, selectChat, updateChat } from "../../redux/slices/Chat";
 import '../../../../css/chat.css'
 import { useEffect } from "react";
 
-
+/**
+ * Component responsible for rendering and manageing a projects chat
+ */
 export default function Chat () {
 
     //States
@@ -50,8 +52,15 @@ export default function Chat () {
 
 
     //Event handlers
+
+    /**
+     * Method used to handle changes in the chat inputfield
+     */
     const handleInputChange = (event) => setInputText( sanitize(event.target.value) );
 
+    /**
+     * Method used to fetch all chat messages of a project
+     */
     const fetchChat = async () => {
         const chat = await getChat(project.id);
         if (chat[0]) {
@@ -66,6 +75,9 @@ export default function Chat () {
         }
     }
 
+    /**
+     * Method used to update the chat messages of a project
+     */
     const updateChatLog = async () => {
         if (inputText.length !== 0) {
             const payload = {
@@ -82,6 +94,7 @@ export default function Chat () {
         }
     }
 
+    //Render function
     return (
         <div className='chat-box'>
             <h1 className="chat-title">Chat</h1>

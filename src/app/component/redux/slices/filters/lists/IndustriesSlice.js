@@ -5,6 +5,9 @@ const initialState = {
   status: 'idle',
 };
 
+/**
+ * Redux slice used to manage the state of all industries
+ */
 export const industriesSlice = createSlice({
   name: 'industries',
   initialState,

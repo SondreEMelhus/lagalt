@@ -34,6 +34,9 @@ export default function ApplicationHandler () {
         fetchApplicant();
     }, [])
 
+    /**
+     * Method used to fetch all applications for a project
+     */
     const fetchApplicant = async () => {
         const userResponse = await getUserWithUsername(application.username);
         if (userResponse[0]) {

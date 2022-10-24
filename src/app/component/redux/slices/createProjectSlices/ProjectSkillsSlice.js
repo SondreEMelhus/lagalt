@@ -5,6 +5,9 @@ const initialState = {
   status: 'idle',
 };
 
+/**
+ * Redux slice used to manage the state of a projects skills
+ */
 export const projectSkillsSlice = createSlice({
   name: 'projectSkills',
   initialState,

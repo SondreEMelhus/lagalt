@@ -1,36 +1,49 @@
+/**
+ * Method responsible for determining what filter options have been chosen, and populating the filteredProjects 
+ * state with the propper projects related to the filter
+ * @param {Array [Project]} listOfProjects : A list of all projects
+ * @param {Industry} filterIndustry : The chosen industry
+ * @param {Keyword} filterKeyword : The chosen keyword
+ * @param {Skill} filterSkill : The chosen skill
+ * @returns A list of all the filtered projects
+ */
 export const applyFilters = (listOfProjects, filterIndustry, filterKeyword, filterSkill) => {
 
     /*
+    Explenation of filter logic
+
+    Each filter option value:
+        Industry = 1;
+        Keyword = 2;
+        Skill = 4;
+
     Switch cases:
+        0/Default: No chosen industry, keyword and skill
 
-    1. Industry = 1
-    2. Keyword = 2
-    3. Skill = 4
-    4. Industry, Keyword = 3
-    5. Industry, Skill = 5
-    6. Keyword, skill = 6 
-    7. Industry, Keyword, Skill = 7
+        1. Industry = 1
+        2. Keyword = 2
+        3. Skill = 4
 
-    TODO: Legg til case dersom 'Alle industrier er valgt
+        4. Industry, Keyword = 3
+        5. Industry, Skill = 5
+        6. Keyword, skill = 6 
 
-    Industry = 1;
-    Keyword = 2;
-    Skill = 4;
+        7. Industry, Keyword, Skill = 7
+
     */
 
+    //Filter score based on the valuex above
     let filterSelection = 0;
-    let filteredProjects = [];
 
-    console.log(filterSelection);
-    console.log('Industry: ' + filterIndustry);
-    console.log('Nøkkelord: ' + filterKeyword);
-    console.log('Ferdighet: ' + filterSkill);
+    //Array to contain all projects matching the filter options
+    let filteredProjects = [];
 
     //Decide filter combination
     filterIndustry.title !== 'Industrier' ? filterSelection += 1 : filterSelection += 0;
     filterKeyword !== 'Nøkkelord' ? filterSelection += 2 : filterSelection += 0;
     filterSkill !== 'Ferdighet' ? filterSelection += 4 : filterSelection += 0;
 
+    //Loop through all projects and add projects matching the filter values
     for (let project of listOfProjects) {
         switch(filterSelection) {
             case 1:
@@ -68,7 +81,6 @@ export const applyFilters = (listOfProjects, filterIndustry, filterKeyword, filt
                     filteredProjects.push(project);
                 }
                 break;
-            //Default case for ingen filter
             default:
                 return listOfProjects;
         }

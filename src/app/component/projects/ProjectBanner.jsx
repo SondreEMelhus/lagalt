@@ -1,5 +1,5 @@
 //Libraries
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -10,7 +10,7 @@ import { getAllContributers } from "../../../api/ProjectAPI/projectsAPI";
 //Redux slices
 import { set } from '../redux/slices/ProjectSlice';
 import { selectUser } from "../redux/slices/UserSlice";
-import { selectUserAdmin, updateAdminStatus } from "../redux/slices/UserAdminSlice";
+import { updateAdminStatus } from "../redux/slices/UserAdminSlice";
 
 //Styling
 import '../../../css/projectBanner.css'
@@ -20,10 +20,9 @@ import film from '../../../assets/movie-camera-svgrepo-com.svg';
 import game from '../../../assets/video-game-control-svgrepo-com.svg';
 import coding from '../../../assets/coding-svgrepo-com.svg';
 
-/*TODO: 
-    - Fiks på CSS så den er mer responsiv og fin
-    - Legg til redux store for å hente diverse variabler
-*/
+/**
+ * Component responsible for rendering and manageing a projects banner
+ */
 export default function ProjectBanner ({ project }) {
 
     //Hooks
@@ -32,7 +31,10 @@ export default function ProjectBanner ({ project }) {
     const user = useSelector(selectUser);
 
     //Event handlers
-    //TODO: Legg til error handling 
+    
+    /**
+     * OnClick method that allows the user to navigate to the projects page by clicking on the banner
+     */
     const navigateToProject = async () => {
         dispatch( set(project) );
         const contributers = await getAllContributers(project.id);
@@ -47,6 +49,9 @@ export default function ProjectBanner ({ project }) {
         navigate('/project');
     }
 
+    /**
+     * Method used to choose what industry icon to display based on the projects industry
+     */
     const chooseIcon = (industry) => {
         if (industry === 'Musikk') { return music };
         if (industry === 'Film') { return film };

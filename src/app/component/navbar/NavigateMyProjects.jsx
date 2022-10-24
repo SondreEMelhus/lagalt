@@ -1,27 +1,21 @@
+//Libraries
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {update} from '../redux/slices/MyProjectsSlice';
-import { getProjects } from "../../../api/project";
-import { selectMyProjects } from "../redux/slices/MyProjectsSlice";
+
+//Styling
 import '../../../css/navbar.css'
 
+/**
+ * Component responsible for rendering the button that allows the user to navigate to a page displaying 
+ * all their projects
+ */
 export default function NavigateMyProjects(){
 
-    const dispatch = useDispatch();
+    //Hooks
     const navigate = useNavigate();
-    const myProjects = useSelector(selectMyProjects)
-
-
-    const handleClick = async () => {
-        const array = await getProjects();
-        console.log(array)
-        dispatch(update(array[1]))
-        console.log(myProjects)
-        navigate('/projects')
-    }
-
+ 
+    //Render function
     return(
-        <button className="myProjectsButton" onClick={handleClick}>Mine Prosjekter</button>
+        <button className="myProjectsButton" onClick={ () => navigate('/projects') }>Mine Prosjekter</button>
     )
 }

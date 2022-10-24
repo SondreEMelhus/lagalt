@@ -18,6 +18,9 @@ import { selectProject } from "../../../../redux/slices/ProjectSlice";
 //Styling
 import '../../../../../../css/createStatus.css'
 
+/**
+ * Component repsonsible for rendering and manageing the process of creating a project status post
+ */
 export default function CreateProjectMessage () {
 
     //States
@@ -30,7 +33,11 @@ export default function CreateProjectMessage () {
     const navigate = useNavigate();
 
     //Event handlers
-    const handleClick = async () => {
+
+    /**
+     * Method used to submit a new status post to the statusboard of a project
+     */
+    const handleSubmit = async () => {
         if (message.length !== 0 || title.length !== 0) {
             const submission = {
                 title: title,
@@ -56,6 +63,7 @@ export default function CreateProjectMessage () {
         }
     }
 
+    //Render function
     return (
         <>
             <div className="application-form">
@@ -70,7 +78,7 @@ export default function CreateProjectMessage () {
                         <textarea onChange={(event) => setMessage(sanitize(event.target.value))} id='motivation-input' className='application-motivation-text'></textarea>
                     </form>
                 </div>
-                <button className="send-btn" onClick={handleClick}>Send</button>
+                <button className="send-btn" onClick={handleSubmit}>Send</button>
                 <button className="cancel-btn" onClick={() => navigate('/project')}>Avbryt</button>
             </div>
         </>

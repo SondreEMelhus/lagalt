@@ -7,11 +7,12 @@ import AdminForm from "./AdminForm";
 //Styling
 import '../../../../css/projectAdmin.css'
 
+/**
+ * Component used as a view for the AdminForm component
+ */
 export default function ProjectAdmin () {
 
-    //Changing status, for now it only changes the css
-    //TODO: Add so that it actually changes the status of the given project
-    
+    //Render function
     return (
         <div>
             <AdminForm />

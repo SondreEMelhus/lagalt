@@ -5,6 +5,9 @@ const initialState = {
   status: 'idle',
 };
 
+/**
+ * Redux slice used to manage the state of all keywords
+ */
 export const keywordsSlice = createSlice({
   name: 'keywords',
   initialState,

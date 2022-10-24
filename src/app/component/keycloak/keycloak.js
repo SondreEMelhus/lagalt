@@ -1,8 +1,13 @@
 import Keycloak from "keycloak-js";
 
-// NB! Leave the / or the relative path will use the Router path
-const keycloak = new Keycloak("/keycloak.json");
+/**
+ * Keycloak object used to handle user login, registration and logout
+ */
+const keycloak = new Keycloak("/keycloak_dev.json");
 
+/**
+ * Method used to intialize a keycloak object with the proper config file
+ */
 export const initialize = () => {
   const config = {
     checkLoginIframe: false,
@@ -10,5 +15,5 @@ export const initialize = () => {
   };
   return keycloak.init(config);
 };
-/** @type { Keycloak } keycloak */
+
 export default keycloak;

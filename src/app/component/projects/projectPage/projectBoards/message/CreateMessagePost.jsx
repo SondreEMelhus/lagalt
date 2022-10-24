@@ -15,8 +15,9 @@ import { addMessageBoardPost } from "../../../../../../api/ProjectAPI/messageBoa
 import { selectUser } from "../../../../redux/slices/UserSlice";
 import { selectProject } from "../../../../redux/slices/ProjectSlice";
 
-//Styling
-
+/**
+ * Component used to render and manage the process of creating a new message in project messageboar
+ */
 export default function CreateProjectMessage () {
 
     //Hooks
@@ -29,7 +30,11 @@ export default function CreateProjectMessage () {
     const [message, setMessage] = useState('');
 
     //Event handlers
-    const handleClick = () => {
+
+    /**
+     * Method used to submit a new message to the messageboard of a project
+     */
+    const handleSubmit = () => {
         if (message.length !== 0 || title.length !== 0) {
             const submission = {
                 title: title,
@@ -69,7 +74,7 @@ export default function CreateProjectMessage () {
                         <textarea onChange={(event) => setMessage(sanitize(event.target.value))} id='motivation-input' className='application-motivation-text'></textarea>
                     </form>
                 </div>
-                <button className="send-btn" onClick={handleClick}>Send</button>
+                <button className="send-btn" onClick={handleSubmit}>Send</button>
                 <button className="cancel-btn" onClick={(event) => navigate('/project')}>Avbryt</button>
             </div>
         </>

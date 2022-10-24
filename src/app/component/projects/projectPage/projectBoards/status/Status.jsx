@@ -12,7 +12,9 @@ import { selectStatus } from "../../../../redux/slices/ContentBoards/StatusBoard
 //Styling
 import '../../../../../../css/contentItem.css'
 
-
+/**
+ * Component responsible for rendering and managing a statusboard status message
+ */
 export default function Status () {
 
     //Hooks

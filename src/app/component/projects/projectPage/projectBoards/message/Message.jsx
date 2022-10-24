@@ -12,7 +12,9 @@ import { selectMessage } from "../../../../redux/slices/ContentBoards/MessageBoa
 //Styling
 import '../../../../../../css/contentItem.css'
 
-
+/**
+ * Component used to render and manage a message in a projects messageboard
+ */
 export default function Message () {
 
     //Hooks

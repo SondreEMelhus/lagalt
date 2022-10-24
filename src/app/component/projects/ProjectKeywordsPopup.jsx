@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 //components
-import XLetter from '../../../assets/xLetter.png'
-import { getKeyWordsOfIndustry } from "../../../api/attributes";
 import { selectProject, updateKeywords } from "../redux/slices/ProjectSlice";
-
 
 //Styling
 import '../../../css/projectKeywordPopup.css'
-import { useDispatch, useSelector } from "react-redux";
 
+/**
+ * Component responsible for rendering and manageing a popupbox contiaing all selctable keywords 
+ */
 export default function ProjectKeyWordsPopup({show, onHide, fetchedKeywords}){
 
+    //Hooks
     const project = useSelector(selectProject);
     const dispatch = useDispatch();
 
@@ -25,9 +26,13 @@ export default function ProjectKeyWordsPopup({show, onHide, fetchedKeywords}){
 
     }, [show])
 
-    function addKeyword(keyword){
-        const newKeywords = [];
-        const alreadyIn = false;
+
+    /**
+     * Method used to add a keyword to the project
+     */
+    const addKeyword = (keyword) => {
+        let newKeywords = [];
+        let alreadyIn = false;
         for(let word of project.keywords){
             newKeywords.push(word);
             if(word === keyword){
@@ -38,17 +43,18 @@ export default function ProjectKeyWordsPopup({show, onHide, fetchedKeywords}){
             newKeywords.push(keyword);
             dispatch(updateKeywords(newKeywords));
         }else{
-            console.log("Keyword already in project keywords");
+            alert("Nøkkelordet er allerede lagt til prosjektet");
         }
     }
 
+    //Render function
     return(
         <div className="popupBox" id="popup">
             <p>Trykk på nøkkelordet du vil ha</p>
             <div className="popupContent">
-            {fetchedKeywords.map((word) => {
+            {fetchedKeywords.map((word, index) => {
                 return(
-                    <div className="keywordsDiv">
+                    <div className="keywordsDiv" key={index}>
                         <button className="wordToSelect" onClick={() => addKeyword(word)}>{word}</button>
                     </div>
                 )

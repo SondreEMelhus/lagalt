@@ -4,37 +4,31 @@ import { useNavigate } from "react-router-dom";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
-//Images/Icons
-import Logo from '../../../assets/Logo.png';
-import dropdown from '../../../assets/Profile.png';
-
 //Components
-import CreateProject from "../projects/ProjectCreator";
+import Login from "../login/Login";
+import FilterBox from "./filter/FilterBox";
+import keycloak from "../keycloak/keycloak";
+import NavigateMyProfile from "./NavigateMyProfile";
+import NavigateMyProjects from "./NavigateMyProjects";
 import ProjectCreatorRework from "../projects/projectCreatorRework/ProjectCreatorRework";
 
 //Styling
 import '../../../css/navbar.css'
-import Login from "../login/Login";
-import Searchbar from "../searchbar/Searchbar";
-import FilterBox from "./filter/FilterBox";
-import NavigateMyProfile from "./NavigateMyProfile";
-import NavigateMyProjects from "./NavigateMyProjects";
-import keycloak from "../keycloak/keycloak";
+import Logo from '../../../assets/Logo.png';
 
+/**
+ * Component responsible for managing and rendering the navbar
+ */
 export default function Navbar() {
 
+  //Hooks
   const navigate = useNavigate();
 
-  const handleNavigate = () => {
-    navigate('/');
-  }
-
+  //Render function
   return (
     <div className="navBar">
-        <img src={Logo} alt="Logo" className="logo" onClick={handleNavigate}/>
+        <img src={Logo} alt="Logo" className="logo" onClick={() => navigate('/')}/>
           <FilterBox />
-          {/* TODO: Finn ut hvor vi kan hente ut en brukers prosjekter <NavigateMyProjects/>*/}
-          {/* TODO: Finn ut hvordan man henter en brukers prosjekte r<NavigateMyProfile/> */}
           {keycloak.authenticated && 
           <DropdownButton id="dropdown-basic-button" title="Alternativer">
           <Dropdown.Item>

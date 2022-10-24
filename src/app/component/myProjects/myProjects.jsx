@@ -1,49 +1,52 @@
 //Libraries
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-
 
 //Components
-import {update} from '../redux/slices/MyProjectsSlice';
-import { updateAdminProject } from "../redux/slices/AdminSlice";
-import { getProjects } from "../../../api/project";
-import {selectUser, userSlice} from '../redux/slices/UserSlice'
-
-import Navbar from "../navbar/Navbar";
+import withAuth from "../../../hoc/withAuth";
 import ProjectBanner from "../projects/ProjectBanner";
 
+//Redux slices
+import { selectUser } from '../redux/slices/UserSlice'
 
-//Styling
-import '../../../css/profile.css'
+//API
 import { selectUserProjects } from '../redux/slices/UserProjects'
 import { getUserProjects } from "../../../api/fetchUserAPI";
 import { updateUserProjects } from "../redux/slices/UserProjects";
-import withAuth from "../../../hoc/withAuth";
 
+//Styling
+import '../../../css/profile.css'
+
+/**
+ * Component responsible for retriving and rendering all projects related to a logged in user
+ */
 function MyProjects () {
 
+    //Hooks
     const user = useSelector(selectUser);
     const userProjects = useSelector(selectUserProjects);
     const dispatch = useDispatch();
 
-    //Populate skills and keywords in filter
     useEffect(() => {
         fetchProjects();
     }, [])
 
+    //API fetch methods
+    
+    /**
+     * Method used to fetch all projects containing the users id as a contributer
+     */
     const fetchProjects = async () => {
         const result = await getUserProjects(user.id);
 
         if (result[0] !== null) {
             alert('Feil: Kunne ikke hente dine prosjekter. Kontakt en administrator.')
         } else {
-            console.log(result[1]);
             dispatch( updateUserProjects (result[1]));
         }
     }
 
-    //TODO: Antar det er protfolio som er en brukers prosjekter??
+    //Render function
     return (
         <>
             <p>Mine prosjekter</p>
@@ -61,4 +64,5 @@ function MyProjects () {
         </>
     )
 }
+
 export default withAuth(MyProjects);

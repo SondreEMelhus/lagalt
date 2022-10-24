@@ -30,7 +30,6 @@ import projectSkillsReducer from './slices/createProjectSlices/ProjectSkillsSlic
 import industriesReducer from './slices/filters/lists/IndustriesSlice';
 import keywordsReducer from './slices/filters/lists/KeywordsSlice';
 import skillsReducer from './slices/filters/lists/SkillsSlice';
-import projectNamesReducer from './slices/filters/lists/ProjectNamesSlice'
 import filteredProjectsReducer from './slices/filters/FilteredProjects';
 
 //Filter singles
@@ -71,7 +70,6 @@ export const store = configureStore({
     industries: industriesReducer,
     keywords: keywordsReducer,
     skills: skillsReducer,
-    projectNames: projectNamesReducer,
     filteredProjects: filteredProjectsReducer,
     
     //Filter singles

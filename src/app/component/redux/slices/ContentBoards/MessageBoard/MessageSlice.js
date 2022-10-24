@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-//TODO: Bytt ut dummy data
 const initialState = {
   value: {},
   status: 'idle',
 };
 
+/**
+ * Redux slice used to manage the state of a projects messageboard messages
+ */
 export const messageSlice = createSlice({
   name: 'message',
   initialState,

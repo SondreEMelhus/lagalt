@@ -1,11 +1,8 @@
 //Libraries
 import React from "react";
+import { useDispatch } from "react-redux";
 
-//Components
-import musicNote from '../../../assets/musicalNote.png'
-import videoIcon from '../../../assets/videoIcon.png'
-import codingIcon from '../../../assets/codingIcon.png'
-import playIcon from '../../../assets/playIcon.png'
+//Redux slices
 import { updateIndustry } from "../redux/slices/ProjectSlice";
 import { updateSkill } from "../redux/slices/ProjectSlice";
 import { updateKeywords } from "../redux/slices/ProjectSlice";
@@ -13,17 +10,30 @@ import { updateKeywords } from "../redux/slices/ProjectSlice";
 
 //Styling
 import '../../../css/industryChanger.css'
-import { waitFor } from "@testing-library/react";
-import { useDispatch } from "react-redux";
+import musicNote from '../../../assets/musicalNote.png'
+import videoIcon from '../../../assets/videoIcon.png'
+import codingIcon from '../../../assets/codingIcon.png'
+import playIcon from '../../../assets/playIcon.png'
 
+
+/**
+ * Component responsible for handling and changing the currently chosen industry.
+ */
 export default function IndusrtyChanger (industry) {
 
+    //States
+    const iconList = [musicNote, videoIcon, codingIcon, playIcon];
     let currentIndustry = industry.industry;
     let currentIcon = getIndustryIcon();
-    const iconList = [musicNote, videoIcon, codingIcon, playIcon];
+   
+    //Hooks
     const dispatch = useDispatch();
 
+    //Event handlers
 
+    /**
+     * OnClick method that handles click actions on the icon dropdown.
+     */
     const dropDownClicked = (icon) => {
         currentIcon = icon;
         document.getElementById("hideDiv").className = "hideDiv"
@@ -32,13 +42,18 @@ export default function IndusrtyChanger (industry) {
         dispatch(updateIndustry(indu));
         dispatch(updateSkill([]));
         dispatch(updateKeywords([]));
-
     }
 
+    /**
+     * Method used to change the className of given div
+     */
     const openDiv = () =>{
         document.getElementById("hideDiv").className="hideDivShow"
     }
 
+    /**
+     * Method used to retrive the icon mathcing the currently chosen industry
+     */
     function getIndustryIcon(){
         if(currentIndustry === "Musikk"){
             return musicNote;
@@ -51,6 +66,9 @@ export default function IndusrtyChanger (industry) {
         }
     }
 
+    /**
+     * Method used to retrive the industry matching a chosen icon
+     */
     function getIndustryForIcon(icon){
         if(icon === musicNote){
             return "Musikk";
@@ -63,11 +81,7 @@ export default function IndusrtyChanger (industry) {
         }
     }
 
-
-    function changeIcon(){
-
-    }
-
+    //Render function
     return (
         <div class="musicNoteBox">
             <img src={currentIcon} alt="" className="musicNoteAdmin" onClick={openDiv} id="selectedIcon"/>

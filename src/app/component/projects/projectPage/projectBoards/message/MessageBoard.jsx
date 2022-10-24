@@ -21,7 +21,9 @@ import { resetMessageBoard, selectMessageBoard, updateMessageBoard } from "../..
 import '../../../../../../css/contentBoard.css'
 import create from '../../../../../../assets/create.png'
 
-
+/**
+ * Component responsble for rendering and managing the process of a projects messageboard
+ */
 export default function ContentBoard () {
 
     //Hooks
@@ -48,6 +50,9 @@ export default function ContentBoard () {
         }
     }, [count])
 
+    /**
+     * Mehtod used to fetch a projects messageboard
+     */
     const fetchMessageBoard = async () => {
         const messageBoard = await getMessageBoard(project.id);
         messageBoard.sort((a,b) => (a.id < b.id) ? 1 : ((b.id < a.id) ? -1 : 0));

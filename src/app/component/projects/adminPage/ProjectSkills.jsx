@@ -29,24 +29,32 @@ export default function ProjectSkills () {
     const [show, setShow] = useState(false);
 
     //Event handlers
+
+    /**
+     * OnClick event handler that is used to remove a skill from a project
+     */
     const removeSkill = (selected) => {
         const newSkillList = [];
         projectSkills.forEach(skill => skill !== selected ? newSkillList.push(skill) : null);
         dispatch(updateSkill(newSkillList));
     }
 
+    /**
+     * OnClick event handler that is used to show all selected skills
+     */
     const showSkillsSelection = async () => {
         setShow(true);
         const allSkills = await getSkillsOfIndustry(project.industry)
         let skills = []
         allSkills.forEach(word => skills.push(word.title));
         setFetchedSkills(skills);
-     }
+    }
 
-     const hide = () => {
-         setShow(false);
-     }
+    const hide = () => {
+        setShow(false);
+    }
 
+    //Render function
     return (
         <div className="skillsdivAdmin">
         <div className="topPartSkillAdmin">

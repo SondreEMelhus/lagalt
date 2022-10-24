@@ -1,3 +1,4 @@
+//Libraries
 import React, { useState, useEffect } from "react";
 
 //Components
@@ -5,6 +6,8 @@ import { getKeyWordsOfIndustry } from "../../../api/attributes";
 
 //Styling
 import '../../../css/projectCreateKeyword.css'
+
+
 export default function ProjectCreateKeyword(industry){
 
     const [selectedKeywords, setSelectedKeywords] = useState([]);

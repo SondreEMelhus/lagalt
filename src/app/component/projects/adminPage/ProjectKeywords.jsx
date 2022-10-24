@@ -14,6 +14,9 @@ import '../../../../css/projectKeyWords.css'
 import KeyWord from '../../../../assets/KeyWord.png'
 import XLetter from '../../../../assets/xLetter.png'
 
+/**
+ * Component used to render and manage a projects keywords
+ */
 export default function ProjectKeyWords () {
 
     //States
@@ -27,12 +30,19 @@ export default function ProjectKeyWords () {
     const dispatch = useDispatch();
 
     //Event handlers
+
+    /**
+     * OnClick event handler that is used to remove a keyword from a project
+     */
     const removeKeyword = (event) => {
         const newKeywords = [];
         keywords.forEach(word => word !== event ? newKeywords.push(word) : null);
         dispatch(updateKeywords(newKeywords));
     }
 
+    /**
+     * OnClick event handler that is used to show all selected keywords 
+     */
     const showKeywordSelection = async () => {
         setShow(true);
         let keywords = []
@@ -45,7 +55,7 @@ export default function ProjectKeyWords () {
         setShow(false);
     }
 
-
+    //Render function
     return (
         <div className="keyWorddivAdmin">
         <div className="topPartKeyWordAdmin">

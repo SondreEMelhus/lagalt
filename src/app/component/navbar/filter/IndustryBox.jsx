@@ -1,25 +1,33 @@
 //Libraries
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import DropdownItem from "react-bootstrap/esm/DropdownItem";
 
-//Components
-import { useSelector, useDispatch } from "react-redux";
-import { selectIndustries } from "../../redux/slices/filters/lists/IndustriesSlice";
+//Redux slices
 import { updateIndustry } from "../../redux/slices/filters/IndustrySlice";
-import { selectKeyword, updateKeyword } from "../../redux/slices/filters/KeywordSlice";
 import { selectSkill, updateSkill } from "../../redux/slices/filters/SkillSlice";
+import { selectIndustries } from "../../redux/slices/filters/lists/IndustriesSlice";
+import { selectKeyword, updateKeyword } from "../../redux/slices/filters/KeywordSlice";
+
 
 export default function IndustryBox () {
 
+     //Hooks
+     const industries = useSelector(selectIndustries);
+     const keyword = useSelector(selectKeyword);
+     const skill = useSelector(selectSkill);
+     const dispatch = useDispatch();
+
+    //States
     const [industryTitle, setIndustrytitle] = useState('Industrier');
 
-    const industries = useSelector(selectIndustries);
-    const keyword = useSelector(selectKeyword);
-    const skill = useSelector(selectSkill);
-    const dispatch = useDispatch();
+    //Event handlers
 
+    /**
+     * OnClick method responsible for filtering what keywords and skills are being shown when choosing a industry
+     */
     const handleClick = (event) => {
         for (let i of industries) {
             if (i.title === event.target.id) {
@@ -36,6 +44,7 @@ export default function IndustryBox () {
         setIndustrytitle(event.target.id);
     }
 
+    //Render function
     return (
         <div>
             <p>Industri</p>

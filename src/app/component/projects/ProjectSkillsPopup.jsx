@@ -25,7 +25,11 @@ export default function ProjectSkillsPopup({show, onHide, fetchedSkills}){
         }
     }, [show])
 
-    //Eventhandlers
+    //Event handlers
+
+    /**
+     * Method used to add a skill to the project 
+     */
     function addSkill(skillGiven){
         let newSkills = [];
         let alreadyIn = false;

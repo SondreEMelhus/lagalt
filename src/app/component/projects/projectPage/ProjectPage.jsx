@@ -35,7 +35,9 @@ import coding from '../../../../assets/coding-svgrepo-com.svg';
 import film from '../../../../assets/movie-camera-svgrepo-com.svg';
 import game from '../../../../assets/video-game-control-svgrepo-com.svg';
 
-
+/**
+ * Component responsible for rendering and managing a project page
+ */
 export default function ProjectPage () {
 
     //Hooks
@@ -46,7 +48,7 @@ export default function ProjectPage () {
     const interactionHistory = useSelector(selectInteractionHistory);
 
     //States
-    const [projectRole, setProjectRole] = useState('non');
+    const [, setProjectRole] = useState('non');
 
     useEffect( () => {
         fetchInteractionHistory();
@@ -56,7 +58,9 @@ export default function ProjectPage () {
     
 
 
-    //TODO: Legg til [error, data]
+    /**
+     * Method used to fetch all necessary data to display the project page
+     */
     const fetchData = async () => {
         //Fetch user role
         const role = await getAllContributers(project.id);
@@ -81,6 +85,9 @@ export default function ProjectPage () {
         }
     }
 
+    /**
+     * Method used to fetch the chat of a project
+     */
     const fetchChat = async () => {
         const chat = await getChat(project.id);
         if (chat[0]) {
@@ -95,6 +102,9 @@ export default function ProjectPage () {
         }
     }
 
+    /**
+     * Method used to fetch the interaction history of a project
+     */
     const fetchInteractionHistory = async () => {
         if (keycloak.authenticated) {
             const data = await getInteractionHistory(user.id);
@@ -102,6 +112,10 @@ export default function ProjectPage () {
         }
     }
 
+    /**
+     * Method used to add a users id to the interaciton history, so that the user can track what projects
+     * they have interacted with 
+     */
     const handleInteractionHist = async (userId, projectId) => {
         let added = false;
             if (interactionHistory === undefined) {
@@ -134,8 +148,12 @@ export default function ProjectPage () {
                     addNewProject(userId, projectId);
                 }
             }
-        }
+    }
     
+    /**
+     * Method used to add a new project to the users interaction history if not previous interaction
+     * exists
+     */
     const addNewProject = async ( userId, projectId) => {
         const interaction = {
             timestamp: generateTimestamp(),
@@ -156,6 +174,9 @@ export default function ProjectPage () {
         }
     }
 
+    /**
+     * Method used to choose what industry icon to display based on the projects industry
+     */
     const chooseIcon = (industry) => {
         if (industry === 'Musikk') {
             return music;

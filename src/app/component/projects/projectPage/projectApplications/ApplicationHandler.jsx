@@ -15,6 +15,9 @@ import { selectApplication} from '../../../redux/slices/Application'
 
 //Styling
 import '../../../../../css/application.css'
+import { useState } from "react";
+import { useEffect } from "react";
+import { getUserWithUsername } from "../../../../../api/fetchUserAPI";
 
 /**
  * Component used to manage and handle the process of handling a project application.
@@ -25,6 +28,21 @@ export default function ApplicationHandler () {
     const navigate = useNavigate()
     const user = useSelector(selectUser);
     const application = useSelector(selectApplication);
+    const [applicant, setApplicant] = useState({});
+
+    useEffect(() => {
+        fetchApplicant();
+    }, [])
+
+    const fetchApplicant = async () => {
+        const userResponse = await getUserWithUsername(application.username);
+        if (userResponse[0]) {
+            alert('Feil: Klarte ikke å hente informasjon om søker. Kontakt en administator for hjelp.')
+        } else {
+            setApplicant(userResponse[1]);
+            console.log(userResponse[1]);
+        }
+    }
 
     //Event handlers
 
@@ -42,8 +60,8 @@ export default function ApplicationHandler () {
      */
     const handleDecline = async () => {
         const response = await declineApplication(application.id);
-        alert('Søknad avvist');
-        navigate('/project');
+            alert('Søknad avvist');
+            navigate('/project');
     }
 
     //Render function
@@ -55,19 +73,19 @@ export default function ApplicationHandler () {
                 <div className="application-skills">
                     <h3>Ferdigheter:</h3>
                     <div className="application-infobox">
-                        {user.skills.length !== 0 ? <BubbleList list={user.skills} /> : <p>Brukeren har ikke fylt inn noen ferdigheter</p>}
+                        {applicant.skills !== undefined ? <BubbleList list={applicant.skills} /> : <p>Brukeren har ikke fylt inn noen ferdigheter</p>}
                     </div>
                 </div>
                 <div className="application-portfolio">
                     <h3>Portfolio:</h3>
                     <div className="application-infobox">
-                    {user.portfolio !== null ? <p>{user.portfolio}</p> : <p>Brukeren har ikke fylt inn portfolio</p>}
+                    {applicant.portfolio !== null ? <p>{applicant.portfolio}</p> : <p>Brukeren har ikke fylt inn portfolio</p>}
                     </div>
                 </div>
                 <div className="application-description">
                     <h3>Beskrivelse:</h3>
                     <div className="application-infobox">
-                    {user.description !== null ? <p>{user.description}</p> : <p>Brukeren har ikke fylt inn beskrivelse</p>}
+                    {applicant.description !== null ? <p>{applicant.description}</p> : <p>Brukeren har ikke fylt inn beskrivelse</p>}
                     </div>
                 </div>
                 <h3>Søknadstekst</h3>

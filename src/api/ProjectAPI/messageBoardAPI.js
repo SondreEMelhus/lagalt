@@ -38,7 +38,7 @@ export const addMessageBoardPost = async ( payload ) => {
         if(!response.ok){
             throw new Error("Could not create a new message with content: " + payload.text);
         }
-        console.log(response);
+       
         const data = await response.json();
         return [null, data];
 

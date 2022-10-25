@@ -51,7 +51,8 @@ export default function CreateProjectMessage () {
 
             const response = await addStatusPost(submission);
 
-            if(response[0]) {
+           
+            if(response[0] !== 'Unexpected end of JSON input') {
                 alert('Feil: Klarte ikke å opprette melding. Ta kontakt med admin for å få hjelp.')
             } else {
                 alert('Statusoppdateringen er send')

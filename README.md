@@ -1,88 +1,58 @@
-# Lagalt Bergen Team Case Period submission october 2022
+# Case period with Noroff : Lagalt
 
-This is the front end part of our case period submission for the Java Fullstack course at Noroff Bergen. 
+## Goal
+**This project is created as a solution to the case "Lagalt". Task given by Noroff University College, Full-Stack Java Development course.**
 
+The goal of the project is to give people a platform where they can cooperate on different projects. Any user can create a project of their interest, and then have other users apply to join the project. 
+
+Projects can vary with a variety of different industries from making music, movies, game development and web development. Each industry also has a preset of skills and keywords that are unique to each industry, that allows project creators to tailor their project towards a specific audience.
+
+Users of the website have two different ways of interacting with the site. **Anonymous mode** allows a user to browse all published projects without having to register an account or login. **Logged in mode** allows all functionality of anonymous mode, but also allows the user to customize their profile with different skills, portfolio and description. In addition the user can apply to join different projects. 
+
+### Development Team
 Team Members:
 - Ulrik Lunde
 - Karolie Øijorden
 - Sondre Melhus
 - Trygve Johannessen
 
+
+## User stories
+ - A user may browse all projects without logging in, but has limited acces to interact with the site.
+ - A filter button in the top navigation bar can be used to limit what projects appare on the fron page.
+ - If the user choose to register or log in, the possibility to create or join a project is unlocked. Aswell as a profile page where the user can enter some information about themselves.
+ - Any user may create a project with the requiered fields.
+ - When applying to join a project, the user is asked to write a description of why they are applying. The user must also accept that information about them are shared with the owner and administrators of a project.
+ - A project owner/administrator has the opportunity to accept or decline applications.
+ - The project owner/administrator can modify the project, by changing title, description, skills needed, keywords, status.
+ - Keywords help describe a project, this will be words that are associated with the project.
+ - When a user is accepted into a project, the user will be able to chat with the other contributors. A message board field and a status board field is also revieled.
+ - The owner/administrator can post status boards to keep all contributors up to date on what is going on.
+ - All contributors can post a message board
+ - A user can always go to "My projects" to see all projects that they are involved with.
+
+## Additional repositories
 Our Back end git repository 
 https://github.com/SondreEMelhus/lagalt-back-end
 
-Our keycloack git repository 
-https://github.com/SondreEMelhus/lagaltKeycloak
-
-Our front end app on Heroku:
-https://lagalt-java.herokuapp.com/
-
-Our back end api on Heroku:
+Our back-end REST API on Heroku:
 https://lagalt-java-backend.herokuapp.com/swagger-ui/index.html
 
-If you wish to run the back end api of our application localy:
-1) You need to have inteliji, posgres and pgAdmin installed
-2) Clone the spring boot project https://github.com/SondreEMelhus/lagalt-back-end
-3) Open postgres, PostgreSQL 14 and create a new database called "lagalt"
-4) Open the project in Inteliji, open the application.properties file. Set the database credentials to match you postgres database
-5) Run the project in inteliji
-6) Open http://localhost:8080/swagger-ui.html
+## Installation
+- Download the repository using SSH key
+- Open the project in visual studio code or any other code editor.
+- Do "npm install" in the console of the project.
+- Run the application with "npm start" in the same console.
+- **Alternatively** you can use the Heroku link below to access a deployed version of the application
+## Heroku link
+https://lagalt-java.herokuapp.com/
+## Project status
+Finished.
+## License
+This project is open-source. You are free to use any of the code in your own projects, as long as the work is credited.
+## Contributers and acknowledgment
+**Code authors:** Sondre Melhus, Ulrik Lunde, Karoline Øijorden, Trygve Johannessen.
 
-If you wish to run the front end react app of our application localy:
-1) You need to have visual studio code, npm and node.js installed
-2) Clone the react application https://github.com/SondreEMelhus/lagalt
-3) Open the project in visual studio code.
-4) Open src/app/component/keycloack/ceycloak.js
-5) Change line 3 to: 
-    const keycloak = new Keycloak("/keycloak_dev.json");
-7) Run npm install
-8) Run npm start
+**Mentor:** Fredrik Pedersen, Consultant at Experis 
 
-Unfortunatly our react application has several hard coded references to the deployment of our back end API on Heroku. We are working to fix this to make it easier to test everyting localy
-
-# Getting Started with Create React App and Redux
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Assignment given by:** Noroff University College
